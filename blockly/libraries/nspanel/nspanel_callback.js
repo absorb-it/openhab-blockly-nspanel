@@ -1,0 +1,304 @@
+uid: absorb-it:blockly:nspanel_callback
+tags: []
+props:
+  parameters: []
+  parameterGroups: []
+timestamp: Nov 30, 2023, 8:47:32 PM
+component: BlockLibrary
+config:
+  name: NSPanel Callback
+slots:
+  blocks:
+    - component: BlockType
+      config:
+        args0:
+          - type: input_dummy
+          - name: TARGET
+            required: true
+            type: input_value
+            check: oh_item
+          - type: input_dummy
+        args1:
+          - type: input_dummy
+          - name: TIMEOUT
+            type: input_value
+            check: Number
+          - name: SCREENSAVER_BRIGHTNESS
+            type: input_value
+            check: Number
+          - name: ACTIVE_BRIGHTNESS
+            type: input_value
+            check: Number
+          - name: SCREENSAVER2
+            type: field_checkbox
+          - type: input_dummy
+          - type: input_dummy
+          - name: SCREENSAVER_SCRIPT_ID
+            type: input_value
+            check: String
+          - type: input_dummy
+        args2:
+          - type: input_dummy
+          - name: STARTUP_SCRIPT_ID
+            type: input_value
+            check: String
+          - name: CODE
+            type: input_statement
+        colour: 90
+        helpUrl: ""
+        message0: >
+          NSPANEL CALLBACK %1 Display on %2 %3
+        message1: >
+          SCREENSAVER SETTINGS %1 Brightness (0 - 100) %4 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %5 %6 Call Script after Screensaver shown%7 (i.e. for WeatherUpdate, enter Id) %8 %9
+        message2: >
+          STARTUP %1 Call Script (enter Id) %2 Run Statement %3
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: ""
+        type: absorb_it_nspanel_callback
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:CODE}}`)"
+        toolbox:
+          - component: PresetInput
+            config:
+              name: TARGET
+              shadow: true
+              type: oh_item
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 20
+              name: TIMEOUT
+              required: false
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 50
+              name: SCREENSAVER_BRIGHTNESS
+              required: false
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 100
+              name: ACTIVE_BRIGHTNESS
+              required: false
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Weather/IconUpdate Script Id
+              name: SCREENSAVER_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: STARTUP_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - type: input_dummy
+          - name: TARGET
+            required: true
+            type: input_value
+            check: oh_item
+          - type: input_dummy
+        args1:
+          - name: TIME_FORMAT
+            type: input_value
+            check: String
+          - name: DATE_FORMAT
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: ""
+        message0: >
+          NSPANEL TIME UPDATE %1 Display on %2 %3
+        message1: >
+          Time Format %1 Date Format %2
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: ""
+        type: absorb_it_nspanel_timeUpdate
+        inputsInline: false
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_timeUpdate}}({{input:TARGET}}, {{input:TIME_FORMAT}}, {{input:DATE_FORMAT}})"
+        toolbox:
+          - component: PresetInput
+            config:
+              name: TARGET
+              shadow: true
+              type: oh_item
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: HH:mm
+              name: TIME_FORMAT
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: dd-MM-yyyy
+              name: DATE_FORMAT
+              required: false
+              shadow: true
+              type: text
+  utilities:
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}() {
+            while (cache.shared.exists('absorb_it_nspanel_refreshTimer'))
+              cache.shared.remove('absorb_it_nspanel_refreshTimer').cancel();
+          }
+        name: absorb_it_nspanel_callback_killRefreshTimer
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(scriptName, context, updateCacheLink) {
+            try {
+                rules.runRule(scriptName, context);
+                cache.private.put('lastPage', scriptName); // any last page
+                if (updateCacheLink)
+                  cache.private.put('currentCard', scriptName); // only some last pages (excluding popupNotify, Screensaver)
+            } catch {
+                console.log("can't start/find rule with id '" + scriptName + "'");
+            }
+          }
+        name: absorb_it_nspanel_callback_startScript
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(command, returnValue = '') {
+            // evaluate command, for 'setter' use retrunValue as required conext
+            let result = "";
+            if (command) {
+                try { result = eval(command); }
+                catch { console.log("eval failed: '" + command + '"'); }
+            }
+            return result;
+          }
+        name: absorb_it_nspanel_callback_safeEval
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, code) {
+            try {
+              contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
+            } catch {
+              // if callback received non-JSON string check for page refresh request
+              if (
+                (event.itemState.toString() === "refresh" || event.itemState.toString() === "refreshTimer")
+                && cache.private.get('currentCard')
+                && (cache.private.get('lastPage') !== "screensaver")
+              ) {
+                {{absorb_it_nspanel_callback_startScript}}(
+                  cache.private.get('currentCard'),
+                  {"previousPage": cache.private.get('lastPage')},
+                  0
+                );
+              }
+              return;
+            }
+            switch(contextValues[1]) {
+              case "startup":
+                items.getItem(target).sendCommand("timeout~" + timeout);
+                items.getItem(target).sendCommand("dimmode~" + screenSaverBrightness + "~" + activeBrightness );
+                {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
+                {{absorb_it_nspanel_callback_safeEval}}(code);
+                break;
+              case "sleepReached":
+                {{absorb_it_nspanel_callback_killRefreshTimer}}; // this seems not to work
+                if (screensaver2 == "TRUE")
+                  items.getItem(target).sendCommand("pageType~screensaver2");
+                else
+                  items.getItem(target).sendCommand("pageType~screensaver");
+                {{absorb_it_nspanel_callback_startScript}}(screensaverStartupScript, {}, 0);
+                cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
+                break;
+              case "buttonPress2":
+                switch(contextValues[3]) {
+                  case "bExit":
+                    if (cache.private.get('currentCard'))
+                      {{absorb_it_nspanel_callback_startScript}}(cache.private.get('currentCard'), {}, 1);
+                    else
+                      {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
+                  break;
+                  default:
+                    if (contextValues[2].split('?')[0] !== cache.private.get('lastPage')) {
+                      // new page called, probably clicked on navigation buttons
+                      {{absorb_it_nspanel_callback_startScript}}(
+                        contextValues[2].split('?')[0], { },
+                        (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
+                      );
+                    }
+                    // find the clicked item, if there hade been multiple on the page
+                    let item = "";
+                    // alarmButtons: third context field contains 'cb' and item id, reparated by '?'
+                    // {"CustomRecv":"event,buttonPress2,*cardAlarmScriptName*,item?1,1"}
+                    if (contextValues[3] && contextValues[3].split('?')[0] === "item")
+                      item = contextValues[3].split('?')[1];
+                    // HVACButtons: third context field contains script name and item id, reparated by '?'
+                    // {"CustomRecv":"event,buttonPress2,*cardThermoScriptName*,hvac_action,item?1"}
+                    if (contextValues[4] && contextValues[4].split('?')[0] === "item")
+                      item = contextValues[4].split('?')[1];
+                    // entities: third context field contains both script name and item id, reparated by '?'
+                    // {"CustomRecv":"event,buttonPress2,*cardEntitiesScriptName*?2,OnOff,0"}
+                    else item = contextValues[2].split('?')[1];
+
+                    {{absorb_it_nspanel_callback_startScript}}(
+                      contextValues[2].split('?')[0],
+                      {
+                        "request": "pageUpdate",
+                        "item": item,
+                        "trigger": contextValues[3],
+                        "newState": contextValues[4],
+                        "previousPage": cache.private.get('lastPage')
+                      },
+                      (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
+                    );
+                  }
+                  break;
+              case "pageOpenDetail":
+                {{absorb_it_nspanel_callback_startScript}}(
+                  contextValues[3].split('?')[0],
+                  {
+                    "request": "pageOpenDetail",
+                    "item": contextValues[3].split('?')[1],
+                    "trigger": contextValues[2]
+                  },
+                  1
+                );
+                break;
+              default:
+            }
+          }
+        name: absorb_it_nspanel_callback
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(target, patternTime = 'HH:mm', patternDate = 'dd-MM-yyyy') {
+            let timeString =  String((time.ZonedDateTime.now()).format(time.DateTimeFormatter.ofPattern(patternTime)));
+            let dateString =  String((time.ZonedDateTime.now()).format(time.DateTimeFormatter.ofPattern(patternDate)));
+            items.getItem(target).sendCommand('time~' + timeString);
+            items.getItem(target).sendCommand('date~' + dateString);
+          }
+        name: absorb_it_nspanel_timeUpdate
