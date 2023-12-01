@@ -200,28 +200,80 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}(param, noOfItems) {
+            let result = String(param);
+            if (result.charAt(0) != '~')
+                result = '~' + result;
+            while ((result.match(/~/g) || []).length < noOfItems)
+                result += '~'
+            while ((result.match(/~/g) || []).length > noOfItems)
+                result = result.replace(/~/, '');
+            return result;
+          }
+        name: absorb_it_nspanel_callback_checkParam
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, code) {
             try {
               contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
             } catch {
-              // if callback received non-JSON string check for page refresh request
-              if (
-                (event.itemState.toString() === "refresh" || event.itemState.toString() === "refreshTimer")
-                && cache.private.get('currentCard')
-                && (cache.private.get('lastPage') !== "screensaver")
-              ) {
-                {{absorb_it_nspanel_callback_startScript}}(
-                  cache.private.get('currentCard'),
-                  {"previousPage": cache.private.get('lastPage')},
-                  0
-                );
+              // if callback received non-JSON string check for local requests
+              let callbackParam = event.itemState.toString().split('?');
+              switch (callbackParam[0]) {
+                case "refresh":
+                  if (cache.private.get('currentCard'))
+                    {{absorb_it_nspanel_callback_startScript}}(
+                      cache.private.get('currentCard'),
+                      {"previousPage": cache.private.get('lastPage')},
+                      0
+                    );
+                  return;
+                case "refreshTimer":
+                  if (cache.private.get('currentCard') && (cache.private.get('lastPage') !== "screensaver"))
+                    {{absorb_it_nspanel_callback_startScript}}(
+                      cache.private.get('currentCard'),
+                      {"previousPage": cache.private.get('lastPage')},
+                      0
+                    );
+                  return;
+                case "loadPage":
+                  if (callbackParam[1])
+                    contextValues = [ , "buttonPress2", callbackParam[1] ];
+                  break;
+                case "loadScreensaver":
+                  contextValues = [ , "sleepReached" ];
+                  break;
+                case "newTimeout":
+                  if (callbackParam[1])
+                    items.getItem(target).sendCommand(
+                      "timeout" +
+                      {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1)
+                    );
+                  return;
+                case "newBrigthness":
+                  if (callbackParam[1] && callbackParam[2])
+                    items.getItem(target).sendCommand(
+                      "dimmode" +
+                      {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1) +
+                      {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1)
+                    );
+                  return;
+                default:
+                  return;
               }
-              return;
             }
             switch(contextValues[1]) {
               case "startup":
-                items.getItem(target).sendCommand("timeout~" + timeout);
-                items.getItem(target).sendCommand("dimmode~" + screenSaverBrightness + "~" + activeBrightness );
+                items.getItem(target).sendCommand(
+                  "timeout" +
+                  {{absorb_it_nspanel_callback_checkParam}}(timeout, 1)
+                );
+                items.getItem(target).sendCommand(
+                  "dimmode" +
+                  {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
+                  {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
+                );
                 {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
                 {{absorb_it_nspanel_callback_safeEval}}(code);
                 break;
@@ -231,16 +283,22 @@ slots:
                   items.getItem(target).sendCommand("pageType~screensaver2");
                 else
                   items.getItem(target).sendCommand("pageType~screensaver");
-                {{absorb_it_nspanel_callback_startScript}}(screensaverStartupScript, {}, 0);
+                {{absorb_it_nspanel_callback_startScript}}(
+                  screensaverStartupScript, {}, 0
+                );
                 cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
                 break;
               case "buttonPress2":
                 switch(contextValues[3]) {
                   case "bExit":
                     if (cache.private.get('currentCard'))
-                      {{absorb_it_nspanel_callback_startScript}}(cache.private.get('currentCard'), {}, 1);
+                      {{absorb_it_nspanel_callback_startScript}}(
+                        cache.private.get('currentCard'), {}, 0
+                      );
                     else
-                      {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
+                      {{absorb_it_nspanel_callback_startScript}}(
+                        startupScript, {}, 1
+                      );
                   break;
                   default:
                     if (contextValues[2].split('?')[0] !== cache.private.get('lastPage')) {
