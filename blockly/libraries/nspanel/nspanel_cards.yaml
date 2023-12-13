@@ -1548,22 +1548,9 @@ slots:
               - nspanel_navigationString
           - type: input_dummy
         args2:
-          - name: SSID
+          - name: QRSTRING
             type: input_value
             check: String
-          - name: PASSWORD
-            type: input_value
-            check: String
-          - name: ENCRYPTION
-            options:
-              - - WPA
-                - WPA
-              - - WEP
-                - WEP
-              - - OFF
-                - ""
-            type: field_dropdown
-          - type: input_dummy
           - type: input_dummy
         args3:
           - type: input_dummy
@@ -1585,7 +1572,7 @@ slots:
         message0: CARD QR %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
-          WIFI SSID %1 WIFI Password %2 WIFI Encryption %3 %4 %5
+          QR String to encode %1 %2
         message3: >
           Right Side Buttons (use NSPanel Entitites) %1 Upper Entity %2 Lower Entity %3
         nextStatement: ""
@@ -1604,9 +1591,7 @@ slots:
                         {{input:NAV_PREV}},
                         {{input:NAV_NEXT}}
                     ],
-                    {{input:SSID}},
-                    {{input:PASSWORD}},
-                    '{{field:ENCRYPTION}}',
+                    {{input:QRSTRING}},
                     [
                         {{input:ENTITY_1}},
                         {{input:ENTITY_2}}
@@ -1622,28 +1607,17 @@ slots:
           - component: PresetInput
             config:
               fields:
-                TEXT: WIFI QR
+                TEXT: QR Code
               name: TITLE
               shadow: true
               type: text
           - component: PresetInput
             config:
               fields:
-                TEXT: SSID
-              name: SSID
+                TEXT: QR String
+              name: QRSTRING
               shadow: true
               type: text
-          - component: PresetInput
-            config:
-              fields:
-                TEXT: PASSWORD
-              name: PASSWORD
-              shadow: true
-              type: text
-          - component: PresetField
-            config:
-              name: ENCRYPTION
-              value: WPA
           - component: PresetInput
             config:
               fields:
@@ -2062,11 +2036,11 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, ssid, password, encryption, entities, refresh) {
+          function {{name}}(target, title, navigation, qrString, entities, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
-            mqtt += {{absorb_it_nspanel_cards_checkParam}}('~WIFI:S:' + ssid + ';T:' + encryption + ';P:' + password + ';;', 1);
+            mqtt += {{absorb_it_nspanel_cards_checkParam}}(qrString, 1);
             for (let i = 0; i < 2; i++) {
               let result = entities[i];
               if (result === undefined) {

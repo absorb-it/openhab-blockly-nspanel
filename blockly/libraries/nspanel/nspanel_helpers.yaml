@@ -203,6 +203,57 @@ slots:
               name: DISPLAY_NAME
               shadow: true
               type: text
+    - component: BlockType
+      config:
+        args0:
+          - type: input_dummy
+          - name: SSID
+            type: input_value
+            check: String
+          - name: PASSWORD
+            type: input_value
+            check: String
+          - name: ENCRYPTION
+            options:
+              - - WPA
+                - WPA
+              - - WEP
+                - WEP
+              - - OFF
+                - ""
+            type: field_dropdown
+        colour: 90
+        helpUrl: https://en.wikipedia.org/wiki/QR_code#Joining_a_Wi%E2%80%91Fi_network
+        inputsInline: false
+        message0: >
+          WIFI QR string %1 SSID %2 Encryption %4 Password %3
+        output: String
+        tooltip: Generates a QR code from your WIFI settings.
+        type: absorb_it_nspanel_wifiQR
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_wifiQR}}({{input:SSID}}, {{input:PASSWORD}}, '{{field:ENCRYPTION}}')"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: SSID
+              name: SSID
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: PASSWORD
+              name: PASSWORD
+              shadow: true
+              type: text
+          - component: PresetField
+            config:
+              name: ENCRYPTION
+              value: WPA
     - component: Separator
       config:
         gap: 48
@@ -395,6 +446,13 @@ slots:
             return(mapping[parseInt(code)]);
           }
         name: absorb_it_nspanel_convertWeatherCodeToIcon
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(ssid, password, encryption) {
+            return {{absorb_it_nspanel_helpers_checkParam}}('~WIFI:S:' + ssid + ';T:' + encryption + ';P:' + password + ';;', 1);
+          }
+        name: absorb_it_nspanel_wifiQR
     - component: UtilityFunction
       config:
         code: >-
