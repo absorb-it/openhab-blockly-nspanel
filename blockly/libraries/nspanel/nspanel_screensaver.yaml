@@ -778,7 +778,8 @@ slots:
             let mqtt = 'weatherUpdate';
             for (let i = 0; i < entities.length; i++) {
               let result = entities[i];
-              mqtt += {{absorb_it_nspanel_ssaver_checkParam}}(result.resultString, 6);
+              if (result)
+                mqtt += {{absorb_it_nspanel_ssaver_checkParam}}(result.resultString, 6);
             }
             items.getItem(target).sendCommand(mqtt);
           }
