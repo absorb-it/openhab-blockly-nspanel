@@ -17,6 +17,9 @@ slots:
             required: true
             type: input_value
             check: oh_item
+          - name: ACTIVE_BRIGHTNESS
+            type: input_value
+            check: Number
           - type: input_dummy
         args1:
           - type: input_dummy
@@ -24,9 +27,6 @@ slots:
             type: input_value
             check: Number
           - name: SCREENSAVER_BRIGHTNESS
-            type: input_value
-            check: Number
-          - name: ACTIVE_BRIGHTNESS
             type: input_value
             check: Number
           - name: SCREENSAVER2
@@ -47,9 +47,9 @@ slots:
         colour: 90
         helpUrl: ""
         message0: >
-          NSPANEL CALLBACK %1 Display on %2 %3
+          NSPANEL CALLBACK %1 Display on %2 Display Brightness (0 - 100) %3 %4
         message1: >
-          SCREENSAVER SETTINGS %1 Brightness (0 - 100) %4 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %5 %6 Call Script after Screensaver shown%7 (i.e. for WeatherUpdate, enter Id) %8 %9
+          SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
           STARTUP %1 Call Script (enter Id) %2 Run Statement %3
         nextStatement: ""
