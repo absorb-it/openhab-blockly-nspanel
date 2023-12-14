@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="30cm" height="22cm" viewBox="855 474 592 423" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="1056" y="596" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1056" y="596" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1116" y="617.437">
+    <tspan x="1116" y="617.437">Callback</tspan>
+    <tspan x="1116" y="633.437">rule</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="1056" y="696" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1056" y="696" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1116" y="717.437">
+    <tspan x="1116" y="717.437">cardGrid</tspan>
+    <tspan x="1116" y="733.437">script</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1126" y="726">
+    <tspan x="1126" y="726"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="1156" y="806" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1156" y="806" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1216" y="827.437">
+    <tspan x="1216" y="827.437">cardPower</tspan>
+    <tspan x="1216" y="843.437">script</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="1016" y="476" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1016" y="476" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1076" y="505.437">
+    <tspan x="1076" y="505.437">MQTT Broker</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="956" y="806" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="956" y="806" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1016" y="827.437">
+    <tspan x="1016" y="827.437">cardChart</tspan>
+    <tspan x="1016" y="843.437">script</tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1100.09,647.006 A 72.5,72.5 0 0 0 1097.5,685.675"/>
+    <polygon style="fill: #000000" points="1099.35,692.884 1091.32,685.102 1096.86,685.806 1100.75,681.793 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1099.35,692.884 1091.32,685.102 1096.86,685.806 1100.75,681.793 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" d="M 1221.42,795.306 A 83.085,83.085 0 0 0 1185.28,732.284"/>
+    <polygon style="fill: #0000ff" points="1178.95,728.345 1190.13,728.538 1185.6,731.814 1185.5,737.404 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" points="1178.95,728.345 1190.13,728.538 1185.6,731.814 1185.5,737.404 "/>
+    <polygon style="fill: #0000ff" points="1221.63,802.758 1217.12,792.528 1221.99,795.267 1227.11,793.012 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" points="1221.63,802.758 1217.12,792.528 1221.99,795.267 1227.11,793.012 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" d="M 1038.81,864.136 A 109.423,109.423 0 0 0 1193.19,864.136"/>
+    <polygon style="fill: #0000ff" points="1198.32,858.702 1195.71,869.574 1193.49,864.443 1188.06,863.139 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" points="1198.32,858.702 1195.71,869.574 1193.49,864.443 1188.06,863.139 "/>
+    <polygon style="fill: #0000ff" points="1033.68,858.702 1043.94,863.139 1038.51,864.443 1036.29,869.574 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" points="1033.68,858.702 1043.94,863.139 1038.51,864.443 1036.29,869.574 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" d="M 1046.31,724.734 A 78.6067,78.6067 0 0 0 1006.35,795.449"/>
+    <polygon style="fill: #0000ff" points="1052.95,721.358 1045.6,729.786 1046.01,724.211 1041.8,720.538 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" points="1052.95,721.358 1045.6,729.786 1046.01,724.211 1041.8,720.538 "/>
+    <polygon style="fill: #0000ff" points="1006.88,802.88 1000.43,793.751 1005.75,795.466 1010.31,792.239 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #0000ff" points="1006.88,802.88 1000.43,793.751 1005.75,795.466 1010.31,792.239 "/>
+  </g>
+  <image x="856" y="526" width="104.565" height="80" xlink:href="file:///home/rene/Desktop/develop/openhab-blockly-nspanel/docs/img/lovelaceUI_screensaver.jpg"/>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1176" y="506">
+    <tspan x="1176" y="506"></tspan>
+  </text>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="1185.39" y1="519.232" x2="1146.61" y2="512.768"/>
+    <polygon style="fill: #000000" points="1192.79,520.465 1182.1,523.753 1185.39,519.232 1183.75,513.889 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1192.79,520.465 1182.1,523.753 1185.39,519.232 1183.75,513.889 "/>
+    <polygon style="fill: #000000" points="1139.21,511.535 1149.9,508.247 1146.61,512.768 1148.25,518.111 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1139.21,511.535 1149.9,508.247 1146.61,512.768 1148.25,518.111 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1196" y="506" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1196" y="506" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1256" y="527.437">
+    <tspan x="1256" y="527.437">Lovelace UI</tspan>
+    <tspan x="1256" y="543.437">Item Channel</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1366" y="506">
+    <tspan x="1366" y="506"></tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1005.41,497.9 A 147.564,147.564 0 0 0 954.536,518.511"/>
+    <polygon style="fill: #000000" points="948.337,522.708 953.393,512.736 954.362,518.242 959.348,520.769 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="948.337,522.708 953.393,512.736 954.362,518.242 959.348,520.769 "/>
+    <polygon style="fill: #000000" points="1012.78,496.598 1003.52,502.871 1005.34,497.585 1002.21,492.958 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1012.78,496.598 1003.52,502.871 1005.34,497.585 1002.21,492.958 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1256" y="531">
+    <tspan x="1256" y="531"></tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1195,529.902 A 108.477,108.477 0 0 0 1126.55,586.139"/>
+    <polygon style="fill: #000000" points="1123.42,592.929 1122.41,581.795 1126.16,585.944 1131.72,585.438 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1123.42,592.929 1122.41,581.795 1126.16,585.944 1131.72,585.438 "/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1016" y="826">
+    <tspan x="1016" y="826"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1126" y="716">
+    <tspan x="1126" y="716"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1106" y="726">
+    <tspan x="1106" y="726"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1136" y="716">
+    <tspan x="1136" y="716"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1116" y="726">
+    <tspan x="1116" y="726"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1128" y="720">
+    <tspan x="1128" y="720"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1124" y="720">
+    <tspan x="1124" y="720"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1140" y="620">
+    <tspan x="1140" y="620"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #0000ff;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1116" y="764.437">
+    <tspan x="1116" y="764.437">logical flow</tspan>
+    <tspan x="1116" y="780.437">must be configured</tspan>
+    <tspan x="1116" y="796.437">in the scripts</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1120" y="780">
+    <tspan x="1120" y="780"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1340" y="620">
+    <tspan x="1340" y="620"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1096" y="616">
+    <tspan x="1096" y="616"></tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="1326" y="586" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1326" y="586" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1386" y="607.437">
+    <tspan x="1386" y="607.437">TimeUpdate</tspan>
+    <tspan x="1386" y="623.437">rule</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1440" y="540">
+    <tspan x="1440" y="540"></tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="1396" y="536">
+    <tspan x="1396" y="536"></tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1292.05,655.014 A 156.25,156.25 0 0 0 1278.51,565.638"/>
+    <polygon style="fill: #000000" points="1275.15,558.947 1284.37,565.271 1278.79,565.508 1275.62,570.118 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1275.15,558.947 1284.37,565.271 1278.79,565.508 1275.62,570.118 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1367.88,584.993 A 155.625,155.625 0 0 0 1325.64,550.544"/>
+    <polygon style="fill: #000000" points="1319.02,547.046 1330.2,546.845 1325.79,550.279 1325.89,555.868 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1319.02,547.046 1330.2,546.845 1325.79,550.279 1325.89,555.868 "/>
+  </g>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1164.31,694.996 A 219.652,219.652 0 0 0 1250.64,566.52"/>
+    <polygon style="fill: #000000" points="1252.25,559.2 1255.3,569.957 1250.85,566.569 1245.47,568.095 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1252.25,559.2 1255.3,569.957 1250.85,566.569 1245.47,568.095 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="1226" y="656" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="1226" y="656" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="1286" y="677.437">
+    <tspan x="1286" y="677.437">WeatherUpdate</tspan>
+    <tspan x="1286" y="693.437">rule</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="886" y="656" width="120" height="50"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="886" y="656" width="120" height="50"/>
+  </g>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:middle;font-family:sans-serif;font-style:normal;font-weight:normal" x="946" y="677.437">
+    <tspan x="946" y="677.437">StatusUpdate</tspan>
+    <tspan x="946" y="693.437">rule</tspan>
+  </text>
+  <text font-size="12.7998" style="fill: #000000;text-anchor:start;font-family:sans-serif;font-style:normal;font-weight:normal" x="936" y="676">
+    <tspan x="936" y="676"></tspan>
+  </text>
+  <g>
+    <path style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" d="M 1045.45,620.853 A 173.582,173.582 0 0 0 972.341,655.018"/>
+    <polygon style="fill: #000000" points="1052.81,619.491 1043.65,625.897 1045.4,620.586 1042.19,616.005 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="1052.81,619.491 1043.65,625.897 1045.4,620.586 1042.19,616.005 "/>
+  </g>
+</svg>
