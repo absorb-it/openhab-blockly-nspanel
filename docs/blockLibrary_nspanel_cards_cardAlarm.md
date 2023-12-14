@@ -30,6 +30,6 @@ The cardAlarm gives you some input options to enter some protection code. The PI
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

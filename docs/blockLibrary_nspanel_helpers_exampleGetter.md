@@ -8,6 +8,6 @@ This is just some example, for instance to set some [Switch](blockLibrary_nspane
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

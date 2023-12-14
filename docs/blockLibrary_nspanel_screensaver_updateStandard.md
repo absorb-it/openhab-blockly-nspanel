@@ -12,6 +12,6 @@ With this module you can set all the Icons and Texts for the [standard screensav
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

@@ -30,6 +30,6 @@ The cardQR will help your guests to connect to your WIFI. It will display some Q
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

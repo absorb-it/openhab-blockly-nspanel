@@ -13,6 +13,6 @@ This helper can be used to generate some standard Wireless Network access QR cod
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

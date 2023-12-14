@@ -10,6 +10,6 @@ You might not find this variable in your standard variable toolbox, just use the
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

@@ -36,6 +36,6 @@ The cardGrid can be used to display different entities and there status. Depende
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

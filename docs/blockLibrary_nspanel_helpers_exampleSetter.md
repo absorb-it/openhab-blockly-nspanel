@@ -8,6 +8,6 @@ This is an example for some action which is triggered for instance by modifying 
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

@@ -28,6 +28,6 @@ This entity gives you some option to switch your fan on and off and control the 
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

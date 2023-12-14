@@ -18,6 +18,6 @@ This is some working example of the Weather / Icon Update for the [standard scre
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

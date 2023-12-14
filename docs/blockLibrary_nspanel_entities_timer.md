@@ -24,6 +24,6 @@ This entity gives you some option to configure a timer and trigger some actions 
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

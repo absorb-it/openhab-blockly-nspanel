@@ -14,6 +14,6 @@ The HVAC Button is only used on the [Thermo Card](blockLibrary_nspanel_cards_car
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

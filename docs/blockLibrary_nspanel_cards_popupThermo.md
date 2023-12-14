@@ -14,6 +14,6 @@ The popupThermo gives you a page with up to three rows, where you can select dif
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

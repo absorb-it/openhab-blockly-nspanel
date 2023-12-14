@@ -36,6 +36,6 @@ The cardEntities page gives you the overview of the status of up to 4 different 
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

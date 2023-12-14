@@ -14,6 +14,6 @@ The array, which is needed to hold all these icons and search for the one you li
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

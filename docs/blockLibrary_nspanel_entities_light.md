@@ -26,6 +26,6 @@ This is some light switch, which is similar to some [standard switch](blockLibra
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

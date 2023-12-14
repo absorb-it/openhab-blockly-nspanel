@@ -41,6 +41,6 @@ The cardMedia page can e used to control some media player. Indicate what music 
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

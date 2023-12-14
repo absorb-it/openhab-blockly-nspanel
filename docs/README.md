@@ -108,6 +108,6 @@ See [Callback](blockLibrary_nspanel_callback_callback.md) for further informatio
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Usage and Installation</p>](../README.md)
+[Openhab Blockly Nspanel - Usage and Installation](../README.md)
 
 ---

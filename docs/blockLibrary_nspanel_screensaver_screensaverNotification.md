@@ -14,6 +14,6 @@ This notification will be shown inside your screensaver, hiding some of the scre
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

@@ -14,6 +14,6 @@ The time (and date), which is displayed on the screensaver of your display, has 
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

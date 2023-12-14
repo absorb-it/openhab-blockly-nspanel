@@ -14,6 +14,6 @@ On the screensaver, two status Icons can be displayed on the top ([standard scre
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

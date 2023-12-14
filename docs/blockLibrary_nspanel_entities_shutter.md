@@ -22,6 +22,6 @@ This is some shutter control, on the entities view it will give you some up-down
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---

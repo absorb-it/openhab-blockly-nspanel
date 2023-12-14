@@ -13,6 +13,6 @@ The navigation string is used to connect your display *Cards* (Pages) between ea
 
 ---
 
-[<p style="text-align: center;">Openhab Blockly Nspanel - Library Documentation</p>](README.md)
+[Openhab Blockly Nspanel - Library Documentation](README.md)
 
 ---
