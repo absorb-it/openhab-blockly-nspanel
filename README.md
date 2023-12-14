@@ -16,15 +16,15 @@ As of now (Dec. 2023) the installation of the add-on is a little tricky. Call it
 
 The openHAB Marketplace does [not yet support multiple blockLibrary templates in one file](https://github.com/openhab/openhab-core/issues/2509). Adding multiple files as some bundle to one marketplace add-on is also not supported. Therefore you have to install all the 5 required blockLibraries separately, and best keep them at the same release to get them running. The 5 add-ons are:
 
-- NSPanel Helpers
+- [NSPanel Helpers](https://community.openhab.org/t/nspanel-lovelace-ui-helpers-part-1-5/152029)
 
-- NSPanel Entities
+- [NSPanel Entities](https://community.openhab.org/t/nspanel-lovelace-ui-entities-part-2-5/152030)
 
-- NSPanel Cards
+- [NSPanel Cards](https://community.openhab.org/t/nspanel-lovelace-ui-cards-part-3-5/152031)
 
-- NSPanel Screensaver
+- [NSPanel Screensaver](https://community.openhab.org/t/nspanel-lovelace-ui-screensaver-part-4-5/152032)
 
-- NSPanel Callback
+- [NSPanel Callback](https://community.openhab.org/t/nspanel-lovelace-ui-callback-part-5-5/152033)
 
 ### manually
 
