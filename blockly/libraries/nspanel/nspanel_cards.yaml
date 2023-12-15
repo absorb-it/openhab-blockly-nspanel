@@ -1857,9 +1857,9 @@ slots:
                 let result = {};
                 if (ctx.trigger == "tempUpdHighLow" || ctx.trigger == "tempUpd") {
                     let newState = ctx.newState.split('|');
-                    let newValue = String(parseInt(newState[0])/100);
+                    let newValue = String(parseInt(newState[0])/10);
                     if (newState[1] !== undefined)
-                        newValue += '|' + String(parseInt(newState[1])/100);
+                        newValue += '|' + String(parseInt(newState[1])/10);
                     {{absorb_it_nspanel_cards_safeEval}}(tempChangeAction, newValue);
                     result = { "refreshPage": "1" }
                 }
