@@ -1680,7 +1680,11 @@ slots:
             let result = "";
             if (command) {
                 try { result = eval(command); }
-                catch { console.log("eval failed: '" + command + '"'); }
+                catch (e) {
+                  console.error("Error", e.stack);
+                  console.log("Error", e.toString());
+                  console.log("eval failed: '" + command + "'");
+                }
             }
             return result;
           }

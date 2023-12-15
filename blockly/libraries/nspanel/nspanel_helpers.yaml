@@ -368,11 +368,12 @@ slots:
             // evaluate command, for 'setter' use retrunValue as required conext
             let result = "";
             if (command) {
-                console.log("returnValue = " + returnValue);
-                console.log("starting command: " + command);
                 try { result = eval(command); }
-                catch { console.log("eval failed: '" + command + '"'); }
-                console.log("result: " + result);
+                catch (e) {
+                  console.error("Error", e.stack);
+                  console.log("Error", e.toString());
+                  console.log("eval failed: '" + command + "'");
+                }
             }
             return result;
           }

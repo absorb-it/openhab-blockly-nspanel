@@ -179,7 +179,10 @@ slots:
                 cache.private.put('lastPage', scriptName); // any last page
                 if (updateCacheLink)
                   cache.private.put('currentCard', scriptName); // only some last pages (excluding popupNotify, Screensaver)
-            } catch {
+            }
+            catch (e) {
+                console.error("Error", e.stack);
+                console.log("Error", e.toString());
                 console.log("can't start/find rule with id '" + scriptName + "'");
             }
           }
@@ -192,7 +195,11 @@ slots:
             let result = "";
             if (command) {
                 try { result = eval(command); }
-                catch { console.log("eval failed: '" + command + '"'); }
+                catch (e) {
+                  console.error("Error", e.stack);
+                  console.log("Error", e.toString());
+                  console.log("eval failed: '" + command + "'");
+                }
             }
             return result;
           }
