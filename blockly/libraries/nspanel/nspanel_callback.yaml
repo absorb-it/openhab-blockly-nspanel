@@ -218,55 +218,57 @@ slots:
             try {
               contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
             } catch {
-              // if callback received non-JSON string check for local requests
-              let callbackParam = event.itemState.toString().split('?');
-              switch (callbackParam[0]) {
-                case "refresh":
-                  if (cache.private.get('currentCard')) {
-                    let context = { "previousPage": cache.private.get('lastPage') };
-                    if (cache.private.exists('DetailPage')) {
-                      context["request"] = "pageOpenDetail";
-                      context["item"] = cache.private.get('DetailPage');
-                    };
-                    {{absorb_it_nspanel_callback_startScript}}(
-                      cache.private.get('currentCard'),
-                      context,
-                      0
-                    );
-                  }
-                  return;
-                case "refreshTimer":
-                  if (cache.private.get('currentCard') && (cache.private.get('lastPage') !== "screensaver"))
-                    {{absorb_it_nspanel_callback_startScript}}(
-                      cache.private.get('currentCard'),
-                      {"previousPage": cache.private.get('lastPage')},
-                      0
-                    );
-                  return;
-                case "loadPage":
-                  if (callbackParam[1])
-                    contextValues = [ , "buttonPress2", callbackParam[1] ];
-                  break;
-                case "loadScreensaver":
-                  contextValues = [ , "sleepReached" ];
-                  break;
-                case "newTimeout":
-                  if (callbackParam[1])
-                    items.getItem(target).sendCommand(
-                      "timeout" +
-                      {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1)
-                    );
-                  return;
-                case "newBrigthness":
-                  if (callbackParam[1] && callbackParam[2])
-                    items.getItem(target).sendCommand(
-                      "dimmode" +
-                      {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1) +
-                      {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1)
-                    );
-                  return;
-                default:
-                  return;
+              if (event.itemState) {
+                // if callback received non-JSON string check for local requests
+                let callbackParam = event.itemState.toString().split('?');
+                switch (callbackParam[0]) {
+                  case "refresh":
+                    if (cache.private.get('currentCard')) {
+                      let context = { "previousPage": cache.private.get('lastPage') };
+                      if (cache.private.exists('DetailPage')) {
+                        context["request"] = "pageOpenDetail";
+                        context["item"] = cache.private.get('DetailPage');
+                      };
+                      {{absorb_it_nspanel_callback_startScript}}(
+                        cache.private.get('currentCard'),
+                        context,
+                        0
+                      );
+                    }
+                    return;
+                  case "refreshTimer":
+                    if (cache.private.get('currentCard') && (cache.private.get('lastPage') !== "screensaver"))
+                      {{absorb_it_nspanel_callback_startScript}}(
+                        cache.private.get('currentCard'),
+                        {"previousPage": cache.private.get('lastPage')},
+                        0
+                      );
+                    return;
+                  case "loadPage":
+                    if (callbackParam[1])
+                      contextValues = [ , "buttonPress2", callbackParam[1] ];
+                    break;
+                  case "loadScreensaver":
+                    contextValues = [ , "sleepReached" ];
+                    break;
+                  case "newTimeout":
+                    if (callbackParam[1])
+                      items.getItem(target).sendCommand(
+                        "timeout" +
+                        {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1)
+                      );
+                    return;
+                  case "newBrigthness":
+                    if (callbackParam[1] && callbackParam[2])
+                      items.getItem(target).sendCommand(
+                        "dimmode" +
+                        {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1) +
+                        {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1)
+                      );
+                    return;
+                  default:
+                    return;
+                }
               }
             }
             switch(contextValues[1]) {
