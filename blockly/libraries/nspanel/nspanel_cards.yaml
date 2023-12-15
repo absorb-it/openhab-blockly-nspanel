@@ -1689,15 +1689,13 @@ slots:
       config:
         code: >-
           function {{name}}(result, target) {
-              if (result && result.sendNow) {
-                if (result.resultString)
-                  items.getItem(target).sendCommand(result.resultString);
-                return 1;
-              } else if (result && result.refreshPage) {
-                items.getItem(target).sendCommand('refresh');
-                return 1;
+              if (result && result.sendNow && result.resultString) {
+                items.getItem(target).sendCommand(result.resultString);
               }
-              return 0;
+              if (result && result.refreshPage) {
+                items.getItem(target).sendCommand('refresh');
+              }
+              return (result && (result.sendNow || result.refreshPage));
           }
         name: absorb_it_nspanel_cards_checkResult
     - component: UtilityFunction
@@ -1846,14 +1844,14 @@ slots:
           function {{name}}(target, title, navigation, target_temp, show_second_temp, second_temp, min_temp, max_temp, temp_steps, temp_unit, tCurTempLbl, currentTemp, tStateLbl, status, actions, tempChangeAction, pagePopupAction, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
-            if (ctx.request == "pageOpenDetail" && ctx.item === null) {
+            if (ctx.request == "pageOpenDetail") {
                 let result = pagePopupAction[0];
                 if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
                   {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
                   return;
                 }
             }
-            if (ctx.request == "pageUpdate" && ctx.item === null) {
+            if (ctx.request == "pageUpdate") {
                 let result = {};
                 if (ctx.trigger == "tempUpdHighLow" || ctx.trigger == "tempUpd") {
                     let newState = ctx.newState.split('|');
@@ -1862,10 +1860,6 @@ slots:
                         newValue += '|' + String(parseInt(newState[1])/10);
                     {{absorb_it_nspanel_cards_safeEval}}(tempChangeAction, newValue);
                     result = { "refreshPage": "1" }
-                }
-                else {
-                    // popupPage triggered change.
-                    result = pagePopupAction[0];
                 }
                 if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
                   {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
@@ -1900,7 +1894,7 @@ slots:
       config:
         code: >-
           function {{name}}(icon, iconColor, topHeading, topOptions, topSelected, topAction, midHeading, midOptions, midSelected, midAction, lowHeading, lowOptions, lowSelected, lowAction) {
-            if (ctx.request == 'pageUpdate') {
+            if (ctx.newState) {
               switch (ctx.trigger) {
                 case "mode-0":
                   {{absorb_it_nspanel_cards_safeEval}}(topAction, ctx.newState);
@@ -1912,7 +1906,7 @@ slots:
                   {{absorb_it_nspanel_cards_safeEval}}(lowAction, ctx.newState);
                   break;
               }
-              return { "sendNow": "1" };
+              return { "refreshPage": "1" };
             }
             return {
                 "sendNow": "1",
