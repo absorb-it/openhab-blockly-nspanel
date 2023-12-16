@@ -1028,32 +1028,38 @@ slots:
         code: >-
           function {{name}}(icon, iconColor, displayName, getState, setState, colorWheel, colorWheelLabel, setColorWheel, colorTemp, colorTempLabel, getColorTemp, setColorTemp, brightness, brightnessLabel, getBrightness, setBrightness) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
-            if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx.newState) {
-              switch (ctx.trigger) {
-                  case "OnOff":
-                    {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
-                    break;
-                  case "colorWheel":
-                    {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, ctx.newState);
-                    break;
-                  case "colorTempSlider":
-                    console.log("\n\n\n***\ncolorTempSlider action: " + ctx.newState);
-                    {{absorb_it_nspanel_entities_safeEval}}(setColorTemp, ctx.newState);
-                    break;
-                  case "brightnessSlider":
-                    {{absorb_it_nspanel_entities_safeEval}}(setBrightness, ctx.newState);
-                    break;
-                }
+            if (ctx.item == ownEntityPos) {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "OnOff") {
+                {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
                 return { "refreshPage": "1" };
               }
-              else {
-                let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(getState, 1);
-                mqtt += (brightness == "TRUE")?({{absorb_it_nspanel_entities_checkParam}}(getBrightness, 1)):'~disable';
-                mqtt += (colorTemp == "TRUE")?({{absorb_it_nspanel_entities_checkParam}}(getColorTemp, 1)):'~disable';
-                mqtt += (colorWheel == "TRUE")?'~enable':'~disable';
-                mqtt += {{absorb_it_nspanel_entities_checkParam}}(colorWheelLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(colorTempLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(brightnessLabel, 1);
-                return { "sendNow": "1", "resultString": mqtt };
+              if (ctx.request == 'pageOpenDetail') {
+                if (ctx["newState"] !== undefined) {
+                switch (ctx.trigger) {
+                    case "OnOff":
+                      {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
+                      break;
+                    case "colorWheel":
+                      {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, ctx.newState);
+                      break;
+                    case "colorTempSlider":
+                      console.log("\n\n\n***\ncolorTempSlider action: " + ctx.newState);
+                      {{absorb_it_nspanel_entities_safeEval}}(setColorTemp, ctx.newState);
+                      break;
+                    case "brightnessSlider":
+                      {{absorb_it_nspanel_entities_safeEval}}(setBrightness, ctx.newState);
+                      break;
+                  }
+                  return { "refreshPage": "1" };
+                }
+                else {
+                  let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(getState, 1);
+                  mqtt += (brightness == "TRUE")?({{absorb_it_nspanel_entities_checkParam}}(getBrightness, 1)):'~disable';
+                  mqtt += (colorTemp == "TRUE")?({{absorb_it_nspanel_entities_checkParam}}(getColorTemp, 1)):'~disable';
+                  mqtt += (colorWheel == "TRUE")?'~enable':'~disable';
+                  mqtt += {{absorb_it_nspanel_entities_checkParam}}(colorWheelLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(colorTempLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(brightnessLabel, 1);
+                  return { "sendNow": "1", "resultString": mqtt };
+                }
               }
             }
             return {
@@ -1068,43 +1074,50 @@ slots:
                             upperDownEnable, upperDownIcon, upperGetter, upperSetter, lowerLabel, lowerLeftEnable, lowerLeftIcon, lowerStopEnable, lowerStopIcon,
                             lowerRightEnable, lowerRightIcon, lowerGetter, lowerSetter) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
-            if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx.newState) {
-                switch (ctx.trigger) {
-                  case "tiltOpen":
-                    {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "open");
-                    break;
-                  case "tiltStop":
-                    {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "stop");
-                    break;
-                  case "tiltClose":
-                    {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "close");
-                    break;
-                  case "tiltSlider":
-                    {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.newState);
-                    break;
-                  case "up":
-                  case "stop":
-                  case "down":
-                    {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger);
-                    break;
-                  case "positionSlider":
-                    {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.newState);
-                    break;
-                }
+            if (ctx.item == ownEntityPos) {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined &&
+                (ctx.trigger == "up" || ctx.trigger == "stop" || ctx.trigger == "down")) {
+                {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger);
                 return { "refreshPage": "1" };
               }
-              else {
-                let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperGetter, 1) + {{absorb_it_nspanel_entities_checkParam}}(popupSubtitle, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(popupIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperUpIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperStopIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperDownIcon, 1);
-                mqtt += (upperUpEnable == "TRUE")?'~enable':'~disable';
-                mqtt += (upperStopEnable == "TRUE")?'~enable':'~disable';
-                mqtt += (upperDownEnable == "TRUE")?'~enable':'~disable';
-                mqtt += {{absorb_it_nspanel_entities_checkParam}}(lowerLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(lowerLeftIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(lowerStopIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(lowerRightIcon, 1);
-                mqtt += (lowerLeftEnable == "TRUE")?'~enable':'~disable';
-                mqtt += (lowerStopEnable == "TRUE")?'~enable':'~disable';
-                mqtt += (lowerRightEnable == "TRUE")?'~enable':'~disable';
-                mqtt += {{absorb_it_nspanel_entities_checkParam}}(lowerGetter, 1);
-                return { "sendNow": "1", "resultString": mqtt };
+              if (ctx.request == 'pageOpenDetail') {
+                if (ctx["newState"] !== undefined) {
+                  switch (ctx.trigger) {
+                    case "tiltOpen":
+                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "open");
+                      break;
+                    case "tiltStop":
+                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "stop");
+                      break;
+                    case "tiltClose":
+                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "close");
+                      break;
+                    case "tiltSlider":
+                      {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.newState);
+                      break;
+                    case "up":
+                    case "stop":
+                    case "down":
+                      {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger);
+                      break;
+                    case "positionSlider":
+                      {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.newState);
+                      break;
+                  }
+                  return { "refreshPage": "1" };
+                }
+                else {
+                  let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperGetter, 1) + {{absorb_it_nspanel_entities_checkParam}}(popupSubtitle, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(popupIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperUpIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperStopIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(upperDownIcon, 1);
+                  mqtt += (upperUpEnable == "TRUE")?'~enable':'~disable';
+                  mqtt += (upperStopEnable == "TRUE")?'~enable':'~disable';
+                  mqtt += (upperDownEnable == "TRUE")?'~enable':'~disable';
+                  mqtt += {{absorb_it_nspanel_entities_checkParam}}(lowerLabel, 1) + {{absorb_it_nspanel_entities_checkParam}}(lowerLeftIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(lowerStopIcon, 1) + {{absorb_it_nspanel_entities_checkParam}}(lowerRightIcon, 1);
+                  mqtt += (lowerLeftEnable == "TRUE")?'~enable':'~disable';
+                  mqtt += (lowerStopEnable == "TRUE")?'~enable':'~disable';
+                  mqtt += (lowerRightEnable == "TRUE")?'~enable':'~disable';
+                  mqtt += {{absorb_it_nspanel_entities_checkParam}}(lowerGetter, 1);
+                  return { "sendNow": "1", "resultString": mqtt };
+                }
               }
             }
             return {
@@ -1117,20 +1130,20 @@ slots:
         code: >-
           function {{name}}(icon, iconColor, displayName, popupIconColor, getOptions, getSelection, setOption, triggerChange) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
-            if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx.newState) {
-                switch (ctx.trigger) {
-                  case "button":
-                    {{absorb_it_nspanel_entities_safeEval}}(triggerChange);
-                    break;
-                  default:
-                    {{absorb_it_nspanel_entities_safeEval}}(setOption, ctx.newState + 1, getOptions.split('?')[ctx.newState]);
-                }
+            if (ctx.item == ownEntityPos) {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "button") {
+                {{absorb_it_nspanel_entities_safeEval}}(triggerChange);
                 return { "refreshPage": "1" };
               }
-              else {
-                let mqtt = 'entityUpdateDetail2' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(popupIconColor), 1)+ '~' + {{absorb_it_nspanel_entities_checkParam}}(getSelection, 1) + {{absorb_it_nspanel_entities_checkParam}}(getOptions, 1);
-                return { "sendNow": "1", "resultString": mqtt };
+              if (ctx.request == 'pageOpenDetail') {
+                if (ctx["newState"] !== undefined) {
+                  {{absorb_it_nspanel_entities_safeEval}}(setOption, ctx.newState + 1, getOptions.split('?')[ctx.newState]);
+                  return { "refreshPage": "1" };
+                }
+                else {
+                  let mqtt = 'entityUpdateDetail2' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(popupIconColor), 1)+ '~' + {{absorb_it_nspanel_entities_checkParam}}(getSelection, 1) + {{absorb_it_nspanel_entities_checkParam}}(getOptions, 1);
+                  return { "sendNow": "1", "resultString": mqtt };
+                }
               }
             }
             return {
@@ -1143,24 +1156,30 @@ slots:
         code: >-
           function {{name}}(icon, iconColor, displayName, getter, setter, popupIconColor, label, speed, speedMax, setSpeed, modes, selectedMode, setSelectedMode) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
-            if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx.newState) {
-                switch (ctx.trigger) {
-                  case "OnOff":
-                    {{absorb_it_nspanel_entities_safeEval}}(setter, ctx.newState);
-                    break;
-                  case "number-set":
-                    {{absorb_it_nspanel_entities_safeEval}}(setSpeed, ctx.newState);
-                    break;
-                  case "mode-preset_modes":
-                    {{absorb_it_nspanel_entities_safeEval}}(setSelectedMode, ctx.newState + 1, modes.split('?')[ctx.newState]);
-                    break;
-                }
+            if (ctx.item == ownEntityPos) {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "OnOff") {
+                {{absorb_it_nspanel_entities_safeEval}}(setter, ctx.newState);
                 return { "refreshPage": "1" };
               }
-              else {
-                let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(popupIconColor), 1)+ {{absorb_it_nspanel_entities_checkParam}}(getter, 1) + {{absorb_it_nspanel_entities_checkParam}}(speed, 1) + {{absorb_it_nspanel_entities_checkParam}}(speedMax, 1)+ {{absorb_it_nspanel_entities_checkParam}}(label, 1) + {{absorb_it_nspanel_entities_checkParam}}(selectedMode, 1) + {{absorb_it_nspanel_entities_checkParam}}(modes, 1)
-                return { "sendNow": "1", "resultString": mqtt };
+              if (ctx.request == 'pageOpenDetail') {
+                if (ctx["newState"] !== undefined) {
+                  switch (ctx.trigger) {
+                    case "OnOff":
+                      {{absorb_it_nspanel_entities_safeEval}}(setter, ctx.newState);
+                      break;
+                    case "number-set":
+                      {{absorb_it_nspanel_entities_safeEval}}(setSpeed, ctx.newState);
+                      break;
+                    case "mode-preset_modes":
+                      {{absorb_it_nspanel_entities_safeEval}}(setSelectedMode, ctx.newState + 1, modes.split('?')[ctx.newState]);
+                      break;
+                  }
+                  return { "refreshPage": "1" };
+                }
+                else {
+                  let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(popupIconColor), 1)+ {{absorb_it_nspanel_entities_checkParam}}(getter, 1) + {{absorb_it_nspanel_entities_checkParam}}(speed, 1) + {{absorb_it_nspanel_entities_checkParam}}(speedMax, 1)+ {{absorb_it_nspanel_entities_checkParam}}(label, 1) + {{absorb_it_nspanel_entities_checkParam}}(selectedMode, 1) + {{absorb_it_nspanel_entities_checkParam}}(modes, 1)
+                  return { "sendNow": "1", "resultString": mqtt };
+                }
               }
             }
             return {
@@ -1174,7 +1193,7 @@ slots:
           function {{name}}(icon, iconColor, displayName, displayValue, popupIconColor, minRemaining, secRemaining, editable, leftBtn, leftBtnAction, midBtn, midBtnAction, rightBtn, rightBtnAction) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx.newState) {
+              if (ctx["newState"] !== undefined) {
                 switch (ctx.trigger) {
                   case "timer-left":
                     {{absorb_it_nspanel_entities_safeEval}}(leftBtnAction, ctx.newState);
