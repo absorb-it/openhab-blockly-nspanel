@@ -266,6 +266,12 @@ slots:
     - component: BlockAssembly
       config:
         blockXml: >
+          <block type="variables_get">
+            <field name="VAR" >returnMode</field>
+          </block>
+    - component: BlockAssembly
+      config:
+        blockXml: >
           <block type="logic_ternary">
             <value name="IF">
               <block type="logic_compare">

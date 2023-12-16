@@ -537,7 +537,9 @@ slots:
     - component: BlockType
       config:
         message0: >
-          ENTITY SELECTOR %1 Icon %2 Icon Color %3 Displayed Name %4 %5 Active Option ('option'-label expected) %6 Trigger State Change (call on button press) %7 %8
+          ENTITY SELECTOR %1 Icon %2 Icon Color %3 Displayed Name %4 %5
+          Active Option ('option'-label expected) %6
+          Trigger State Change (call on button press) %7 %8 %9
         args0:
           - type: input_dummy
             align: CENTER
@@ -554,6 +556,7 @@ slots:
           - name: GET_SELECTION
             type: input_value
             check: String
+          - type: input_dummy
           - name: TRIGGER_CHANGE
             type: input_statement
           - type: input_dummy
@@ -566,16 +569,21 @@ slots:
           - type: input_dummy
           - type: input_dummy
         message2: >
-          Possible Options (separate by options by '?') %1 Set Item State (returnValue = (index) = [0-X]) %2
+          Possible Options (separate by options by '?') %1
+          - Action Trigger %2
+          .    (returnValue = (index) = [1-X]) %3
+          .    (returnMode = 'Option') %4 %5
         args2:
           - name: GET_OPTIONS
             type: input_value
             check: String
+          - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
           - name: SETTER
             type: input_statement
         colour: 90
         helpUrl: ""
-        inputsInline: false
         output: nspanel_entitySelectorString
         tooltip: ""
         type: absorb_it_nspanel_entitySelector
@@ -631,7 +639,9 @@ slots:
     - component: BlockType
       config:
         message0: >
-          ENTITY FAN %1 Icon %2 Icon Color %3 Displayed Name %4 %5 State of Item ([0,1]) %6 Set Item State (returnValue=[0,1]) %7 %8
+          ENTITY FAN %1 Icon %2 Icon Color %3 Displayed Name %4 %5
+          State of Item ([0,1]) %6
+          Set Item State (returnValue=[0,1]) %7 %8 %9
         args0:
           - type: input_dummy
             align: CENTER
@@ -648,6 +658,7 @@ slots:
           - name: GETTER
             type: input_value
             check: String
+          - type: input_dummy
           - name: SETTER
             type: input_statement
           - type: input_dummy
@@ -659,7 +670,13 @@ slots:
             type: input_value
           - type: input_dummy
         message2: >
-          Slider Label %1 Slider Value %2 Slider Maximum %3 Set Speed (returnValue = [0-Max]) %4 %5 Possible Modes (separate by '?') %6 Selected Mode %7 Set Mode (returnValue = (index) = [0-X]) %8
+          Slider Label %1 Slider Value %2 Slider Maximum %3
+          Set Speed (returnValue = [0-Max]) %12 %4 %5
+          Possible Modes (separate by '?') %6
+          Selected Mode %7
+          Set Mode %8
+          .    (returnValue = (index) = [1-X]) %9
+          .    (returnMode = 'Mode') %10 %11
         args2:
           - name: LABEL
             type: input_value
@@ -679,11 +696,14 @@ slots:
           - name: SELECTED_MODE
             type: input_value
             check: String
+          - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
           - name: SET_SELECTED_MODE
             type: input_statement
+          - type: input_dummy
         colour: 90
         helpUrl: ""
-        inputsInline: false
         output: nspanel_entityFanString
         tooltip: ""
         type: absorb_it_nspanel_entityFan
@@ -934,7 +954,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(command, returnValue = '') {
+          function {{name}}(command, returnValue = '', returnMode = '') {
             // evaluate command, for 'setter' use returnValue as required conext
             let result = "";
             // convert to returnValue to Number if possible
@@ -1100,7 +1120,7 @@ slots:
                     {{absorb_it_nspanel_entities_safeEval}}(triggerChange);
                     break;
                   default:
-                    {{absorb_it_nspanel_entities_safeEval}}(setOption, ctx.newState);
+                    {{absorb_it_nspanel_entities_safeEval}}(setOption, ctx.newState + 1, getOptions.split('?')[ctx.newState]);
                 }
                 return { "refreshPage": "1" };
               }
@@ -1129,7 +1149,7 @@ slots:
                     {{absorb_it_nspanel_entities_safeEval}}(setSpeed, ctx.newState);
                     break;
                   case "mode-preset_modes":
-                    {{absorb_it_nspanel_entities_safeEval}}(setSelectedMode, ctx.newState);
+                    {{absorb_it_nspanel_entities_safeEval}}(setSelectedMode, ctx.newState + 1, modes.split('?')[ctx.newState]);
                     break;
                 }
                 return { "refreshPage": "1" };

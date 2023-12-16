@@ -766,6 +766,9 @@ slots:
           - name: TOP_ACTION
             type: input_statement
           - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
         args2:
           - name: MID_HEADING
             type: input_value
@@ -776,6 +779,9 @@ slots:
           - name: MID_ACTION
             type: input_statement
           - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
         args3:
           - name: LOW_HEADING
             type: input_value
@@ -785,17 +791,19 @@ slots:
             type: input_value
           - name: LOW_ACTION
             type: input_statement
+          - type: input_dummy
+          - type: input_dummy
+          - type: input_dummy
         colour: 90
         helpUrl: ""
-        inputsInline: false
         message0: >
           POPUP THERMO PAGE %1 Top Left Icon %2 Top Left Icon Color %3 %4
         message1: >
-          Upper Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger (returnValue = (index) = [0-X]) %4 %5
+          Upper Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger %5 .    (returnValue = (index) = [1-X]) %7 .    (returnMode = 'Option') %8 %4 %6
         message2: >
-          Middle Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger (returnValue = (index) = [0-X]) %4 %5
+          Upper Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger %5 .    (returnValue = (index) = [1-X]) %7 .    (returnMode = 'Option') %8 %4 %6
         message3: >
-          Lower Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger (returnValue = (index) = [0-X]) %4
+          Upper Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger %5 .    (returnValue = (index) = [1-X]) %7 .    (returnMode = 'Option') %6 %4
         output: nspanel_popupThermoString
         nextStatement: ""
         previousStatement: ""
@@ -1675,7 +1683,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(command, returnValue = '') {
+          function {{name}}(command, returnValue = '', returnMode = '') {
             // evaluate command, for 'setter' use retrunValue as required conext
             let result = "";
             // convert to returnValue to Number if possible
@@ -1904,13 +1912,13 @@ slots:
             if (ctx.newState) {
               switch (ctx.trigger) {
                 case "mode-0":
-                  {{absorb_it_nspanel_cards_safeEval}}(topAction, ctx.newState);
+                  {{absorb_it_nspanel_cards_safeEval}}(topAction, ctx.newState + 1, topOptions.split('?')[ctx.newState]);
                   break;
                 case "mode-1":
-                  {{absorb_it_nspanel_cards_safeEval}}(midAction, ctx.newState);
+                  {{absorb_it_nspanel_cards_safeEval}}(midAction, ctx.newState + 1, midOptions.split('?')[ctx.newState]);
                   break;
                 case "mode-2":
-                  {{absorb_it_nspanel_cards_safeEval}}(lowAction, ctx.newState);
+                  {{absorb_it_nspanel_cards_safeEval}}(lowAction, ctx.newState + 1, lowOptions.split('?')[ctx.newState]);
                   break;
               }
               return { "refreshPage": "1" };
