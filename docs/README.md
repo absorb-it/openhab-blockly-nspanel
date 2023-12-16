@@ -13,6 +13,7 @@
 - [get Alarm Button](blockLibrary_nspanel_helpers_alarmButton.md)
 - [get WIFI QR String](blockLibrary_nspanel_helpers_QRString.md)
 - [Example returnValue](blockLibrary_nspanel_helpers_returnValue.md)
+- [Example returnMode](blockLibrary_nspanel_helpers_returnValue.md)
 - [Example Getter Statement](blockLibrary_nspanel_helpers_exampleGetter.md)
 - [Example Setter Statement](blockLibrary_nspanel_helpers_exampleSetter.md)
 

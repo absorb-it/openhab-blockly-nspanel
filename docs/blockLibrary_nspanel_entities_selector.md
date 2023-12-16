@@ -18,7 +18,7 @@ This entity gives you some selection option, for instance to select some input o
 
 - Configure the Icon color of the selector popup page.
 
-- Separate the possible options with a question mark '?'. Add some action to this selector, the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will give you the index of the choosen option (counting from 0).
+- Separate the possible options with a question mark '?'. Add some action to this selector, the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will give you the index of the choosen option (counting from 1). You can also use the [*returnMode* variable](blockLibrary_nspanel_helpers_returnMode.md) for your actions, it will contain the newly selected option as a String.
 
 ---
 

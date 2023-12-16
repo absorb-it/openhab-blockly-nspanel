@@ -24,7 +24,7 @@ This entity gives you some option to switch your fan on and off and control the 
 
 - If the slider is moved, the *Set Speed* action is triggered. The [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will contain the value of the current slider position.
 
-- Separate the possible modes with a question mark '?' and configure the pre-selected mode. Add some action to this selector, the returnValue variable will give you the index of the choosen option (counting from 0).
+- Separate the possible modes with a question mark '?' and configure the pre-selected mode. Add some action to this selector, the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will give you the index of the choosen option (counting from 1). You can also use the [*returnMode* variable](blockLibrary_nspanel_helpers_returnMode.md) for this action, it will contain the newly selected mode as a String.
 
 ---
 

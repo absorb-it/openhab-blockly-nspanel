@@ -12,6 +12,8 @@ This is some shutter control, on the entities view it will give you some up-down
 
 - Displayed Name: it is usually shown close to the Icon.
 
+- If you are using this entity block on the [Card Entities](blockLibrary_nspanel_cards_cardEntities.md), you can change the shutter position from the main page as well as from the popup page. Use the popup *Action Trigger* to configure this action. 
+
 ### Popup Configuration
 
 - Configure the Icon and the Label of the shutter popup page.
