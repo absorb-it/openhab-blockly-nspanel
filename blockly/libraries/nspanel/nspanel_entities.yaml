@@ -334,7 +334,8 @@ slots:
     - component: BlockType
       config:
         message0: >
-          ENTITY SHUTTER %1 Icon %2 Icon Color %3 Displayed Name %4 %5 **** POPUP **** %9 Popup Page Icon %6 Popup Page Subtitle %7 %8
+          ENTITY SHUTTER %1 Icon %2 Icon Color %3 Displayed Name %4 %5
+          **** POPUP **** %9 Popup Page Icon %6 Popup Page Subtitle %7 %8
         args0:
           - type: input_dummy
             align: CENTER
@@ -359,7 +360,8 @@ slots:
         message1: >
           Upper Slider (Position) - Label %1 - %2 'UP' Icon %3 - %4 'STOP' Icon %5 - %6 'Down' Icon %7
            - Position ([0-100]) %8
-           - Set Position (Main Page and Popup) %9 (returnValue = [0-100|up|stop|down]) %10 %11
+           - Action Trigger (Entities Page and Popup) %9
+           .   (returnValue = [0-100|up|stop|down]) %11 %10 %12
         args1:
           - name: UPPER_LABEL
             type: input_value
@@ -386,10 +388,12 @@ slots:
           - name: UPPER_SETTER
             type: input_statement
           - type: input_dummy
+          - type: input_dummy
         message2: >
           Lower Slider (Tilt) - Label %1 - %2 'OPEN' Icon %3 - %4 'STOP' Icon %5 - %6 'CLOSE' Icon %7
            - Position ([0-100]) %8
-           - Set Position %9 (returnValue = [0-100|open|stop|close]) %10 %11
+           - Action Trigger %9
+           .   (returnValue = [0-100|up|stop|down]) %11 %10
         args2:
           - name: LOWER_LABEL
             type: input_value
