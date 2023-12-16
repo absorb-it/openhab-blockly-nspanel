@@ -740,6 +740,9 @@ slots:
           function {{name}}(command, returnValue = '') {
             // evaluate command, for 'setter' use retrunValue as required conext
             let result = "";
+            // convert to returnValue to Number if possible
+            if (parseFloat(returnValue) == returnValue)
+              returnValue = parseFloat(returnValue);
             if (command) {
                 try { result = eval(command); }
                 catch (e) {
