@@ -24,15 +24,16 @@ The cardEntities page gives you the overview of the status of up to 4 different 
 
 ### Special Configuration for cardEntities
 
-- Add up to 8 different Entities to indicate different settings or enable some actions. The Icon will be displayed together with the Name, the Value will be ignored. The layout will be automatically changed if slots 7 or 8 are used for some Entity.
-
-- Only some Entities are useful, because there is not enough space on the Grid view to include a lot of additional functions. Choose one of the following entities from the "NSPanel Entities" library:
-  
-  - [Entity Label](blockLibrary_nspanel_entities_label.md) - some Icon with a Label
-  - [Entity Button](blockLibrary_nspanel_entities_button.md) - has some additional Action trigger
-  - [Entity Shutter](blockLibrary_nspanel_entities_shutter.md) - looks like the Entity Button, but can open Shutter Popup
-  - [Entity Selector](blockLibrary_nspanel_entities_selector.md) - looks like the Entity Button, but can open Selector Popup
-  - [Entity Timer](blockLibrary_nspanel_entities_timer.md) - looks like the Entity Button, but can open Timer Popup
+- Add up to 4 different Entities to indicate different settings or enable some actions. The Icon will be displayed together with the Name and the Value. Some Entities allow direct actions on the main page, others allow access to a sub-page with some options.
+- Choose any entity you like from the "NSPanel Entities" library:
+  - [Entity Label](blockLibrary_nspanel_entities_label.md) - some Icon with a Label.
+  - [Entity Button](blockLibrary_nspanel_entities_button.md) - has some additional Action trigger.
+  - [Entity Switch](blockLibrary_nspanel_entities_switch.md) - has some on-off switch.
+  - [Entity Light](blockLibrary_nspanel_entities_light.md) - has some additional Popup page for light settings.
+  - [Entity Fan](blockLibrary_nspanel_entities_fan.md) - has some additional Popup page for fan control.
+  - [Entity Shutter](blockLibrary_nspanel_entities_shutter.md) - looks like the Entity Button, but can open Shutter Popup.
+  - [Entity Selector](blockLibrary_nspanel_entities_selector.md) - looks like the Entity Button, but can open Selector Popup.
+  - [Entity Timer](blockLibrary_nspanel_entities_timer.md) - looks like the Entity Button, but can open Timer Popup.
 
 ---
 
