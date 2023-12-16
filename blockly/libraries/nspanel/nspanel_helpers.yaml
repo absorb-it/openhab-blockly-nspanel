@@ -135,7 +135,7 @@ slots:
         helpUrl: "https://docs.nspanel.pky.eu/card-climate/"
         inputsInline: false
         message0: >
-          HVAC BUTTON string %1 Icon %2 Icon Color %3 State of Item ([0,1]) %4 Button Press Action %5
+          HVAC BUTTON string %1 Icon %2 Icon Color %3 State of Button ([0,1]) %4 Button Press Action %5
         output: nspanel_hvacButtonString
         tooltip: "Special Button which can be used with the Thermo Page. The Button-Press action will be triggered without any useful parameter."
         type: absorb_it_nspanel_hvacButton
