@@ -8,9 +8,7 @@ The HVAC Button is only used on the [Thermo Card](blockLibrary_nspanel_cards_car
 
 - Configure the displayed Icon and the color.
 - Switch of the Item: provide a value of '0' or '1' to render the State of the Icon on the display.
-- Configure the triggered action if you press the Icon button.
-
-<br clear="right"/>
+- Configure the triggered action if you press the Icon button.<br clear="right"/>
 
 ---
 

@@ -7,9 +7,7 @@ This helper can be used to generate some standard Wireless Network access QR cod
 [<img src="img/blockLibrary_nspanel_helpers_QRString.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_QRString.png)
 
 - Enter the SSID of the network.
-- Choose the encryption and the password of your network.
-
-<br clear="right"/>
+- Choose the encryption and the password of your network.<br clear="right"/>
 
 ---
 

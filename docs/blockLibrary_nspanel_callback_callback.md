@@ -30,31 +30,26 @@ Provide the new screensaver timeout as a parameter to the related state change, 
 
 ### newBrigthness
 
-You can also modify the brightness settings of the display on the fly, maybe to dim the panel down by night. Just provide the screensaver brightness as the first parameter, the normal brightness as the second parameter. For instance as 'newBrigthness?35?80'.
+You can also modify the brightness settings of the display on the fly, maybe to dim the panel down by night. Just provide the screensaver brightness as the first parameter, the normal brightness as the second parameter. For instance as 'newBrigthness?35?80'.<br clear="right"/>
 
 ## Configuration
 
 [<img src="img/blockLibrary_nspanel_callback_callback.png" align="right" width="300">](img/blockLibrary_nspanel_callback_callback.png)
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
-
 - The Brightness for the activated display (for instance after some touch event) as numerical value between 0 and 100.
 
 The *Callback* will configure the screensaver after receiving the display startup message. The following settings are relevant for the screensaver:
 
 - The Screensaver timeout in seconds - enter 0 here to disable the screensaver completely.
-
 - The Brightness for the Screensaver as numerical value between 0 and 100. 
-
 - You can decide, if you like to use a more [complex Screensaver](https://docs.nspanel.pky.eu/img/screensaver2.png), displaying more than 15 states, instead of the [usual one](https://docs.nspanel.pky.eu/img/screensaver.png), which gives you around 5 states on the display.
-
 - You can enter a script name (the script ID, not the Label!), which is called whenever the screensaver is activated. This can be used to renew all the icons and status informations on the screensaver.
 
 You might also like to display some initial card (page) after starting.
 
 - Add the ID of some script configuring your card.
-
-- Run any statement you like.
+- Run any statement you like.<br clear="right"/>
 
 ---
 

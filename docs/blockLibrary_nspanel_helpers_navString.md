@@ -7,9 +7,7 @@ The navigation string is used to connect your display *Cards* (Pages) between ea
 [<img src="img/blockLibrary_nspanel_helpers_navString.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_navString.png)
 
 - Add some Icon and set the color you like.
-- Add some *Card* (Page) to navigate to. You should enter some target script Id. This script gets called when you press the navigational button and usually renders some new *Card*. 
-
-<br clear="right"/>
+- Add some *Card* (Page) to navigate to. You should enter some target script Id. This script gets called when you press the navigational button and usually renders some new *Card*.<br clear="right"/>
 
 ---
 

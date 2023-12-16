@@ -13,11 +13,9 @@
 - [get Alarm Button](blockLibrary_nspanel_helpers_alarmButton.md)
 - [get WIFI QR String](blockLibrary_nspanel_helpers_QRString.md)
 - [Example returnValue](blockLibrary_nspanel_helpers_returnValue.md)
-- [Example returnMode](blockLibrary_nspanel_helpers_returnValue.md)
+- [Example returnMode](blockLibrary_nspanel_helpers_returnMode.md)
 - [Example Getter Statement](blockLibrary_nspanel_helpers_exampleGetter.md)
-- [Example Setter Statement](blockLibrary_nspanel_helpers_exampleSetter.md)
-
-<br clear="right"/>
+- [Example Setter Statement](blockLibrary_nspanel_helpers_exampleSetter.md)<br clear="right"/>
 
 ### Cards Library
 
@@ -31,18 +29,14 @@
 - [Power Card](blockLibrary_nspanel_cards_cardPower.md)
 - [QR Card](blockLibrary_nspanel_cards_cardQR.md)
 - [Thermo Card](blockLibrary_nspanel_cards_cardThermo.md)
-- [Thermo Popup](blockLibrary_nspanel_cards_popupThermo.md)
-
-<br clear="right"/>
+- [Thermo Popup](blockLibrary_nspanel_cards_popupThermo.md)<br clear="right"/>
 
 ### Callback Library
 
 [<img src="img/blockLibrary_nspanel_callback_timeUpdate.png" align="right" width="300">](img/blockLibrary_nspanel_callback_timeUpdate.png)
 
 - [Callback](blockLibrary_nspanel_callback_callback.md)
-- [Time Update](blockLibrary_nspanel_callback_timeUpdate.md)
-
-<br clear="right"/>
+- [Time Update](blockLibrary_nspanel_callback_timeUpdate.md)<br clear="right"/>
 
 ### Screensaver/Notification Library
 
@@ -53,9 +47,7 @@
 - [show Screensaver Notification](blockLibrary_nspanel_screensaver_screensaverNotification.md)
 - [set Screensaver Status Icons](blockLibrary_nspanel_screensaver_screensaverStatusIcons.md)
 - [update Screensaver Icons + Texts (complex)](blockLibrary_nspanel_screensaver_updateComplex.md)
-- [update Screensaver Icons + Texts (standard)](blockLibrary_nspanel_screensaver_updateStandard.md)
-
-<br clear="right"/>
+- [update Screensaver Icons + Texts (standard)](blockLibrary_nspanel_screensaver_updateStandard.md)<br clear="right"/>
 
 ### Entities Library
 
@@ -68,9 +60,7 @@
 - [Item Selector](blockLibrary_nspanel_entities_selector.md)
 - [Window Shutter Control](blockLibrary_nspanel_entities_shutter.md)
 - [Switch](blockLibrary_nspanel_entities_switch.md)
-- [Timer Control](blockLibrary_nspanel_entities_timer.md)
-
-<br clear="right"/>
+- [Timer Control](blockLibrary_nspanel_entities_timer.md)<br clear="right"/>
 
 ## Configuration Examples
 
@@ -84,9 +74,7 @@
 
 - [Notification Rule](openhab_rules_notification.md)
 - [Timeupdate Rule](openhab_rules_timeupdate.md)
-- [Weatherupdate Rule](openhab_rules_weatherupdate.md)
-
-<br clear="right"/>
+- [Weatherupdate Rule](openhab_rules_weatherupdate.md)<br clear="right"/>
 
 ### Example Cards
 
@@ -99,9 +87,7 @@
 - [Media Card](openhab_scripts_nspanel1_cardMedia.md)
 - [Power Card](openhab_scripts_nspanel1_cardPower.md)
 - [QR Card](openhab_scripts_nspanel1_cardQR.md)
-- [Thermo Card](openhab_scripts_nspanel1_cardThermo.md)
-
-<br clear="right"/>
+- [Thermo Card](openhab_scripts_nspanel1_cardThermo.md)<br clear="right"/>
 
 ## Remote Control Options
 

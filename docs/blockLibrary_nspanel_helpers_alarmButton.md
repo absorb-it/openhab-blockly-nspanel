@@ -7,9 +7,7 @@ The Alarm Button is only used on the [Alarm Card](blockLibrary_nspanel_cards_car
 [<img src="img/blockLibrary_nspanel_helpers_alarmButton.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_alarmButton.png)
 
 - Configure the displayed name.
-- Configure the triggered action, the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will contain the code which was entered.
-
-<br clear="right"/>
+- Configure the triggered action, the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will contain the code which was entered.<br clear="right"/>
 
 ---
 

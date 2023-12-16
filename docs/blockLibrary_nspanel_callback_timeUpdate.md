@@ -7,10 +7,8 @@ The time (and date), which is displayed on the screensaver of your display, has 
 [<img src="img/blockLibrary_nspanel_callback_timeUpdate.png" align="right" width="300">](img/blockLibrary_nspanel_callback_timeUpdate.png)
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
-
 - The Time Format.
-
-- The Date Format.
+- The Date Format.<br clear="right"/>
 
 ---
 
