@@ -1038,7 +1038,7 @@ slots:
         message2: >
           Song Title %1 - Color %2 Author %3 - Color %4 Volume %5 Play/Pause Icon %6 ON/OFF Btn %7 Color %8 Shuffle Icon %9 Icon%10 %11
         message3: >
-          choose Button, Shutter or Selector %9 (use NSPanel Entities): %8 Up Left Media Icon %1 Entity 1 %2 Entity 2 %3 Entity 3 %4 Entity 4 %5 Entity 5 %6 %7
+          choose Label, Button, Shutter or Selector %9 (use NSPanel Entities): %8 Up Left Media Icon %1 Entity 1 %2 Entity 2 %3 Entity 3 %4 Entity 4 %5 Entity 5 %6 %7
         message4: >
           Media Player Control Actions: %1 - Back: %2 - Play/Pause:  %3 - Next:  %4 - Volume (returnValue = [0-100]):  %5 - ON/OFF:  %6 - Shuffle:  %7
         nextStatement: ""
