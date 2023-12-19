@@ -10,7 +10,7 @@ This is some working example of the Callback implementation.
 
 [<img src="img/openhab_rules_callback_script.png" align="right" width="300">](img/openhab_rules_callback_script.png)
 
-- The callback can be configured as above. You might like to have a look at the [Callback Description](blockLibrary_nspanel_callback_callback.md) as well.<br clear="right"/>
+- The callback can be configured as shown here. You might like to have a look at the [Callback Description](blockLibrary_nspanel_callback_callback.md) as well.<br clear="right"/>
 
 ---
 

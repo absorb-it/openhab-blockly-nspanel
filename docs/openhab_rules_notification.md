@@ -10,7 +10,7 @@ This is some working example of the Screensaver Notification.
 
 [<img src="img/openhab_rules_notification_script.png" align="right" width="300">](img/openhab_rules_notification_script.png)
 
-- The notification can be configured as above. You might like to have a look at the [Notification Description](blockLibrary_nspanel_screensaver_screensaverNotification.md) as well.
+- The notification can be configured as shown. You might like to have a look at the [Notification Description](blockLibrary_nspanel_screensaver_screensaverNotification.md) as well.
 - Some timer is added to remove the notification after a while by sending an empty notification.<br clear="right"/>
 
 ---
