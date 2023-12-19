@@ -43,11 +43,11 @@ slots:
             type: input_value
             check: String
         colour: 90
-        helpUrl: "https://github.com/sevesalm/eInk-weather-display/blob/master/weather_icon_codes.md"
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_getIconNameForWeathercode.md"
         inputsInline: false
-        message0: get icon name for WeatherSymbol3 code %1
+        message0: get icon name for Weather code %1
         output: String
-        tooltip: "Converts Weathercode from FMI forcast to suitable Icon-Name."
+        tooltip: "Converts Weathercode from OSM or FMI forcast to suitable Icon-Name."
         type: absorb_it_nspanel_weatherIcon
       slots:
         code:
@@ -444,7 +444,7 @@ slots:
         code: >-
           function {{name}}(code) {
             // see https://github.com/sevesalm/eInk-weather-display/blob/master/weather_icon_codes.md
-            let mapping = {
+            let fmi_mapping = {
               "1":"fullscreen", "2":"weather-partly-cloudy", "21":"weather-partly-rainy", "22":"weather-rainy",
               "23":"weather-pouring", "3":"weather-cloudy", "31":"weather-partly-rainy", "32":"weather-rainy",
               "33":"weather-pouring", "41":"weather-partly-snowy-rainy", "42":"weather-snowy-rainy", "43":"weather-snowy-rainy",
@@ -453,7 +453,95 @@ slots:
               "73":"weather-hail", "81":"weather-partly-snowy-rainy", "82":"weather-partly-snowy-rainy", "83":"weather-hail",
               "91":"weather-fog", "92":"weather-fog"
               };
-            return(mapping[parseInt(code)]);
+            // see https://openweathermap.org/weather-conditions
+            let owm_mapping = {
+              "200":"weather-lightning-rainy",
+              "201":"weather-lightning-rainy",
+              "202":"weather-lightning-rainy",
+              "210":"weather-lightning",
+              "211":"weather-lightning",
+              "212":"weather-lightning",
+              "221":"weather-lightning-rainy",
+              "230":"weather-lightning-rainy",
+              "231":"weather-lightning-rainy",
+              "232":"weather-lightning-rainy",
+              "300":"weather-hail",
+              "301":"weather-hail",
+              "302":"weather-hail",
+              "310":"weather-hail",
+              "311":"weather-hail",
+              "312":"weather-hail",
+              "313":"weather-hail",
+              "314":"weather-hail",
+              "321":"weather-hail",
+              "500":"weather-rainy",
+              "501":"weather-rainy",
+              "502":"weather-rainy",
+              "503":"weather-pouring",
+              "504":"weather-pouring",
+              "511":"snowflake-melt",
+              "520":"weather-pouring",
+              "521":"weather-pouring",
+              "531":"weather-pouring",
+              "600":"weather-snowy",
+              "601":"weather-snowy",
+              "602":"weather-snowy-heavy",
+              "611":"weather-snowy",
+              "612":"weather-snowy-heavy",
+              "613":"weather-snowy-heavy",
+              "615":"weather-snowy-rainy",
+              "616":"weather-snowy-rainy",
+              "620":"weather-snowy-heavy",
+              "621":"weather-snowy-heavy",
+              "622":"weather-snowy-heavy",
+              "701":"weather-fog",
+              "711":"smoke",
+              "721":"weather-hazy",
+              "731":"weather-tornado",
+              "741":"weather-fog",
+              "751":"weather-tornado",
+              "761":"weather-tornado",
+              "762":"smog",
+              "771":"weather-tornado",
+              "781":"weather-tornado",
+              "800":"weather-sunny",
+              "801":"weather-partly-cloudy",
+              "802":"weather-cloudy",
+              "803":"weather-cloudy",
+              "804":"cloud"
+            };
+
+            let owm_short_mapping = {
+              "01d":"weather-sunny",
+              "01n":"weather-night",
+              "02d":"weather-partly-cloudy",
+              "02n":"weather-night-partly-cloudy",
+              "03d":"weather-cloudy",
+              "03n":"weather-cloudy",
+              "04d":"cloud",
+              "04n":"cloud",
+              "09d":"weather-pouring",
+              "09n":"weather-pouring",
+              "10d":"weather-rainy",
+              "10n":"weather-rainy",
+              "11d":"weather-lightning",
+              "11n":"weather-lightning",
+              "13d":"weather-snowy",
+              "13n":"weather-snowy",
+              "50d":"weather-fog",
+              "50n":"weather-fog",
+            };
+
+            let result = fmi_mapping[parseInt(code)];
+            if(/^\d\d[nd]+$/.test(code))
+              result = owm_short_mapping[code]
+            else if (/^\d\d\d$/.test(code))
+              result = owm_mapping[parseInt(code)]
+
+            if (result === undefined)
+              result = "cloud-question"
+
+            return result;
           }
         name: absorb_it_nspanel_convertWeatherCodeToIcon
     - component: UtilityFunction
