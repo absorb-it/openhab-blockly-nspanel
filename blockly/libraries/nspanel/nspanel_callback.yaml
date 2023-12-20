@@ -190,12 +190,9 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(command, returnValue = '') {
+          function {{name}}(command) {
             // evaluate command, for 'setter' use retrunValue as required conext
             let result = "";
-            // convert to returnValue to Number if possible
-            if (parseFloat(returnValue) == returnValue)
-              returnValue = parseFloat(returnValue);
             if (command) {
                 try { result = eval(command); }
                 catch (e) {
