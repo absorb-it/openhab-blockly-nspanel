@@ -1682,7 +1682,7 @@ slots:
       config:
         code: >-
           function {{name}}(command, returnValue = '', returnMode = '') {
-            // evaluate command, for 'setter' use retrunValue as required conext
+            // evaluate command, use returnValue/returnMode as context
             let result = "";
             // convert to returnValue to Number if possible
             if (parseFloat(returnValue) == returnValue)

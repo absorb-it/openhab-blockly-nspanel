@@ -738,7 +738,7 @@ slots:
       config:
         code: >-
           function {{name}}(command) {
-            // evaluate command, for 'setter' use retrunValue as required conext
+            // evaluate command
             let result = "";
             if (command) {
                 try { result = eval(command); }

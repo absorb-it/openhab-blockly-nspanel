@@ -192,8 +192,8 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(command) {
-            // evaluate command, for 'setter' use retrunValue as required conext
+          function {{name}}(command, returnValue = '') {
+            // evaluate command, use returnValue as context
             let result = "";
             if (command) {
                 try { result = eval(command); }
