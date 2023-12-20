@@ -179,12 +179,14 @@ slots:
                 cache.private.put('lastPage', scriptName); // any last page
                 if (updateCacheLink)
                   cache.private.put('currentCard', scriptName); // only some last pages (excluding popupNotify, Screensaver)
+                return 1;
             }
             catch (e) {
                 console.error("Error", e.stack);
                 console.log("Error", e.toString());
                 console.log("can't start/find rule with id '" + scriptName + "'");
             }
+            return 0;
           }
         name: absorb_it_nspanel_callback_startScript
     - component: UtilityFunction
@@ -221,7 +223,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, code) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, startupAction) {
             try {
               contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
             } catch {
@@ -289,9 +291,10 @@ slots:
                   {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
                   {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
                 );
-                {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
-                {{absorb_it_nspanel_callback_safeEval}}(code);
-                break;
+                let success = {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
+                {{absorb_it_nspanel_callback_safeEval}}(startupAction);
+                if (success || startupAction != '')
+                  break;
               case "sleepReached":
                 {{absorb_it_nspanel_callback_killRefreshTimer}}; // this seems not to work
                 if (screensaver2 == "TRUE")
