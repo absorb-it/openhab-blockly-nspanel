@@ -237,6 +237,8 @@ slots:
                 let callbackParam = event.itemState.toString().split('?');
                 switch (callbackParam[0]) {
                   case "refresh":
+                  case "ON":    // triggered by Hardware Button press (if rule configured to fire)
+                  case "OFF":   // triggered by Hardware Button press (if rule configured to fire)
                     if (cache.private.get('currentCard')) {
                       let context = { "previousPage": cache.private.get('lastPage') };
                       if (cache.private.exists('DetailPage')) {
