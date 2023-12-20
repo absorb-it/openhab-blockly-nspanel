@@ -39,10 +39,12 @@ slots:
           - type: input_dummy
         args2:
           - type: input_dummy
+            align: CENTER
           - name: STARTUP_SCRIPT_ID
             type: input_value
             check: String
-          - name: CODE
+          - type: input_dummy
+          - name: STARTUP_ACTION
             type: input_statement
         colour: 90
         helpUrl: ""
@@ -51,7 +53,8 @@ slots:
         message1: >
           SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
-          STARTUP %1 Call Script (enter Id) %2 Run Statement %3
+          STARTUP %1 Call Script (enter Id) %2
+          Run Statement %3 %4
         nextStatement: ""
         previousStatement: ""
         tooltip: ""
@@ -60,7 +63,7 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:CODE}}`)"
+              template: "{{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`)"
         toolbox:
           - component: PresetInput
             config:
