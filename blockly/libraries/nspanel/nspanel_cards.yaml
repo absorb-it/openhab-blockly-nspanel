@@ -805,8 +805,6 @@ slots:
         message3: >
           Upper Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger %5 .    (returnValue = (index) = [1-X]) %7 .    (returnMode = 'Option') %6 %4
         output: nspanel_popupThermoString
-        nextStatement: ""
-        previousStatement: ""
         tooltip: ""
         type: absorb_it_nspanel_popupThermo
       slots:
