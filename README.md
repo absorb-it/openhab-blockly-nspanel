@@ -1,6 +1,6 @@
 # openhab-blockly-nspanel
 
-openHAB blockLibrary for nspanel lovelace UI
+openHAB 4 blockLibrary for nspanel lovelace UI
 
 ## About
 
@@ -10,7 +10,7 @@ Using some blockLibraries as a base of this add-on gives you the option to confi
 
 ## Installation
 
-As of now (Dec. 2023) the installation of the add-on is a little tricky. Call it 'alpha', even if I expect the software to be 'beta' already :)
+This library needs **openHAB 4** and will not work on any earlier openHAB release. Open a ticket at github for openHAB 3 support, if there are enough requests, I might think about rewriting and testing the relevant parts.
 
 ### via the openHAB Marketplace
 
