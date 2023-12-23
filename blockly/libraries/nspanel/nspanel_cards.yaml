@@ -30,19 +30,16 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
           - name: ENTITY_1
             type: input_value
             check:
-              - String
               - nspanel_entitySwitchString
               - nspanel_entityLabelString
               - nspanel_entityLabelString
@@ -55,7 +52,6 @@ slots:
           - name: ENTITY_2
             type: input_value
             check:
-              - String
               - nspanel_entitySwitchString
               - nspanel_entityLabelString
               - nspanel_entityButtonString
@@ -67,7 +63,6 @@ slots:
           - name: ENTITY_3
             type: input_value
             check:
-              - String
               - nspanel_entitySwitchString
               - nspanel_entityLabelString
               - nspanel_entityButtonString
@@ -79,7 +74,6 @@ slots:
           - name: ENTITY_4
             type: input_value
             check:
-              - String
               - nspanel_entitySwitchString
               - nspanel_entityLabelString
               - nspanel_entityButtonString
@@ -160,19 +154,16 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
           - name: ENTITY_1
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -181,7 +172,6 @@ slots:
           - name: ENTITY_2
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -190,7 +180,6 @@ slots:
           - name: ENTITY_3
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -199,7 +188,6 @@ slots:
           - name: ENTITY_4
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -208,7 +196,6 @@ slots:
           - name: ENTITY_5
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -217,7 +204,6 @@ slots:
           - name: ENTITY_6
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -226,7 +212,6 @@ slots:
           - name: ENTITY_7
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -235,7 +220,6 @@ slots:
           - name: ENTITY_8
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -320,12 +304,10 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
@@ -503,12 +485,10 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
@@ -556,42 +536,34 @@ slots:
           - name: HVAC_ACTION_1
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_2
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_3
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_4
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_5
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_6
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_7
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - name: HVAC_ACTION_8
             type: input_value
             check:
-              - String
               - nspanel_hvacButtonString
           - type: input_dummy
           - type: input_dummy
@@ -604,7 +576,6 @@ slots:
           - name: TMP_POPUP
             type: input_value
             check:
-              - String
               - nspanel_popupThermoString
             align: RIGHT
           - type: input_dummy
@@ -923,12 +894,10 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
@@ -965,7 +934,6 @@ slots:
           - name: MEDIA_ICON
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -973,7 +941,6 @@ slots:
           - name: ENTITY_1
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -981,7 +948,6 @@ slots:
           - name: ENTITY_2
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -989,7 +955,6 @@ slots:
           - name: ENTITY_3
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -997,7 +962,6 @@ slots:
           - name: ENTITY_4
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -1005,7 +969,6 @@ slots:
           - name: ENTITY_5
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
               - nspanel_entityShutterString
@@ -1178,34 +1141,28 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
           - name: BUTTON_1
             type: input_value
             check:
-              - String
               - nspanel_alarmBtnString
           - name: BUTTON_2
             type: input_value
             check:
-              - String
               - nspanel_alarmBtnString
           - name: BUTTON_3
             type: input_value
             check:
-              - String
               - nspanel_alarmBtnString
           - name: BUTTON_4
             type: input_value
             check:
-              - String
               - nspanel_alarmBtnString
           - type: input_dummy
           - name: ICON
@@ -1336,12 +1293,10 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
@@ -1350,7 +1305,6 @@ slots:
           - name: HOME_VALUE
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: ABOVE_HOME
             type: input_value
@@ -1362,7 +1316,6 @@ slots:
           - name: ENTITY_1
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: SPEED_1
             type: input_value
@@ -1370,7 +1323,6 @@ slots:
           - name: ENTITY_2
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: SPEED_2
             type: input_value
@@ -1378,7 +1330,6 @@ slots:
           - name: ENTITY_3
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: SPEED_3
             type: input_value
@@ -1389,7 +1340,6 @@ slots:
           - name: ENTITY_4
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: SPEED_4
             type: input_value
@@ -1397,7 +1347,6 @@ slots:
           - name: ENTITY_5
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: SPEED_5
             type: input_value
@@ -1405,7 +1354,6 @@ slots:
           - name: ENTITY_6
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
           - name: SPEED_6
             type: input_value
@@ -1545,12 +1493,10 @@ slots:
           - name: NAV_PREV
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - name: NAV_NEXT
             type: input_value
             check:
-              - String
               - nspanel_navigationString
           - type: input_dummy
         args2:
@@ -1563,13 +1509,11 @@ slots:
           - name: ENTITY_1
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
           - name: ENTITY_2
             type: input_value
             check:
-              - String
               - nspanel_entityLabelString
               - nspanel_entityButtonString
         colour: 90

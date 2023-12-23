@@ -22,32 +22,26 @@ slots:
           - align: CENTER
             type: input_dummy
           - check:
-              - String
               - nspanel_entityLabelString
             name: MAIN
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: FORECAST_1
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: FORECAST_2
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: FORECAST_3
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: FORECAST_4
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: ALTERNATIVE
             type: input_value
@@ -85,7 +79,6 @@ slots:
           - align: CENTER
             type: input_dummy
           - check:
-              - String
               - nspanel_entityLabelString
             name: MAIN
             type: input_value
@@ -94,17 +87,14 @@ slots:
           - align: CENTER
             type: input_dummy
           - check:
-              - String
               - nspanel_entityLabelString
             name: LEFT_1
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: LEFT_2
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: LEFT_3
             type: input_value
@@ -113,32 +103,26 @@ slots:
           - align: CENTER
             type: input_dummy
           - check:
-              - String
               - nspanel_entityLabelString
             name: BOTTOM_1
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: BOTTOM_2
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: BOTTOM_3
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: BOTTOM_4
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: BOTTOM_5
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: BOTTOM_6
             type: input_value
@@ -147,27 +131,22 @@ slots:
           - align: CENTER
             type: input_dummy
           - check:
-              - String
               - nspanel_entityLabelString
             name: INDICATOR_1
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: INDICATOR_2
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: INDICATOR_3
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: INDICATOR_4
             type: input_value
           - check:
-              - String
               - nspanel_entityLabelString
             name: INDICATOR_5
             type: input_value
