@@ -46,6 +46,9 @@ slots:
           - type: input_dummy
           - name: STARTUP_ACTION
             type: input_statement
+          - name: STARTUP_REDO
+            type: field_checkbox
+          - type: input_dummy
         colour: 90
         helpUrl: ""
         message0: >
@@ -53,7 +56,9 @@ slots:
         message1: >
           SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
-          STARTUP %1 Call Script (enter Id) %2
+          STARTUP %1
+          %5 run also after leaving Screensaver %6
+          Show Page / Call Script (enter Id) %2
           Run Statement %3 %4
         nextStatement: ""
         previousStatement: ""
@@ -64,7 +69,7 @@ slots:
           - component: BlockCodeTemplate
             config:
               template: >-
-                {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`);
+                {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
         toolbox:
           - component: PresetInput
             config:
@@ -230,7 +235,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, startupAction) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, startupAction, startupRedo) {
             try {
               contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
             } catch {
@@ -306,6 +311,8 @@ slots:
                   break;
               case "sleepReached":
                 {{absorb_it_nspanel_callback_killRefreshTimer}}; // this seems not to work
+                if (startupRedo == "TRUE")
+                  cache.private.remove('currentCard');
                 if (screensaver2 == "TRUE")
                   items.getItem(target).sendCommand("pageType~screensaver2");
                 else
