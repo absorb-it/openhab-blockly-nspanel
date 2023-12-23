@@ -236,6 +236,19 @@ slots:
       config:
         code: >-
           function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, startupAction, startupRedo) {
+            // allow refreshing of dimming and timeout when saving configured callback
+            if (!cache.private.exists('initialized')) {
+              items.getItem(target).sendCommand(
+                "timeout" +
+                {{absorb_it_nspanel_callback_checkParam}}(timeout, 1)
+              );
+              items.getItem(target).sendCommand(
+                "dimmode" +
+                {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
+                {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
+              );
+              cache.private.put('initialized', 1);
+            };
             try {
               contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
             } catch {
