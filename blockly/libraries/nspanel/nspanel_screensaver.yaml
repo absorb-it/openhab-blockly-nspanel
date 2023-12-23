@@ -59,7 +59,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_weatherupdate}}({{input:TARGET}}, [{{input:MAIN}}, {{input:FORECAST_1}}, {{input:FORECAST_2}}, {{input:FORECAST_3}}, {{input:FORECAST_4}}, {{input:ALTERNATIVE}}]);"
+              template: >-
+                {{utility:absorb_it_nspanel_weatherupdate}}({{input:TARGET}}, [{{input:MAIN}}, {{input:FORECAST_1}}, {{input:FORECAST_2}}, {{input:FORECAST_3}}, {{input:FORECAST_4}}, {{input:ALTERNATIVE}}]);
         toolbox:
           - component: PresetInput
             config:
@@ -169,7 +170,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_weatherupdate}}({{input:TARGET}}, [{{input:MAIN}}, {{input:LEFT_1}}, {{input:LEFT_2}}, {{input:LEFT_3}}, {{input:BOTTOM_1}}, {{input:BOTTOM_2}}, {{input:BOTTOM_3}}, {{input:BOTTOM_4}}, {{input:BOTTOM_5}}, {{input:BOTTOM_6}}, {{input:INDICATOR_1}}, {{input:INDICATOR_2}}, {{input:INDICATOR_3}}, {{input:INDICATOR_4}}, {{input:INDICATOR_5}}]);"
+              template: >-
+                {{utility:absorb_it_nspanel_weatherupdate}}({{input:TARGET}}, [{{input:MAIN}}, {{input:LEFT_1}}, {{input:LEFT_2}}, {{input:LEFT_3}}, {{input:BOTTOM_1}}, {{input:BOTTOM_2}}, {{input:BOTTOM_3}}, {{input:BOTTOM_4}}, {{input:BOTTOM_5}}, {{input:BOTTOM_6}}, {{input:INDICATOR_1}}, {{input:INDICATOR_2}}, {{input:INDICATOR_3}}, {{input:INDICATOR_4}}, {{input:INDICATOR_5}}]);
         toolbox:
           - component: PresetInput
             config:
@@ -207,7 +209,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_notify}}({{input:TARGET}}, {{input:HEADER}}, {{input:TEXT}});"
+              template: >-
+                {{utility:absorb_it_nspanel_notify}}({{input:TARGET}}, {{input:HEADER}}, {{input:TEXT}});
         toolbox:
           - component: PresetInput
             config:
@@ -276,7 +279,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_status}}({{input:TARGET}}, {{input:LEFT_ICON}}, {{input:LEFT_ICON_COLOR}}, '{{field:LEFT_ICON_FONT}}', {{input:RIGHT_ICON}}, {{input:RIGHT_ICON_COLOR}}, '{{field:RIGHT_ICON_FONT}}');"
+              template: >-
+                {{utility:absorb_it_nspanel_status}}({{input:TARGET}}, {{input:LEFT_ICON}}, {{input:LEFT_ICON_COLOR}}, '{{field:LEFT_ICON_FONT}}', {{input:RIGHT_ICON}}, {{input:RIGHT_ICON_COLOR}}, '{{field:RIGHT_ICON_FONT}}');
         toolbox:
           - component: PresetInput
             config:
@@ -402,7 +406,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_color}}({{input:TARGET}}, {{input:COLOR_background}}, {{input:COLOR_tTime}}, {{input:COLOR_timeAMPM}}, {{input:COLOR_tDate}}, {{input:COLOR_tMainText}}, {{input:COLOR_tForecast1}}, {{input:COLOR_tForecast2}}, {{input:COLOR_tForecast3}}, {{input:COLOR_tForecast4}}, {{input:COLOR_tForecast1Val}}, {{input:COLOR_tForecast2Val}}, {{input:COLOR_tForecast3Val}}, {{input:COLOR_tForecast4Val}}, {{input:COLOR_bar}}, {{input:COLOR_tMainTextAlt2}}, {{input:COLOR_tTimeAdd}});"
+              template: >-
+                {{utility:absorb_it_nspanel_color}}({{input:TARGET}}, {{input:COLOR_background}}, {{input:COLOR_tTime}}, {{input:COLOR_timeAMPM}}, {{input:COLOR_tDate}}, {{input:COLOR_tMainText}}, {{input:COLOR_tForecast1}}, {{input:COLOR_tForecast2}}, {{input:COLOR_tForecast3}}, {{input:COLOR_tForecast4}}, {{input:COLOR_tForecast1Val}}, {{input:COLOR_tForecast2Val}}, {{input:COLOR_tForecast3Val}}, {{input:COLOR_tForecast4Val}}, {{input:COLOR_bar}}, {{input:COLOR_tMainTextAlt2}}, {{input:COLOR_tTimeAdd}});
         toolbox:
           - component: PresetInput
             config:
@@ -613,7 +618,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_setupPopupNotification}}({{input:TARGET}}, {{input:NOTIFICATION}}, {{input:NOTIFICATION_COLOR}}, {{input:TIMEOUT}}, '{{field:FONT_ID}}', {{input:HEADING}}, {{input:HEADING_COLOR}}, '{{field:SHOW_ICON}}', {{input:ICON}}, {{input:ICON_COLOR}}, {{input:BTN_LEFT}}, {{input:BTN_LEFT_COLOR}}, {{input:BTN_RIGHT}}, {{input:BTN_RIGHT_COLOR}}, `{{statements:ACTION_LEFT}}`, `{{statements:ACTION_RIGHT}}`)"
+              template: >-
+                {{utility:absorb_it_nspanel_setupPopupNotification}}({{input:TARGET}}, {{input:NOTIFICATION}}, {{input:NOTIFICATION_COLOR}}, {{input:TIMEOUT}}, '{{field:FONT_ID}}', {{input:HEADING}}, {{input:HEADING_COLOR}}, '{{field:SHOW_ICON}}', {{input:ICON}}, {{input:ICON_COLOR}}, {{input:BTN_LEFT}}, {{input:BTN_LEFT_COLOR}}, {{input:BTN_RIGHT}}, {{input:BTN_RIGHT_COLOR}}, `{{statements:ACTION_LEFT}}`, `{{statements:ACTION_RIGHT}}`);
         toolbox:
           - component: PresetInput
             config:

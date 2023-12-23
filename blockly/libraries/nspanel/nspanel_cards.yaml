@@ -388,7 +388,7 @@ slots:
                     {{input:OFFSET}},
                     {{input:NUMBER_X_LABELS}},
                     {{input:REFRESH}}
-                )
+                );
         toolbox:
           - component: PresetField
             config:
@@ -628,7 +628,7 @@ slots:
                         {{input:TMP_POPUP}}
                     ],
                     {{input:REFRESH}}
-                  )
+                  );
         toolbox:
           - component: PresetInput
             config:
@@ -782,7 +782,7 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: >
+              template: >-
                 {{utility:absorb_it_nspanel_setupPopupThermo}}({{input:ICON}}, {{input:ICON_COLOR}}, {{input:TOP_HEADING}}, {{input:TOP_OPTIONS}}, {{input:TOP_SELECTED}}, `{{statements:TOP_ACTION}}`, {{input:MID_HEADING}}, {{input:MID_OPTIONS}}, {{input:MID_SELECTED}}, `{{statements:MID_ACTION}}`, {{input:LOW_HEADING}}, {{input:LOW_OPTIONS}}, {{input:LOW_SELECTED}}, `{{statements:LOW_ACTION}}`)
         toolbox:
           - component: PresetInput
@@ -1043,7 +1043,7 @@ slots:
                     `{{statements:ACTION_ONOFF}}`,
                     `{{statements:ACTION_SHUFFLE}}`,
                     {{input:REFRESH}}
-                )
+                );
         toolbox:
           - component: PresetInput
             config:
@@ -1223,7 +1223,7 @@ slots:
                     {{input:BTM_LEFT_COLOR}},
                     `{{statements:BTM_LEFT_ACTION}}`,
                     {{input:REFRESH}}
-                )
+                );
         toolbox:
           - component: PresetInput
             config:
@@ -1547,7 +1547,7 @@ slots:
                         {{input:ENTITY_2}}
                     ],
                     {{input:REFRESH}}
-                )
+                );
         toolbox:
           - component: PresetInput
             config:

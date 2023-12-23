@@ -63,7 +63,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`)"
+              template: >-
+                {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`);
         toolbox:
           - component: PresetInput
             config:
@@ -141,7 +142,8 @@ slots:
         code:
           - component: BlockCodeTemplate
             config:
-              template: "{{utility:absorb_it_nspanel_timeUpdate}}({{input:TARGET}}, {{input:TIME_FORMAT}}, {{input:DATE_FORMAT}})"
+              template: >-
+                {{utility:absorb_it_nspanel_timeUpdate}}({{input:TARGET}}, {{input:TIME_FORMAT}}, {{input:DATE_FORMAT}});
         toolbox:
           - component: PresetInput
             config:
