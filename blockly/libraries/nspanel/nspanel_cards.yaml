@@ -12,6 +12,40 @@ slots:
     - component: BlockType
       config:
         args0:
+          - align: CENTER
+            type: input_dummy
+          - check: oh_item
+            name: TARGET
+            type: input_value
+        colour: 90
+        helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/absorb_it_nspanel_testHelper.md
+        inputsInline: false
+        message0: NSPanel Item %2 (use for direct testcalls) %1
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          If you like to start some page directly from the Blockly
+          Editor for testing purposes, a working context is missing.
+          This Helper will define the target NSPanel for this Card
+          and trigger a "loadPage"-call via some existing CallBack.
+          A working CallBack is required. This CallBack can override
+          the target NSPanel Item, check the online help for details.
+        type: absorb_it_nspanel_testHelper
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: >-
+                {{utility:absorb_it_nspanel_testHelper}}({{input:TARGET}});
+        toolbox:
+          - component: PresetInput
+            config:
+              name: TARGET
+              shadow: true
+              type: oh_item
+    - component: BlockType
+      config:
+        args0:
           - type: input_dummy
             align: CENTER
           - name: TITLE
@@ -1587,9 +1621,15 @@ slots:
       config:
         code: >-
           function {{name}}(context) {
+            if (!context.target) {
+              if (!ctx.triggeredLoadPage)
+                console.error("missing context for loading Card '" + ctx.ruleUID + "', try NSPanel Item Helper (see NSPanel Cards library)!");
+              return 0;
+            }
             console.log("starting script '" + context + "'");
+            return 1;
           }
-        name: absorb_it_nspanel_cards_startupLogging
+        name: absorb_it_nspanel_cards_startupCheck
     - component: UtilityFunction
       config:
         code: >-
@@ -1607,8 +1647,18 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}(target) {
+            if (!ctx.target) {
+              items.getItem(target).postUpdate('loadPage?' + ctx.ruleUID);
+              ctx.triggeredLoadPage = 1;
+            }
+          }
+        name: absorb_it_nspanel_testHelper
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(title, navigation, entities, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             for (let i = 0; i < 4; i++) {
@@ -1633,7 +1683,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, entities, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             let type = "cardGrid";
@@ -1661,7 +1711,7 @@ slots:
       config:
         code: >-
           function {{name}}(type, title, navigation, item, scaling, AxisLabel, chartColorRGB888, NumberOfValues, OffsetUnit, Offset, NumberOfXLabels, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             maxValue = 0; MAX_VALUE_BY_DESIGN = 196;
             let dataset = '';
@@ -1727,7 +1777,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, target_temp, show_second_temp, second_temp, min_temp, max_temp, temp_steps, temp_unit, tCurTempLbl, currentTemp, tStateLbl, status, actions, tempChangeAction, pagePopupAction, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageOpenDetail") {
                 let result = pagePopupAction[0];
@@ -1806,7 +1856,7 @@ slots:
                             volume, playPauseIcon, onOffBtn_enabled, onOffBtnColor, shuffleIcon_enabled,
                             shuffleIcon, entities, actionBack, actionPause, actionNext, actionVolume, actionOnOff, actionShuffle, refresh) {
             // starting script '{request=pageUpdate, item=null, ruleUID=nspanel1_cardMedia, trigger=button, previousPage=nspanel1_cardGrid, newState=null}'
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {
               switch (ctx.trigger) {
@@ -1858,7 +1908,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, buttons, icon, iconColor, flashIcon, numpad, btmLeftIcon, btmLeftColor, btmLeftAction, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {
               {{absorb_it_nspanel_cards_safeEval}}(btmLeftAction);
@@ -1895,7 +1945,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, aboveHome, entities, speed_1, speed_2, speed_3, speed_4, speed_5, speed_6, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             mqtt += {{absorb_it_nspanel_cards_checkParam}}((entities[0])?entities[0].resultString:'', 6) + {{absorb_it_nspanel_cards_checkParam}}('', 6) + {{absorb_it_nspanel_cards_checkParam}}(aboveHome, 1) +
@@ -1916,7 +1966,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, qrString, entities, refresh) {
-            {{absorb_it_nspanel_cards_startupLogging}}(ctx);
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(ctx)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             mqtt += {{absorb_it_nspanel_cards_checkParam}}(qrString, 1);

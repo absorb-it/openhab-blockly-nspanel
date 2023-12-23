@@ -191,9 +191,22 @@ slots:
       config:
         code: >-
           function {{name}}(scriptName, context, updateCacheLink) {
+            const RuleManager = osgi.getService('org.openhab.core.automation.RuleManager');
+            var thread = Java.type('java.lang.Thread');
+
             if (!scriptName || scriptName === "Script Id")
               return 0;
+            context["timerName"] = {{getTimerName}}();
             try {
+                let timer = 10;
+                while (RuleManager.getStatus(scriptName).toString() === "RUNNING") {
+                  if (!timer--) {
+                    console.log("finished waiting for rule " + scriptName);
+                    break;
+                  }
+                  console.log("waiting 1 sec. for running rule " + scriptName);
+                  thread.sleep(1000);
+                }
                 rules.runRule(scriptName, context);
                 cache.private.put('lastPage', scriptName); // any last page
                 if (updateCacheLink)
