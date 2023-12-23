@@ -14,9 +14,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -86,7 +83,7 @@ slots:
         colour: 90
         helpUrl: ""
         inputsInline: false
-        message0: CARD ENTITIES %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD ENTITIES %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: "choose any Entity (use NSPanel Entities): %5 Entity 1 %1 Entity 2 %2 Entity 3 %3 Entity 4 %4"
         nextStatement: ""
@@ -99,7 +96,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardEntities}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -114,11 +110,6 @@ slots:
                     {{input:REFRESH}}
                   );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -138,9 +129,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -230,7 +218,7 @@ slots:
         colour: 90
         helpUrl: ""
         inputsInline: false
-        message0: CARD GRID %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD GRID %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: "choose Label, Button, Shutter, %10 Selector or Timer (use NSPanel Entities): %9 Entity 1 %1 Entity 2 %2 Entity 3 %3 Entity 4 %4 Entity 5 %5 Entity 6 %6 Entity 7 %7 Entity 8 %8"
         nextStatement: ""
@@ -243,7 +231,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardGrid}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -257,11 +244,6 @@ slots:
                     {{input:REFRESH}}
                   );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -288,9 +270,6 @@ slots:
             type: field_dropdown
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -356,7 +335,7 @@ slots:
         colour: 90
         helpUrl: ""
         inputsInline: false
-        message0: CARD CHART %1 %2 Display on NSPanel Item %3 Page Title %4 Refresh Time (Seconds, 0 - disable) %5 %6
+        message0: CARD CHART %1 %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
           State Values from %1 Scaling of State Value (*scale) %2 Number of Values %3 Offset between Values %4 %5 %6
@@ -373,7 +352,6 @@ slots:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardChart}}(
                     '{{field:TYPE}}',
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -394,11 +372,6 @@ slots:
             config:
               name: TYPE
               value: cardChart
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -469,9 +442,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -583,7 +553,7 @@ slots:
           - type: input_dummy
         colour: 90
         helpUrl: ""
-        message0: CARD THERMO %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD THERMO %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
           Target Temperature %1 Second Target Temp. %2 %3 Min. Temperature %4 Max. Temperature %5 Temperature Steps %6 Unit %7 %8 %9
@@ -601,7 +571,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardThermo}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -630,11 +599,6 @@ slots:
                     {{input:REFRESH}}
                   );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -878,9 +842,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -994,7 +955,7 @@ slots:
         colour: 90
         helpUrl: ""
         inputsInline: false
-        message0: CARD MEDIA %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD MEDIA %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
           Song Title %1 - Color %2 Author %3 - Color %4 Volume %5 Play/Pause Icon %6 ON/OFF Btn %7 Color %8 Shuffle Icon %9 Icon%10 %11
@@ -1012,7 +973,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardMedia}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -1045,11 +1005,6 @@ slots:
                     {{input:REFRESH}}
                 );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -1125,9 +1080,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -1189,7 +1141,7 @@ slots:
           - type: input_dummy
         colour: 90
         helpUrl: ""
-        message0: CARD ALARM %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD ALARM %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
           Alarm Buttons (use NSPanel Helpers) %16 Button 1 %1 Button 2 %2 Button 3 %3 Button 4 %4 %5 Icon next to Code %6 Icon Color %7 flashing Icon %8 %9 show Numpad %10 %11 %12 Icon bottom left %13 Icon Color %14 Icon Button Action %15
@@ -1203,7 +1155,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardAlarm}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -1225,11 +1176,6 @@ slots:
                     {{input:REFRESH}}
                 );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -1277,9 +1223,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -1361,7 +1304,7 @@ slots:
         colour: 90
         helpUrl: ""
         inputsInline: false
-        message0: CARD POWER %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD POWER %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
           choose Label as Entitiy (use NSPanel Entities): %4 Home Area %1 Entity %2 Text above %3
@@ -1379,7 +1322,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardPower}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -1404,11 +1346,6 @@ slots:
                     {{input:REFRESH}}
                 );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -1477,9 +1414,6 @@ slots:
         args0:
           - type: input_dummy
             align: CENTER
-          - name: TARGET
-            type: input_value
-            check: oh_item
           - name: TITLE
             type: input_value
             check: String
@@ -1519,7 +1453,7 @@ slots:
         colour: 90
         helpUrl: ""
         inputsInline: false
-        message0: CARD QR %1 Display on NSPanel Item %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
+        message0: CARD QR %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
           QR String to encode %1 %2
@@ -1535,7 +1469,6 @@ slots:
             config:
               template: >-
                 cache.private.put('entity_pos', '0'); {{utility:absorb_it_nspanel_showCardQR}}(
-                    {{input:TARGET}},
                     {{input:TITLE}},
                     [
                         {{input:NAV_PREV}},
@@ -1549,11 +1482,6 @@ slots:
                     {{input:REFRESH}}
                 );
         toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
           - component: PresetInput
             config:
               fields:
@@ -1599,23 +1527,23 @@ slots:
       config:
         code: >-
           function {{name}}() {
-            if (cache.shared.exists('absorb_it_nspanel_refreshTimer'))
-              cache.shared.remove('absorb_it_nspanel_refreshTimer').cancel();
+            if (cache.shared.exists(ctx.timerName))
+              cache.shared.remove(ctx.timerName).cancel();
           }
         name: absorb_it_nspanel_cards_killRefreshTimer
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, refresh) {
+          function {{name}}(refresh) {
             {{absorb_it_nspanel_cards_killRefreshTimer}}(); // just to be 100% shure
             refresh = parseInt(refresh);
             if (refresh != 0) {
-              cache.shared.put('absorb_it_nspanel_refreshTimer',
+              cache.shared.put(ctx.timerName,
                 actions.ScriptExecution.createTimer(
-                  'absorb_it_nspanel_refreshTimer',
+                  ctx.timerName,
                   time.ZonedDateTime.now().plusSeconds(refresh),
                   function () {
-                    items.getItem(target).postUpdate('refreshTimer');
+                    items.getItem(ctx.target).postUpdate('refreshTimer');
                   }
                 )
               );
@@ -1645,12 +1573,12 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(result, target) {
+          function {{name}}(result) {
               if (result && result.sendNow && result.resultString) {
-                items.getItem(target).sendCommand(result.resultString);
+                items.getItem(ctx.target).sendCommand(result.resultString);
               }
               if (result && result.refreshPage) {
-                items.getItem(target).sendCommand('refresh');
+                items.getItem(ctx.target).sendCommand('refresh');
               }
               return (result && (result.sendNow || result.refreshPage));
           }
@@ -1679,7 +1607,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, entities, refresh) {
+          function {{name}}(title, navigation, entities, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
@@ -1689,22 +1617,22 @@ slots:
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("", 6);
                   continue;
               }
-              if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
               mqtt += {{absorb_it_nspanel_cards_checkParam}}(result.resultString, 6);
             }
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~cardEntities");
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~cardEntities");
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardEntities
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, entities, refresh) {
+          function {{name}}(title, navigation, entities, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
@@ -1717,22 +1645,22 @@ slots:
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("", 6);
                   continue;
               }
-              if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
               mqtt += {{absorb_it_nspanel_cards_checkParam}}(result.resultString, 6);
             }
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~" + type);
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~" + type);
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardGrid
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(type, target, title, navigation, item, scaling, AxisLabel, chartColorRGB888, NumberOfValues, OffsetUnit, Offset, NumberOfXLabels, refresh) {
+          function {{name}}(type, title, navigation, item, scaling, AxisLabel, chartColorRGB888, NumberOfValues, OffsetUnit, Offset, NumberOfXLabels, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             maxValue = 0; MAX_VALUE_BY_DESIGN = 196;
@@ -1790,21 +1718,21 @@ slots:
             }
             mqtt += String(dataset);
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~" + type);
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~" + type);
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardChart
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, target_temp, show_second_temp, second_temp, min_temp, max_temp, temp_steps, temp_unit, tCurTempLbl, currentTemp, tStateLbl, status, actions, tempChangeAction, pagePopupAction, refresh) {
+          function {{name}}(title, navigation, target_temp, show_second_temp, second_temp, min_temp, max_temp, temp_steps, temp_unit, tCurTempLbl, currentTemp, tStateLbl, status, actions, tempChangeAction, pagePopupAction, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageOpenDetail") {
                 let result = pagePopupAction[0];
-                if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                  {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+                if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                  {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                   return;
                 }
             }
@@ -1818,8 +1746,8 @@ slots:
                     {{absorb_it_nspanel_cards_safeEval}}(tempChangeAction, newValue);
                     result = { "refreshPage": "1" }
                 }
-                if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                  {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+                if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                  {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                   return;
                 }
             }
@@ -1832,8 +1760,8 @@ slots:
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("", 4);
                   continue;
               }
-              if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
               mqtt += {{absorb_it_nspanel_cards_checkParam}}((result.resultString)?result.resultString:'', 4);
@@ -1842,9 +1770,9 @@ slots:
             mqtt += (show_second_temp == "TRUE")?({{absorb_it_nspanel_cards_checkParam}}(second_temp*10, 1)):'~';
             mqtt += (pagePopupAction[0])?'~0':'~1';
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~cardThermo");
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~cardThermo");
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardThermo
     - component: UtilityFunction
@@ -1874,7 +1802,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, text_1st, color_1st, text_2nd, color_2nd,
+          function {{name}}(title, navigation, text_1st, color_1st, text_2nd, color_2nd,
                             volume, playPauseIcon, onOffBtn_enabled, onOffBtnColor, shuffleIcon_enabled,
                             shuffleIcon, entities, actionBack, actionPause, actionNext, actionVolume, actionOnOff, actionShuffle, refresh) {
             // starting script '{request=pageUpdate, item=null, ruleUID=nspanel1_cardMedia, trigger=button, previousPage=nspanel1_cardGrid, newState=null}'
@@ -1901,7 +1829,7 @@ slots:
                     {{absorb_it_nspanel_cards_safeEval}}(actionShuffle);
                     break;
               }
-              {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
               return;
             }
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
@@ -1914,28 +1842,28 @@ slots:
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("", 6);
                   continue;
               }
-              if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
               mqtt += {{absorb_it_nspanel_cards_checkParam}}(result.resultString, 6);
             }
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~cardMedia");
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~cardMedia");
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardMedia
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, buttons, icon, iconColor, flashIcon, numpad, btmLeftIcon, btmLeftColor, btmLeftAction, refresh) {
+          function {{name}}(title, navigation, buttons, icon, iconColor, flashIcon, numpad, btmLeftIcon, btmLeftColor, btmLeftAction, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {
               {{absorb_it_nspanel_cards_safeEval}}(btmLeftAction);
-              if ({{absorb_it_nspanel_cards_checkResult}}({ "refreshPage": "1" }, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}({ "refreshPage": "1" }, ctx.target)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
             }
@@ -1947,8 +1875,8 @@ slots:
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("", 2);
                   continue;
               }
-              if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
               mqtt += {{absorb_it_nspanel_cards_checkParam}}(result.resultString, 2);
@@ -1958,15 +1886,15 @@ slots:
             mqtt += (flashIcon == "TRUE")?'~enable':'~disable';
             mqtt += {{absorb_it_nspanel_cards_checkParam}}(btmLeftIcon, 1) + {{absorb_it_nspanel_cards_checkParam}}({{absorb_it_nspanel_cards_getRGB565}}(btmLeftColor), 1);
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~cardAlarm");
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~cardAlarm");
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardAlarm
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, aboveHome, entities, speed_1, speed_2, speed_3, speed_4, speed_5, speed_6, refresh) {
+          function {{name}}(title, navigation, aboveHome, entities, speed_1, speed_2, speed_3, speed_4, speed_5, speed_6, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
@@ -1979,15 +1907,15 @@ slots:
             mqtt +=  {{absorb_it_nspanel_cards_checkParam}}((entities[5])?entities[5].resultString:'', 6) + {{absorb_it_nspanel_cards_checkParam}}(speed_5, 1);
             mqtt +=  {{absorb_it_nspanel_cards_checkParam}}((entities[6])?entities[6].resultString:'', 6) + {{absorb_it_nspanel_cards_checkParam}}(speed_6, 1);
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~cardPower");
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~cardPower");
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardPower
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, title, navigation, qrString, entities, refresh) {
+          function {{name}}(title, navigation, qrString, entities, refresh) {
             {{absorb_it_nspanel_cards_startupLogging}}(ctx);
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
@@ -1998,15 +1926,15 @@ slots:
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("x", 6); // required, if only one and only first param is used QR is not shown
                   continue;
               }
-              if ({{absorb_it_nspanel_cards_checkResult}}(result, target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              if ({{absorb_it_nspanel_cards_checkResult}}(result)) {
+                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
                 return;
               }
               mqtt += {{absorb_it_nspanel_cards_checkParam}}(result.resultString, 6);
             }
             if (ctx.previousPage !== ctx.ruleUID)
-              items.getItem(target).sendCommand("pageType~cardQR");
-            items.getItem(target).sendCommand(mqtt);
-            {{absorb_it_nspanel_cards_startRefreshTimer}}(target, refresh);
+              items.getItem(ctx.target).sendCommand("pageType~cardQR");
+            items.getItem(ctx.target).sendCommand(mqtt);
+            {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
           }
         name: absorb_it_nspanel_showCardQR

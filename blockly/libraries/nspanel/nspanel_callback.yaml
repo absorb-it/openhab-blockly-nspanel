@@ -176,8 +176,15 @@ slots:
       config:
         code: >-
           function {{name}}() {
-            while (cache.shared.exists('absorb_it_nspanel_refreshTimer'))
-              cache.shared.remove('absorb_it_nspanel_refreshTimer').cancel();
+            return 'absorb_it_nspanel_refreshTimer_' + ctx.ruleUID;
+          }
+        name: getTimerName
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}() {
+            while (cache.shared.exists({{getTimerName}}()))
+              cache.shared.remove({{getTimerName}}()).cancel();
           }
         name: absorb_it_nspanel_callback_killRefreshTimer
     - component: UtilityFunction
@@ -260,7 +267,10 @@ slots:
                   case "ON":    // triggered by Hardware Button press (if rule configured to fire)
                   case "OFF":   // triggered by Hardware Button press (if rule configured to fire)
                     if (cache.private.get('currentCard')) {
-                      let context = { "previousPage": cache.private.get('lastPage') };
+                      let context = {
+                        "previousPage": cache.private.get('lastPage'),
+                        "target": target
+                      };
                       if (cache.private.exists('DetailPage')) {
                         context["request"] = "pageOpenDetail";
                         context["item"] = cache.private.get('DetailPage');
@@ -276,7 +286,10 @@ slots:
                     if (cache.private.get('currentCard') && (cache.private.get('lastPage') !== "screensaver"))
                       {{absorb_it_nspanel_callback_startScript}}(
                         cache.private.get('currentCard'),
-                        {"previousPage": cache.private.get('lastPage')},
+                        {
+                          "previousPage": cache.private.get('lastPage'),
+                          "target": target
+                        },
                         0
                       );
                     return;
@@ -318,12 +331,14 @@ slots:
                   {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
                   {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
                 );
-                let success = {{absorb_it_nspanel_callback_startScript}}(startupScript, {}, 1);
+                let success = {{absorb_it_nspanel_callback_startScript}}(
+                  startupScript, { "target": target }, 1
+                );
                 {{absorb_it_nspanel_callback_safeEval}}(startupAction);
                 if (success || startupAction != '')
                   break;
               case "sleepReached":
-                {{absorb_it_nspanel_callback_killRefreshTimer}}; // this seems not to work
+                {{absorb_it_nspanel_callback_killRefreshTimer}};
                 if (startupRedo == "TRUE")
                   cache.private.remove('currentCard');
                 if (screensaver2 == "TRUE")
@@ -331,7 +346,7 @@ slots:
                 else
                   items.getItem(target).sendCommand("pageType~screensaver");
                 {{absorb_it_nspanel_callback_startScript}}(
-                  screensaverStartupScript, {}, 0
+                  screensaverStartupScript, { "target": target }, 0
                 );
                 cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
                 break;
@@ -341,18 +356,18 @@ slots:
                     cache.private.remove('DetailPage');
                     if (cache.private.get('currentCard'))
                       {{absorb_it_nspanel_callback_startScript}}(
-                        cache.private.get('currentCard'), {}, 0
+                        cache.private.get('currentCard'), { "target": target }, 0
                       );
                     else
                       {{absorb_it_nspanel_callback_startScript}}(
-                        startupScript, {}, 1
+                        startupScript, { "target": target }, 1
                       );
                   break;
                   default:
                     if (contextValues[2].split('?')[0] !== cache.private.get('lastPage')) {
                       // new page called, probably clicked on navigation buttons
                       {{absorb_it_nspanel_callback_startScript}}(
-                        contextValues[2].split('?')[0], { },
+                        contextValues[2].split('?')[0], { "target": target },
                         (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
                       );
                     }
@@ -369,7 +384,6 @@ slots:
                     // entities: third context field contains both script name and item id, reparated by '?'
                     // {"CustomRecv":"event,buttonPress2,*cardEntitiesScriptName*?2,OnOff,0"}
                     else item = contextValues[2].split('?')[1];
-
                     {{absorb_it_nspanel_callback_startScript}}(
                       contextValues[2].split('?')[0],
                       {
@@ -377,7 +391,8 @@ slots:
                         "item": item,
                         "trigger": contextValues[3],
                         "newState": contextValues[4],
-                        "previousPage": cache.private.get('lastPage')
+                        "previousPage": cache.private.get('lastPage'),
+                        "target": target
                       },
                       (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
                     );
@@ -391,7 +406,8 @@ slots:
                   {
                     "request": "pageOpenDetail",
                     "item": item,
-                    "trigger": contextValues[2]
+                    "trigger": contextValues[2],
+                    "target": target
                   },
                   1
                 );
