@@ -50,7 +50,7 @@ slots:
             type: field_checkbox
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md"
         message0: >
           NSPANEL CALLBACK %1 Display on %2 Display Brightness (0 - 100) %3 %4
         message1: >
@@ -131,7 +131,7 @@ slots:
             type: input_value
             check: String
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_timeUpdate.md"
         message0: >
           NSPANEL TIME UPDATE for %1
         message1: >

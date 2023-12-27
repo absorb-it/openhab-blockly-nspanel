@@ -27,7 +27,7 @@ slots:
             type: input_value
             check: String
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_label.md"
         inputsInline: false
         message0: >
           ENTITY LABEL %1 Icon %2 Icon Color %3 Displayed Name %4 Displayed Value %5
@@ -89,7 +89,7 @@ slots:
           - name: SETTER
             type: input_statement
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_button.md"
         inputsInline: false
         message0: >
           ENTITY BUTTON %1 Icon %2 Icon Color %3 Displayed Name %4 Displayed Value %5 Buttonpress Action %6
@@ -155,7 +155,7 @@ slots:
           - type: input_dummy
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_switch.md"
         inputsInline: false
         message0: >
           ENTITY SWITCH %1 Icon %2 Icon Color %3 Displayed Name %4 %5 Switch State ([0,1]) %6 Switch Action %8 - on Entities View: (returnValue=[0,1]) %9 - on other Views: (plain trigger) %10 %7
@@ -257,7 +257,7 @@ slots:
           - type: input_dummy
         inputsInline: false
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_light.md"
         output: nspanel_entityLightString
         tooltip: ""
         type: absorb_it_nspanel_entityLight
@@ -422,7 +422,7 @@ slots:
           - type: input_dummy
         inputsInline: false
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_shutter.md"
         output: nspanel_entityShutterString
         tooltip: ""
         type: absorb_it_nspanel_entityShutter
@@ -587,7 +587,7 @@ slots:
           - name: SETTER
             type: input_statement
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_selector.md"
         output: nspanel_entitySelectorString
         tooltip: ""
         type: absorb_it_nspanel_entitySelector
@@ -707,7 +707,7 @@ slots:
             type: input_statement
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_fan.md"
         output: nspanel_entityFanString
         tooltip: ""
         type: absorb_it_nspanel_entityFan
@@ -848,7 +848,7 @@ slots:
           - name: RIGHT_BTN_ACTION
             type: input_statement
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_timer.md"
         inputsInline: false
         output: nspanel_entityTimerString
         tooltip: ""

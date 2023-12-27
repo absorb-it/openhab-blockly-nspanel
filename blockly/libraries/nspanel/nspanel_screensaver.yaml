@@ -42,7 +42,7 @@ slots:
             name: ALTERNATIVE
             type: input_value
         colour: 90
-        helpUrl: https://docs.nspanel.pky.eu/config-screensaver/
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_screensaver_updateStandard.md"
         inputsInline: false
         message0: UPDATE Standard Screensaver %1
         message1: >
@@ -139,7 +139,7 @@ slots:
             name: INDICATOR_5
             type: input_value
         colour: 90
-        helpUrl: https://docs.nspanel.pky.eu/config-screensaver/
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_screensaver_updateComplex.md"
         inputsInline: false
         message0: UPDATE Complex Screensaver %1
         message1: choose Label Entities (see NSPanel Entities) %1 Main Entity %2 %3
@@ -175,7 +175,7 @@ slots:
             name: TEXT
             type: input_value
         colour: 90
-        helpUrl: https://docs.nspanel.pky.eu/notifications/
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_screensaver_screensaverNotification.md"
         inputsInline: false
         message0: SCREENSAVER NOTIFICATION %1
         message1: (use empty fields to cancel previous notification) %1 Header %2 Text %3
@@ -236,7 +236,7 @@ slots:
           - name: RIGHT_ICON_COLOR
             type: input_value
         colour: 90
-        helpUrl: https://docs.nspanel.pky.eu/config-screensaver/
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_screensaver_screensaverStatusIcons.md"
         inputsInline: false
         message0: SCREENSAVER STATUS Icons %1
         message1: >
@@ -354,7 +354,7 @@ slots:
           - type: input_dummy
           - type: input_dummy
         colour: 90
-        helpUrl: https://docs.nspanel.pky.eu/config-screensaver/
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_screensaver_screensaverColors.md"
         inputsInline: false
         message0: SCREENSAVER COLORS %1
         message1: >
@@ -551,7 +551,7 @@ slots:
           - name: ACTION_RIGHT
             type: input_statement
         colour: 90
-        helpUrl: https://docs.nspanel.pky.eu/notifications/
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_screensaver_fullNotification.md"
         inputsInline: false
         message0: >
           FULLSIZE NOTIFICATION %1

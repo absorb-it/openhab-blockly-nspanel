@@ -81,7 +81,7 @@ slots:
               - nspanel_entityTimerString
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardEntities.md"
         inputsInline: false
         message0: CARD ENTITIES %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
@@ -216,7 +216,7 @@ slots:
           - type: input_dummy
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardGrid.md"
         inputsInline: false
         message0: CARD GRID %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
@@ -333,7 +333,7 @@ slots:
             type: input_value
             check: Number
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardChart.md"
         inputsInline: false
         message0: CARD CHART %1 %2 Page Title %3 Refresh Time (Seconds, 0 - disable) %4 %5
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
@@ -552,7 +552,7 @@ slots:
             align: CENTER
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardThermo.md"
         message0: CARD THERMO %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
@@ -730,7 +730,7 @@ slots:
           - type: input_dummy
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_popupThermo.md"
         message0: >
           POPUP THERMO PAGE %1 Top Left Icon %2 Top Left Icon Color %3 %4
         message1: >
@@ -953,7 +953,7 @@ slots:
           - name: ACTION_SHUFFLE
             type: input_statement
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardMedia.md"
         inputsInline: false
         message0: CARD MEDIA %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
@@ -1140,7 +1140,7 @@ slots:
             type: input_statement
           - type: input_dummy
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardAlarm.md"
         message0: CARD ALARM %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
         message2: >
@@ -1302,7 +1302,7 @@ slots:
             type: input_value
             check: Number
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardPower.md"
         inputsInline: false
         message0: CARD POWER %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
@@ -1451,7 +1451,7 @@ slots:
               - nspanel_entityLabelString
               - nspanel_entityButtonString
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardQR.md"
         inputsInline: false
         message0: CARD QR %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
@@ -1836,7 +1836,7 @@ slots:
                     {{absorb_it_nspanel_cards_safeEval}}(actionShuffle);
                     break;
               }
-              {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
+              {{absorb_it_nspanel_cards_checkResult}}({ "refreshPage": "1" }, ctx.target)
               return;
             }
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
@@ -1869,10 +1869,8 @@ slots:
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {
               {{absorb_it_nspanel_cards_safeEval}}(btmLeftAction);
-              if ({{absorb_it_nspanel_cards_checkResult}}({ "refreshPage": "1" }, ctx.target)) {
-                {{absorb_it_nspanel_cards_startRefreshTimer}}(refresh);
-                return;
-              }
+              {{absorb_it_nspanel_cards_checkResult}}({ "refreshPage": "1" }, ctx.target)
+              return;
             }
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             mqtt += {{absorb_it_nspanel_cards_checkParam}}(ctx.ruleUID, 1);

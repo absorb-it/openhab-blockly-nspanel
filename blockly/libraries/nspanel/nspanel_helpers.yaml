@@ -108,7 +108,7 @@ slots:
             type: input_value
             check: String
         colour: 90
-        helpUrl: "https://docs.nspanel.pky.eu/icon-cheatsheet.html"
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_getIconForName.md"
         message0: get icon for icon-name %1
         output: String
         tooltip: >
@@ -172,7 +172,7 @@ slots:
             type: input_value
             check: Colour
         colour: 90
-        helpUrl: ""
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_navString.md"
         inputsInline: false
         message0: NAVIGATION string %1 Icon %3 Icon Color %4 Target Script Id %2
         output: nspanel_navigationString
@@ -224,7 +224,7 @@ slots:
           - name: SETTER
             type: input_statement
         colour: 90
-        helpUrl: "https://docs.nspanel.pky.eu/card-climate/"
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_hvacButton.md"
         inputsInline: false
         message0: >
           HVAC BUTTON string %1 Icon %2 Icon Color %3 State of Button ([0,1]) %4 Button Press Action %5
@@ -274,7 +274,7 @@ slots:
           - name: SETTER
             type: input_statement
         colour: 90
-        helpUrl: "https://docs.nspanel.pky.eu/card-alarm/"
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_alarmButton.md"
         inputsInline: false
         message0: >
           ALARM BUTTON string %1 Display Name %2 Buttonpress Action %3 (returnValue == CODE) %4 %5
@@ -315,7 +315,7 @@ slots:
                 - ""
             type: field_dropdown
         colour: 90
-        helpUrl: https://en.wikipedia.org/wiki/QR_code#Joining_a_Wi%E2%80%91Fi_network
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_QRString.md"
         inputsInline: false
         message0: >
           WIFI QR string %1 SSID %2 Encryption %4 Password %3
