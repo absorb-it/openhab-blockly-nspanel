@@ -119,12 +119,10 @@ slots:
     - component: BlockType
       config:
         args0:
-          - type: input_dummy
           - name: TARGET
             required: true
             type: input_value
             check: oh_item
-          - type: input_dummy
         args1:
           - name: TIME_FORMAT
             type: input_value
@@ -135,7 +133,7 @@ slots:
         colour: 90
         helpUrl: ""
         message0: >
-          NSPANEL TIME UPDATE %1 Display on %2 %3
+          NSPANEL TIME UPDATE for %1
         message1: >
           Time Format %1 Date Format %2
         nextStatement: ""
