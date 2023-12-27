@@ -1578,7 +1578,7 @@ slots:
                 items.getItem(ctx.target).sendCommand(result.resultString);
               }
               if (result && result.refreshPage) {
-                items.getItem(ctx.target).sendCommand('refresh');
+                items.getItem(ctx.target).postUpdate('refresh');
               }
               return (result && (result.sendNow || result.refreshPage));
           }
