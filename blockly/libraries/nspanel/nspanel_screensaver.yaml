@@ -49,7 +49,7 @@ slots:
           choose Label Entities (see NSPanel Entities) %1 Weather MainIcon %2 1st Forecast %3 2nd Forecast %4 3rd Forecast %5 4th Forecast %6 2nd Weather MainIcon (4th Forecast ignored) %7
         nextStatement: ""
         previousStatement: ""
-        tooltip: Call this regularily with a rule triggering on any Weather Update.
+        tooltip: "Configure Icons and Labels shown on your Screensaver. Best called by some rule, but be aware that some context information about the NSPanel Item is required."
         type: absorb_it_nspanel_weatherupdate
       slots:
         code:
@@ -151,7 +151,7 @@ slots:
           Indicator Entities %1 1st Entity %2 2nd Entity %3 3rd Entity %4 4th Entity %5 5th Entity %6
         nextStatement: ""
         previousStatement: ""
-        tooltip: Call this regularily with a rule triggering on any State Update when using complex Screensaver.
+        tooltip: "Configure Icons and Labels shown on your complex Screensaver. Best called by some rule, but be aware that some context information about the NSPanel Item is required."
         type: absorb_it_nspanel_weatherupdate2
       slots:
         code:
@@ -181,7 +181,7 @@ slots:
         message1: (use empty fields to cancel previous notification) %1 Header %2 Text %3
         nextStatement: ""
         previousStatement: ""
-        tooltip: Show some Notification directly on the Screensaver.
+        tooltip: "Show some Notification in the lower part of your Screensaver (if this is shown). Be aware that some context information about the NSPanel Item is required."
         type: absorb_it_nspanel_notify
       slots:
         code:
@@ -243,7 +243,7 @@ slots:
           Left Icon (Font Size %1) %2 Left Icon Color %3 %4 Right Icon (Font Size %5) %6 Right Icon Color %7
         nextStatement: ""
         previousStatement: ""
-        tooltip: Update Status Icons of Screensaver. Standard Screensaver has these Icons on Top, complex Screensaver has these Icons on Bottom.
+        tooltip: "Update Status Icons of Screensaver. Standard Screensaver has these Icons on Top, complex Screensaver has these Icons on Bottom. Be aware that some context information about the NSPanel Item is required."
         type: absorb_it_nspanel_status
       slots:
         code:
@@ -361,7 +361,7 @@ slots:
           Background %1 Horizontal Bar %14 %19 Main Text %5 Main Text (alt2) %15 %18 Time %2 AM/PM %3 Date %4 Time (add) %16 %17 Forecast 1 %6 Forecast 1 (value) %10 Forecast 2 %7 Forecast 2 (value) %11 Forecast 3 %8 Forecast 3 (value) %12 Forecast 4 %9 Forecast 4 (value) %13
         nextStatement: ""
         previousStatement: ""
-        tooltip: Configure all Colors of the Screensaver.
+        tooltip: "Configure all Colors of your Screensaver. Be aware that some context information about the NSPanel Item is required."
         type: absorb_it_nspanel_color
       slots:
         code:
@@ -563,7 +563,7 @@ slots:
           Left Button Action %1 Right Button Action %2
         nextStatement: ""
         previousStatement: ""
-        tooltip: Show Notification as a own Page using the whole display.
+        tooltip: "Show Notification as a own Page using the whole display. Be aware that some context information about the NSPanel Item is required."
         type: absorb_it_nspanel_popupNotify
       slots:
         code:

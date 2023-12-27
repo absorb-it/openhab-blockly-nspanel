@@ -112,7 +112,7 @@ slots:
         message0: get icon for icon-name %1
         output: String
         tooltip: >
-          "Converts the name of some icon to the icon code. Check the help link for a list of names. Converted from https://github.com/joBr99/nspanel-lovelace-ui/blob/main/apps/nspanel-lovelace-ui/luibackend/icon_mapping.py"
+          "Converts the name of some icon to the icon code. Check the help link for a list of possible icon names."
         type: absorb_it_nspanel_getIcon
       slots:
         code:

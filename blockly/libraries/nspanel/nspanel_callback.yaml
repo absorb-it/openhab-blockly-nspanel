@@ -62,7 +62,7 @@ slots:
           Run Statement %3 %4
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts."
         type: absorb_it_nspanel_callback
       slots:
         code:
@@ -138,7 +138,7 @@ slots:
           Time Format %1 Date Format %2
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "This updates the time on some NSPanel - there is no local clock in these devices."
         type: absorb_it_nspanel_timeUpdate
         inputsInline: false
       slots:

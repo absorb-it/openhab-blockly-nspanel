@@ -32,7 +32,7 @@ slots:
         message0: >
           ENTITY LABEL %1 Icon %2 Icon Color %3 Displayed Name %4 Displayed Value %5
         output: nspanel_entityLabelString
-        tooltip: "Simple Entity just containing some Icon and some Text. Dependend on the usage, the supplied Value might be shown or not."
+        tooltip: "Entity displaying some Icon and some Text. Dependend on the usage, the supplied Value might be shown or not."
         type: absorb_it_nspanel_entityLabel
       slots:
         code:
@@ -94,7 +94,7 @@ slots:
         message0: >
           ENTITY BUTTON %1 Icon %2 Icon Color %3 Displayed Name %4 Displayed Value %5 Buttonpress Action %6
         output: nspanel_entityButtonString
-        tooltip: ""
+        tooltip: "Entity displaying some Icon and some Text. Additonally some Action can be added. Dependend on the usage, the supplied Value might be shown or not."
         type: absorb_it_nspanel_entityButton
       slots:
         code:
@@ -160,7 +160,7 @@ slots:
         message0: >
           ENTITY SWITCH %1 Icon %2 Icon Color %3 Displayed Name %4 %5 Switch State ([0,1]) %6 Switch Action %8 - on Entities View: (returnValue=[0,1]) %9 - on other Views: (plain trigger) %10 %7
         output: nspanel_entitySwitchString
-        tooltip: ""
+        tooltip: "Entity displaying some Icon and some Text. A Switch is displayed, the Switch State and the Switch Actions can be configured. Dependend on the usage, the supplied Value might be shown or not."
         type: absorb_it_nspanel_entitySwitch
       slots:
         code:
@@ -259,7 +259,10 @@ slots:
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_light.md"
         output: nspanel_entityLightString
-        tooltip: ""
+        tooltip: >-
+          Entity displaying some Icon and some Text. A Switch is displayed, the Switch State and the Switch Actions can be configured. Dependend on the usage, the supplied Value might be shown or not.
+
+          Additionally to the Switch entity some Popup Page can be accessed to control more specific light settings.
         type: absorb_it_nspanel_entityLight
       slots:
         code:
@@ -424,7 +427,7 @@ slots:
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_shutter.md"
         output: nspanel_entityShutterString
-        tooltip: ""
+        tooltip: "Entity displaying some Icon and some Text. Additionally some shutter controls might be displayed and access to some Popup Page with more specific settings is given."
         type: absorb_it_nspanel_entityShutter
       slots:
         code:
@@ -589,7 +592,7 @@ slots:
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_selector.md"
         output: nspanel_entitySelectorString
-        tooltip: ""
+        tooltip: "Entity displaying some Icon and some Text. Additionally the pre-selected Mode might be displayed and access to some Popup Page with more specific settings is given."
         type: absorb_it_nspanel_entitySelector
       slots:
         code:
@@ -709,7 +712,10 @@ slots:
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_fan.md"
         output: nspanel_entityFanString
-        tooltip: ""
+        tooltip: >-
+          Entity displaying some Icon and some Text. A Switch is displayed, the Switch State and the Switch Actions can be configured. Dependend on the usage, the supplied Value might be shown or not.
+
+          Additionally to the Switch entity some Popup Page can be accessed to control more specific fan settings.
         type: absorb_it_nspanel_entityFan
       slots:
         code:
@@ -851,7 +857,7 @@ slots:
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_timer.md"
         inputsInline: false
         output: nspanel_entityTimerString
-        tooltip: ""
+        tooltip: "Entity displaying some Icon and some Text. Additionally access to some Popup Page with a timer and more specific settings is given."
         type: absorb_it_nspanel_entityTimer
       slots:
         code:

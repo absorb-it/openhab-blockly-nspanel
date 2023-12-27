@@ -88,7 +88,7 @@ slots:
         message2: "choose any Entity (use NSPanel Entities): %5 Entity 1 %1 Entity 2 %2 Entity 3 %3 Entity 4 %4"
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page with up to 4 entities displayed line by line."
         type: absorb_it_nspanel_cardEntities
       slots:
         code:
@@ -223,7 +223,7 @@ slots:
         message2: "choose Label, Button, Shutter, %10 Selector or Timer (use NSPanel Entities): %9 Entity 1 %1 Entity 2 %2 Entity 3 %3 Entity 4 %4 Entity 5 %5 Entity 6 %6 Entity 7 %7 Entity 8 %8"
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page with up to 8 entities displayed as a grid."
         type: absorb_it_nspanel_cardGrid
       slots:
         code:
@@ -343,7 +343,7 @@ slots:
           Chart Color %1 Y-Axis Label %2 Number of X-Labels %3
         nextStatement: ""
         previousStatement: ""
-        tooltip: While creating a Bar-Chart, resulting Values should fi the vertical scale of the display and therefore should not be bigger than 196.
+        tooltip: "NSPanel Page to display a line or bar chart based on historical data. While creating a Bar-Chart, resulting Values should fit the vertical scale of the display and therefore should not be bigger than 196."
         type: absorb_it_nspanel_cardChart
       slots:
         code:
@@ -563,7 +563,7 @@ slots:
           HVAC Action Buttons (use NSPanel Helpers) %16 HVAC Action 1 %1 HVAC Action 2 %2 HVAC Action 3 %3 HVAC Action 4 %4 HVAC Action 5 %5 HVAC Action 6 %6 HVAC Action 7 %7 HVAC Action 8 %8 %9 Temperature Change Action %10 - One Target: (returnVal=Temp) %11 - Two Targets: (returnVal=RightTemp|LeftTemp) %12 %13 %14 Enable Popup Page %17 add config here (use NSPanel Helpers) %15
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page to control 1 or 2 temperature settings. You can also add a Popup Page to control additional settings."
         type: absorb_it_nspanel_cardThermo
       slots:
         code:
@@ -740,7 +740,7 @@ slots:
         message3: >
           Upper Row Heading %1 - Options (separate by '?') %2 - Selected Option %3 - Action Trigger %5 .    (returnValue = (index) = [1-X]) %7 .    (returnMode = 'Option') %6 %4
         output: nspanel_popupThermoString
-        tooltip: ""
+        tooltip: "NSPanel Popup Page to be used together with a Card Thermo."
         type: absorb_it_nspanel_popupThermo
       slots:
         code:
@@ -965,7 +965,7 @@ slots:
           Media Player Control Actions: %1 - Back: %2 - Play/Pause:  %3 - Next:  %4 - Volume (returnValue = [0-100]):  %5 - ON/OFF:  %6 - Shuffle:  %7
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page to control your media player."
         type: absorb_it_nspanel_cardMedia
       slots:
         code:
@@ -1147,7 +1147,7 @@ slots:
           Alarm Buttons (use NSPanel Helpers) %16 Button 1 %1 Button 2 %2 Button 3 %3 Button 4 %4 %5 Icon next to Code %6 Icon Color %7 flashing Icon %8 %9 show Numpad %10 %11 %12 Icon bottom left %13 Icon Color %14 Icon Button Action %15
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page allowing you to display a keypad to enter some security code."
         type: absorb_it_nspanel_cardAlarm
       slots:
         code:
@@ -1314,7 +1314,7 @@ slots:
           Right Side %1 Upper Entity %2 -  (-120 - 120) speed %3 Middle Entity %4 -  (-120 - 120) speed %5 Lower Entity %6 -  (-120 - 120) speed %7
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page with up to 6 icons surrounding one central unit. Suitable to display power usage or network settings or similar."
         type: absorb_it_nspanel_cardPower
       slots:
         code:
@@ -1461,7 +1461,7 @@ slots:
           Right Side Buttons (use NSPanel Entitites) %1 Upper Entity %2 Lower Entity %3
         nextStatement: ""
         previousStatement: ""
-        tooltip: ""
+        tooltip: "NSPanel Page to display a QR code with some information on the side."
         type: absorb_it_nspanel_cardQR
       slots:
         code:
