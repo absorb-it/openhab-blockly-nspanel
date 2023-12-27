@@ -12,6 +12,98 @@ slots:
     - component: BlockType
       config:
         args0:
+          - type: input_dummy
+        colour: 160
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_getContextItem.md"
+        message0: get NSPanel Item from context %1
+        output: String
+        tooltip: >-
+          If called from the NSPanel CallBack, any Card will have the target NSPanel Item information in it's context.
+
+          This Item will contain this context information and can be used to trigger additional actions on
+          that NSPanel Item.
+        type: absorb_it_nspanel_getContextItem
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_getTargetItem}}()"
+    - component: BlockType
+      config:
+        args0:
+          - check: oh_item
+            name: TARGET
+            type: input_value
+        colour: 0
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setNSPanelIfNotContext.md"
+        inputsInline: false
+        message0: NSPanel Item if not set %1
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          Cards and Pages require some target NSPanel Item to work. If you like to start some page directly from the Blockly Editor for testing purposes, the working context (with information about the NSPanel Item) is missing.
+
+          This Helper will define the target NSPanel for this Card and trigger a "loadPage"-call via some existing CallBack. A working CallBack is required.
+
+          Any request coming from a CallBack (any preset context) will override the target NSPanel Item set by this module. Suggested especially for local testing, check the online help for details.
+        type: absorb_it_nspanel_setNSPanelIfNotContext
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_setNSPanelIfNotContext}}({{input:TARGET}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              name: TARGET
+              shadow: true
+              type: oh_item
+    - component: BlockType
+      config:
+        args0:
+          - check: oh_item
+            name: TARGET
+            type: input_value
+          - name: SCRIPT_ID
+            type: input_value
+            check: String
+        colour: 0
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_startScriptWithContext.md"
+        inputsInline: false
+        message0: >
+          NSPanel Item %1 Show Page / Call Script (enter Id) %2
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          Cards and Pages require some target NSPanel Item to work. This is usually set by the CallBack. To run these scripts directly in Blockly or via any other triggering Rule than the designated CallBack, the required context can be set with this module.
+
+          A script can be called directly or some Card module can be added below. The context is kept until changed for instance by another module of this type.
+        type: absorb_it_nspanel_startScriptWithContext
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_startScriptWithContext}}({{input:TARGET}}, {{input:SCRIPT_ID}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              name: TARGET
+              shadow: true
+              type: oh_item
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+    - component: Separator
+      config:
+        gap: 48
+    - component: BlockType
+      config:
+        args0:
           - name: ICON_NAME
             type: input_value
             check: String
@@ -397,6 +489,33 @@ slots:
             return ownEntityPos;
           }
         name: absorb_it_nspanel_helpers_getEntityPos
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}() {
+            return ctx.target
+          }
+        name: absorb_it_nspanel_getTargetItem
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(target) {
+            if (!ctx.target) {
+              items.getItem(target).postUpdate('loadPage?' + ctx.ruleUID);
+              ctx.triggeredLoadPage = 1;
+            }
+          }
+        name: absorb_it_nspanel_setNSPanelIfNotContext
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(target, scriptName) {
+            if (!scriptName || scriptName === "Script Id")
+              return;
+            ctx.target = target;
+            {{absorb_it_nspanel_helpers_safeEval}}(scriptName);
+          }
+        name: absorb_it_nspanel_startScriptWithContext
     - component: UtilityFunction
       config:
         code: >-

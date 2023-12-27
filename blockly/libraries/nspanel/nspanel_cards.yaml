@@ -12,40 +12,6 @@ slots:
     - component: BlockType
       config:
         args0:
-          - align: CENTER
-            type: input_dummy
-          - check: oh_item
-            name: TARGET
-            type: input_value
-        colour: 90
-        helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/absorb_it_nspanel_testHelper.md
-        inputsInline: false
-        message0: NSPanel Item %2 (use for direct testcalls) %1
-        nextStatement: ""
-        previousStatement: ""
-        tooltip: >-
-          If you like to start some page directly from the Blockly
-          Editor for testing purposes, a working context is missing.
-          This Helper will define the target NSPanel for this Card
-          and trigger a "loadPage"-call via some existing CallBack.
-          A working CallBack is required. This CallBack can override
-          the target NSPanel Item, check the online help for details.
-        type: absorb_it_nspanel_testHelper
-      slots:
-        code:
-          - component: BlockCodeTemplate
-            config:
-              template: >-
-                {{utility:absorb_it_nspanel_testHelper}}({{input:TARGET}});
-        toolbox:
-          - component: PresetInput
-            config:
-              name: TARGET
-              shadow: true
-              type: oh_item
-    - component: BlockType
-      config:
-        args0:
           - type: input_dummy
             align: CENTER
           - name: TITLE
@@ -1644,16 +1610,6 @@ slots:
             return result;
           }
         name: absorb_it_nspanel_cards_checkParam
-    - component: UtilityFunction
-      config:
-        code: >-
-          function {{name}}(target) {
-            if (!ctx.target) {
-              items.getItem(target).postUpdate('loadPage?' + ctx.ruleUID);
-              ctx.triggeredLoadPage = 1;
-            }
-          }
-        name: absorb_it_nspanel_testHelper
     - component: UtilityFunction
       config:
         code: >-
