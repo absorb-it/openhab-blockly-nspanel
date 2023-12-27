@@ -709,7 +709,21 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}() {
+            if (!ctx.target) {
+              if (!ctx.triggeredLoadPage)
+                console.error("missing context for loading Card '" + ctx.ruleUID + "', try NSPanel Item Helper (see NSPanel Cards library)!");
+              return 0;
+            }
+            console.log("starting script '" + ctx + "'");
+            return 1;
+          }
+        name: absorb_it_nspanel_ssaver_startupCheck
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(entities) {
+            if (!{{absorb_it_nspanel_ssaver_startupCheck}}()) return;
             let mqtt = 'weatherUpdate';
             for (let i = 0; i < entities.length; i++) {
               let result = entities[i];
@@ -726,6 +740,7 @@ slots:
       config:
         code: >-
           function {{name}}(header, text) {
+            if (!{{absorb_it_nspanel_ssaver_startupCheck}}()) return;
             items.getItem(ctx.target).sendCommand('notify' + {{absorb_it_nspanel_ssaver_checkParam}}(header, 1) + {{absorb_it_nspanel_ssaver_checkParam}}(text, 1));
           }
         name: absorb_it_nspanel_notify
@@ -733,6 +748,7 @@ slots:
       config:
         code: >-
           function {{name}}(notification, notificationColor, timeout, fontId, heading, headingColor, showIcon, icon, iconColor, btnLeft, btnLeftColor, btnRight, btnRightColor, actionLeft, actionRight) {
+            if (!{{absorb_it_nspanel_ssaver_startupCheck}}()) return;
             if (ctx.request == 'pageUpdate') {
               switch (ctx.trigger) {
                 case "no":
@@ -755,6 +771,7 @@ slots:
       config:
         code: >-
           function {{name}}(leftIcon, leftIconColor, leftIconFont, rightIcon, rightIconColor, rightIconFont) {
+            if (!{{absorb_it_nspanel_ssaver_startupCheck}}()) return;
             mqtt = {{absorb_it_nspanel_ssaver_checkParam}}(leftIcon, 1) + {{absorb_it_nspanel_ssaver_checkParam}}({{absorb_it_nspanel_ssaver_getRGB565}}(leftIconColor), 1) + {{absorb_it_nspanel_ssaver_checkParam}}(rightIcon, 1) + {{absorb_it_nspanel_ssaver_checkParam}}({{absorb_it_nspanel_ssaver_getRGB565}}(rightIconColor), 1);
             mqtt += (leftIconFont == '1')?{{absorb_it_nspanel_ssaver_checkParam}}(leftIconFont, 1):'~';
             mqtt += (rightIconFont == '1')?{{absorb_it_nspanel_ssaver_checkParam}}(rightIconFont, 1):'~';
@@ -767,6 +784,7 @@ slots:
           function {{name}}(background, tTime, timeAMPM, tDate, tMainText, tForecast1, tForecast2,
                             tForecast3, tForecast4, tForecast1Val, tForecast2Val, tForecast3Val,
                             tForecast4Val, bar, tMainTextAlt2, tTimeAdd) {
+            if (!{{absorb_it_nspanel_ssaver_startupCheck}}()) return;
             items.getItem(ctx.target).sendCommand('color~' + {{absorb_it_nspanel_ssaver_getRGB565}}(background) + '~' +
                 {{absorb_it_nspanel_ssaver_getRGB565}}(tTime) + '~' + {{absorb_it_nspanel_ssaver_getRGB565}}(timeAMPM) + '~' + {{absorb_it_nspanel_ssaver_getRGB565}}(tDate) + '~' +
                 {{absorb_it_nspanel_ssaver_getRGB565}}(tMainText) + '~' + {{absorb_it_nspanel_ssaver_getRGB565}}(tForecast1) + '~' + {{absorb_it_nspanel_ssaver_getRGB565}}(tForecast2) + '~' +
