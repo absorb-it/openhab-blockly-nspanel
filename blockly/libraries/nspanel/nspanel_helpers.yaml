@@ -512,8 +512,14 @@ slots:
           function {{name}}(target, scriptName) {
             if (!scriptName || scriptName === "Script Id")
               return;
-            ctx.target = target;
-            {{absorb_it_nspanel_helpers_safeEval}}(scriptName);
+            try {
+                rules.runRule(scriptName, { "target": target });
+            }
+            catch (e) {
+                console.error("Error", e.stack);
+                console.log("Error", e.toString());
+                console.log("can't start/find rule with id '" + scriptName + "'");
+            }
           }
         name: absorb_it_nspanel_startScriptWithContext
     - component: UtilityFunction
