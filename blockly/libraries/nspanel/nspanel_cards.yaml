@@ -1588,14 +1588,13 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}() {
+          function {{name}}(functionName) {
+            console.log("starting script '" + functionName + "' " + ctx);
             if (!ctx.target) {
               if (!ctx.triggeredLoadPage)
-                console.error("missing context for loading Card '" + ctx.ruleUID + "', try NSPanel Item Helper (see NSPanel Cards library)!");
+                console.error("missing context for loading Card '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item if not set' from Helpers library!");
               return 0;
             }
-            console.log("starting script '" + ctx + "'");
-            console.log("starting script '" + ctx.target + "'");
             return 1;
           }
         name: absorb_it_nspanel_cards_startupCheck
@@ -1617,7 +1616,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, entities, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             for (let i = 0; i < 4; i++) {
@@ -1642,7 +1641,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, entities, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             let type = "cardGrid";
@@ -1670,7 +1669,7 @@ slots:
       config:
         code: >-
           function {{name}}(type, title, navigation, item, scaling, AxisLabel, chartColorRGB888, NumberOfValues, OffsetUnit, Offset, NumberOfXLabels, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             maxValue = 0; MAX_VALUE_BY_DESIGN = 196;
             let dataset = '';
@@ -1736,7 +1735,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, target_temp, show_second_temp, second_temp, min_temp, max_temp, temp_steps, temp_unit, tCurTempLbl, currentTemp, tStateLbl, status, actions, tempChangeAction, pagePopupAction, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageOpenDetail") {
                 let result = pagePopupAction[0];
@@ -1815,7 +1814,7 @@ slots:
                             volume, playPauseIcon, onOffBtn_enabled, onOffBtnColor, shuffleIcon_enabled,
                             shuffleIcon, entities, actionBack, actionPause, actionNext, actionVolume, actionOnOff, actionShuffle, refresh) {
             // starting script '{request=pageUpdate, item=null, ruleUID=nspanel1_cardMedia, trigger=button, previousPage=nspanel1_cardGrid, newState=null}'
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {
               switch (ctx.trigger) {
@@ -1867,7 +1866,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, buttons, icon, iconColor, flashIcon, numpad, btmLeftIcon, btmLeftColor, btmLeftAction, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {
               {{absorb_it_nspanel_cards_safeEval}}(btmLeftAction);
@@ -1902,7 +1901,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, aboveHome, entities, speed_1, speed_2, speed_3, speed_4, speed_5, speed_6, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             mqtt += {{absorb_it_nspanel_cards_checkParam}}((entities[0])?entities[0].resultString:'', 6) + {{absorb_it_nspanel_cards_checkParam}}('', 6) + {{absorb_it_nspanel_cards_checkParam}}(aboveHome, 1) +
@@ -1923,7 +1922,7 @@ slots:
       config:
         code: >-
           function {{name}}(title, navigation, qrString, entities, refresh) {
-            if (!{{absorb_it_nspanel_cards_startupCheck}}()) return;
+            if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
             mqtt += {{absorb_it_nspanel_cards_checkParam}}(qrString, 1);
