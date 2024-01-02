@@ -197,7 +197,7 @@ slots:
             context["timerName"] = {{getTimerName}}();
             try {
                 let timer = 10;
-                while (RuleManager.getStatus(scriptName).toString() === "RUNNING") {
+                while (RuleManager.getStatus(scriptName) && RuleManager.getStatus(scriptName).toString() === "RUNNING") {
                   if (!timer--) {
                     console.log("finished waiting for rule " + scriptName);
                     break;
