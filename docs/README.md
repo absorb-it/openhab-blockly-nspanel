@@ -6,6 +6,9 @@
 
 [<img src="img/blockLibrary_nspanel_helpers_hvacButton.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_hvacButton.png)
 
+- [get NSPanel Item from Context](blockLibrary_nspanel_helpers_getContextItem.md)
+- [set NSPanel Item if Context not found](blockLibrary_nspanel_helpers_setNSPanelIfNotContext.md)
+- [start Script with forced Context](blockLibrary_nspanel_helpers_startScriptWithContext.md)
 - [get Icon for IconName](blockLibrary_nspanel_helpers_getIconForName.md)
 - [get IconName for Weathercode](blockLibrary_nspanel_helpers_getIconNameForWeathercode.md)
 - [get Navigation String](blockLibrary_nspanel_helpers_navString.md)
@@ -64,17 +67,13 @@
 
 ## Configuration Examples
 
-### Callback
+### Example Rules
 
 [<img src="img/openhab_rules_.png" align="right" width="300">](img/openhab_rules_.png)
 
 - [Callback Rule](openhab_rules_callback.md)
-
-### Example Rules
-
-- [Notification Rule](openhab_rules_notification.md)
 - [Timeupdate Rule](openhab_rules_timeupdate.md)
-- [Weatherupdate Rule](openhab_rules_weatherupdate.md)<br clear="right"/>
+- [Screensaver Update Rule](openhab_rules_ssaverupdate.md)<br clear="right"/>
 
 ### Example Cards
 

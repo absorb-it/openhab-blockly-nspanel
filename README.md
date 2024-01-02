@@ -68,13 +68,15 @@ Now add some *Channel* and enter the receiving and sending MQTT topics for you N
 
 Before starting the configuration of these libraries you need to get a little bit familiar to the overall concept of this add-on. In the image you can see the display itself (hardware), the *MQTT-Broker* and the *Lovelace UI Item* as you configured them already. Now some *Rule* has to be added, which triggers the [*Callback*](docs/blockLibrary_nspanel_callback_callback.md) on any change of the Item state (any received relevant MQTT message or any direct change).
 
-This *Callback* will forward your message to the last or any new *Card* you requested by parsing this message. These *Cards* are just *Scripts* you created, which can have some forward and backwards navigation items on top. These items will contain references to other *Scripts* for navigation between you *Cards*. This way you can configure any navigation you like between all of your *Cards* .<br clear="right"/>
+This *Callback* will forward your message to the last or any new *Card* you requested by parsing this message. These *Cards* are just *Scripts* you created, which can have some forward and backwards navigation items on top. These items will contain references to other *Scripts* for navigation between your *Cards*. This way you can configure any navigation you like between all of your *Cards*.
+
+The *CallBack* will also forward the configured *NSPanel Item* to your *Card*, to the *Script* which gets called (new since version 0.4). This way you can use the same script (the same *Card* configuration) for multiple hardware displays. They only require separate callbacks to work.<br clear="right"/>
 
 [<img src="docs/img/openhab_scripts_.png" align="right" width="300">](docs/img/openhab_scripts_.png)
 
 One **important issue** with this concept is, that you need to reference your *Scripts* (and *Rules*) by there (internal) name, by there id or uid, quite often. By default, openHAB will give any Rule or Script you create some random (internal) name, like for instance '03f74d4dc'. That's hard to remember.
 
-But you can change this internal name, this id, just once while creating the *Script* or *Rule* as long as it is unique for your openHAB installation. No further change is possible, therefore you have to know what you are creating before you do this. Name you *Rules* like 'WeatherUpdate', name your *Scripts* like 'nspanel1_cardPower' and everything will work much smoother. And, just to e clear, I'm just talking about the internal name, the id or uid of some *Rule* or *Script*. References to the *Label* cannot be used (as of now).<br clear="right"/>
+But you can change this internal name, this id, just once while creating the *Script* or *Rule* as long as it is unique for your openHAB installation. No further change is possible, therefore you have to know what you are creating before you do this. Name you *Rules* like 'WeatherUpdate', name your *Scripts* like 'nspanel1_cardPower' and everything will work much smoother. And, just to be clear, I'm just talking about the internal name, the id or uid of some *Rule* or *Script*. References to the *Label* cannot be used (as of now).<br clear="right"/>
 
 ### Configure the Callback
 
@@ -84,7 +86,7 @@ Create some rule, which triggers on any update of your *NSPanel Item*. Let it ex
 
 [<img src="docs/img/openhab_rules_callback_script.png" align="right" width="300">](docs/img/openhab_rules_callback_script.png)
 
-The *Callback* needs to send messages to the panel, therefore it needs some link to the *NSPanel Item*. You might like to add some *Script* or *Rule* which will [update the Icons on your screensaver](docs/openhab_rules_weatherupdate.md), and you might add some *Script* which will [configure your first *Card*](docs/openhab_scripts_nspanel1_cardQR.md). Add both *Scripts* and *Rules* by referencing there internal ids - in the example screenshot you can also see how important it might be, to use meaningful names for these ids. You can reference them even before they are created, at least these references to the scripts can be changed whenever you like.<br clear="right"/>
+The *Callback* needs to send messages to the panel, therefore it needs some link to the *NSPanel Item*. You might like to add some *Script* or *Rule* which will [update the Icons on your screensaver](docs/openhab_rules_ssaverupdate.md), and you might add some *Script* which will [configure your first *Card*](docs/openhab_scripts_nspanel1_cardQR.md). Add both *Scripts* and *Rules* by referencing there internal ids - in the example screenshot you can also see how important it might be, to use meaningful names for these ids. You can reference them even before they are created, at least these references to the scripts can be changed whenever you like.<br clear="right"/>
 
 ### Configure the Time and Date
 
