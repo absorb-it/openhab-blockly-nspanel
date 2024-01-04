@@ -181,8 +181,10 @@ slots:
       config:
         code: >-
           function {{name}}() {
-            while (cache.shared.exists({{getTimerName}}()))
+            if (cache.shared.exists({{getTimerName}}())) {
+              console.debug("remove existing refresh timer " + {{getTimerName}}());
               cache.shared.remove({{getTimerName}}()).cancel();
+            }
           }
         name: absorb_it_nspanel_callback_killRefreshTimer
     - component: UtilityFunction

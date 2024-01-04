@@ -1527,8 +1527,10 @@ slots:
       config:
         code: >-
           function {{name}}() {
-            if (cache.shared.exists(ctx.timerName))
+            if (cache.shared.exists(ctx.timerName)) {
+              console.debug("remove existing refresh timer " + ctx.timerName);
               cache.shared.remove(ctx.timerName).cancel();
+            }
           }
         name: absorb_it_nspanel_cards_killRefreshTimer
     - component: UtilityFunction
