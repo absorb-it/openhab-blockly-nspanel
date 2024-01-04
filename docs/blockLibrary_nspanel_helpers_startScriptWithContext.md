@@ -12,7 +12,18 @@ This module gives you the option to force this context information for any scrip
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
 - Add the ID of some script configuring your *Card*. 
-- You can also add additional *Cards* as *Statements*, they will all use the context *NSPanel Item* you just provided.<br clear="right"/>
+
+You can also add additional *Cards* as *Statements*, they will all use the context *NSPanel Item* you just provided.<br clear="right"/>
+
+## additional Context
+
+[<img src="img/blockLibrary_nspanel_helpers_startScriptWithContext_addContext.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_startScriptWithContext_addContext.png)
+
+If you like to use some centralized script with special features per display, you can also add some keys to the context dictionary *ctx*. Just add *ctx* as a variable and set the required items.<br clear="right"/>
+
+[<img src="img/blockLibrary_nspanel_helpers_startScriptWithContext_useContext.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_startScriptWithContext_useContext.png)
+
+In the targeted script you can access these items as contextual information, just use the supplied statements from openHAB to access the values.
 
 ---
 
