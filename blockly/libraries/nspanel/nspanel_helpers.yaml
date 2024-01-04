@@ -513,7 +513,7 @@ slots:
             if (!scriptName || scriptName === "Script Id")
               return;
             try {
-                rules.runRule(scriptName, { "target": target });
+                rules.runRule(scriptName, Object.assign({}, ctx, { "target": target }));
             }
             catch (e) {
                 console.error("Error", e.stack);
