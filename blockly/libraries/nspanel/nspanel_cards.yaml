@@ -1773,8 +1773,13 @@ slots:
           function {{name}}(functionName) {
             console.log("starting script '" + functionName + "' " + ctx);
             if (!ctx.target) {
-              if (!ctx.triggeredLoadPage)
-                console.error("missing context for loading Card '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item if not set' from Helpers library!");
+              if (!ctx.triggerLoadPage) {
+                console.error("missing context for loading Card '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item' or 'NSPanel Item via CallBack' from Helpers library!");
+              }
+              else if (!ctx.triggerLoadPageDone) {
+                ctx.triggerLoadPageDone = 1;
+                items.getItem(ctx.triggerLoadPage).postUpdate('loadPage?' + ctx.ruleUID);
+              }
               return 0;
             }
             return 1;

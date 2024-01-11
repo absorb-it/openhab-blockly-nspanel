@@ -37,7 +37,7 @@ slots:
         colour: 0
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setNSPanelIfNotContext.md"
         inputsInline: false
-        message0: NSPanel Item if not set %1
+        message0: NSPanel Item via CallBack %1
         nextStatement: ""
         previousStatement: ""
         tooltip: >-
@@ -67,6 +67,7 @@ slots:
           - name: SCRIPT_ID
             type: input_value
             check: String
+          - type: input_dummy
         colour: 0
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_startScriptWithContext.md"
         inputsInline: false
@@ -500,10 +501,7 @@ slots:
       config:
         code: >-
           function {{name}}(target) {
-            if (!ctx.target) {
-              items.getItem(target).postUpdate('loadPage?' + ctx.ruleUID);
-              ctx.triggeredLoadPage = 1;
-            }
+            ctx.triggerLoadPage = target;
           }
         name: absorb_it_nspanel_setNSPanelIfNotContext
     - component: UtilityFunction
