@@ -71,13 +71,13 @@ slots:
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_startScriptWithContext.md"
         inputsInline: false
         message0: >
-          NSPanel Item %1 Show Page / Call Script (enter Id) %2
+          NSPanel Item %1 Call Script (enter Id) %2 Attach Card Statement %3
         nextStatement: ""
         previousStatement: ""
         tooltip: >-
           Cards and Pages require some target NSPanel Item to work. This is usually set by the CallBack. To run these scripts directly in Blockly or via any other triggering Rule than the designated CallBack, the required context can be set with this module.
 
-          A script can be called directly or some Card module can be added below. The context is kept until changed for instance by another module of this type.
+          A script can be called directly or some Card module can be added below. Both the Script and the attached statements will be started if available. The context is kept until changed for instance by another module of this type.
         type: absorb_it_nspanel_startScriptWithContext
       slots:
         code:
@@ -510,16 +510,17 @@ slots:
       config:
         code: >-
           function {{name}}(target, scriptName) {
-            if (!scriptName || scriptName === "Script Id")
-              return;
-            try {
-                rules.runRule(scriptName, Object.assign({}, ctx, { "target": target }));
-            }
-            catch (e) {
+            if (scriptName && scriptName !== "Script Id") {
+              try {
+                  rules.runRule(scriptName, Object.assign({}, ctx, { "target": target }));
+              }
+              catch (e) {
                 console.error("Error", e.stack);
                 console.log("Error", e.toString());
                 console.log("can't start/find rule with id '" + scriptName + "'");
+              }
             }
+            ctx.target = target;
           }
         name: absorb_it_nspanel_startScriptWithContext
     - component: UtilityFunction
