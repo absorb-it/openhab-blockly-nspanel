@@ -364,7 +364,7 @@ slots:
           Upper Slider (Position) - Label %1 - %2 'UP' Icon %3 - %4 'STOP' Icon %5 - %6 'Down' Icon %7
            - Position ([0-100]) %8
            - Action Trigger (Entities Page and Popup) %9
-           .   (returnValue = [0-100|up|stop|down]) %11 %10 %12
+           .   (returnValue = [0-100|UP|STOP|DOWN]) %11 %10 %12
         args1:
           - name: UPPER_LABEL
             type: input_value
@@ -396,7 +396,7 @@ slots:
           Lower Slider (Tilt) - Label %1 - %2 'OPEN' Icon %3 - %4 'STOP' Icon %5 - %6 'CLOSE' Icon %7
            - Position ([0-100]) %8
            - Action Trigger %9
-           .   (returnValue = [0-100|up|stop|down]) %11 %10
+           .   (returnValue = [0-100|OPEN|STOP|CLOSE]) %11 %10
         args2:
           - name: LOWER_LABEL
             type: input_value
@@ -1138,6 +1138,7 @@ slots:
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
               if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "button") {
+                ctx["newState"] = ctx["newState"].toUpperCase();
                 {{absorb_it_nspanel_entities_safeEval}}(triggerChange);
                 return { "refreshPage": "1" };
               }
