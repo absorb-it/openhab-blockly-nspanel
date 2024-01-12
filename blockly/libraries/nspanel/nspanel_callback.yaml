@@ -320,7 +320,8 @@ slots:
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1)
                       );
                     return;
-                  case "newBrigthness":
+                  case "newBrightness":
+                  case "newBrigthness":   // keep old value, type of parameter was fixed in 0.6
                     if (callbackParam[1] && callbackParam[2])
                       items.getItem(target).sendCommand(
                         "dimmode" +
