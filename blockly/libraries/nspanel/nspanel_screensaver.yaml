@@ -531,9 +531,9 @@ slots:
             console.log("starting script '" + functionName + "' " + ctx);
             if (!ctx.target && !ctx.triggerLoadPageDone) {
               if (!ctx.triggerLoadPage)
-                console.error("missing context for loading Card '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item' from Helpers library!");
+                console.error("missing context for loading '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item' from Helpers library!");
               else {
-                console.warn("missing context for loading Card '" + functionName + "' in '" + ctx.ruleUID + "'. Context from 'NSPanel Item via CallBack' can't be used for standalone screensaver helpers. If used in combination with real (fullPage) cards, just ignore this message.");
+                console.warn("missing context for loading '" + functionName + "' in '" + ctx.ruleUID + "'. Context from 'NSPanel Item via CallBack' can't be used for standalone screensaver helpers. If used in combination with real (fullPage) cards, just ignore this message.");
               }
               return 0;
             }
