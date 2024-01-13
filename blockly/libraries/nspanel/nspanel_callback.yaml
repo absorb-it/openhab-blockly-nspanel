@@ -256,8 +256,9 @@ slots:
       config:
         code: >-
           function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, startupAction, startupRedo) {
-            // allow refreshing of dimming and timeout when saving configured callback
+            // on first run only...
             if (!cache.private.exists('initialized')) {
+              // allow refreshing of dimming and timeout when saving configured callback
               items.getItem(target).sendCommand(
                 "timeout" +
                 {{absorb_it_nspanel_callback_checkParam}}(timeout, 1)
@@ -267,8 +268,14 @@ slots:
                 {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
                 {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
               );
+              // store settings from blockly interface to be able to change them on-the-fly
+              cache.private.put('complexScreenSaver', screensaver2);
+              cache.private.put('enterScriptName', screensaverStartupScript);
+              cache.private.put('leaveScriptName', startupScript);
+              // done
               cache.private.put('initialized', 1);
             };
+
             try {
               contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
             } catch {
@@ -329,6 +336,21 @@ slots:
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1)
                       );
                     return;
+                  case "complexScreenSaver":
+                  {
+                    cache.private.put('complexScreenSaver', callbackParam[1]);
+                    return;
+                    }
+                  case "enterScriptName":
+                  {
+                    cache.private.put('enterScriptName', callbackParam[1]);
+                    return;
+                  }
+                  case "leaveScriptName":
+                  {
+                    cache.private.put('leaveScriptName', callbackParam[1]);
+                    return;
+                  }
                   default:
                     return;
                 }
@@ -346,7 +368,7 @@ slots:
                   {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
                 );
                 let success = {{absorb_it_nspanel_callback_startScript}}(
-                  startupScript, { "target": target }, 1
+                  cache.private.get('leaveScriptName'), { "target": target }, 1
                 );
                 {{absorb_it_nspanel_callback_safeEval}}(startupAction);
                 if (success || startupAction != '')
@@ -355,12 +377,12 @@ slots:
                 {{absorb_it_nspanel_callback_killRefreshTimer}};
                 if (startupRedo == "TRUE")
                   cache.private.remove('currentCard');
-                if (screensaver2 == "TRUE")
+                if (cache.private.get('complexScreenSaver') == "TRUE")
                   items.getItem(target).sendCommand("pageType~screensaver2");
                 else
                   items.getItem(target).sendCommand("pageType~screensaver");
                 {{absorb_it_nspanel_callback_startScript}}(
-                  screensaverStartupScript, { "target": target }, 0
+                  cache.private.get('enterScriptName'), { "target": target }, 0
                 );
                 cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
                 break;
@@ -374,7 +396,7 @@ slots:
                       );
                     else
                       {{absorb_it_nspanel_callback_startScript}}(
-                        startupScript, { "target": target }, 1
+                        cache.private.get('leaveScriptName'), { "target": target }, 1
                       );
                   break;
                   default:
