@@ -1706,7 +1706,7 @@ slots:
       config:
         code: >-
           function {{name}}() {
-            if (cache.shared.exists(ctx.timerName)) {
+            if (ctx.timerName && cache.shared.exists(ctx.timerName)) {
               console.debug("remove existing refresh timer " + ctx.timerName);
               cache.shared.remove(ctx.timerName).cancel();
             }
@@ -1716,21 +1716,23 @@ slots:
       config:
         code: >-
           function {{name}}(refresh) {
-            if (cache.shared.exists(ctx.timerName)) {
-              {{absorb_it_nspanel_cards_killRefreshTimer}}(); // just to be 100% shure
-            }
-            refresh = parseInt(refresh);
-            if (refresh != 0) {
-              console.debug("create refresh timer " + ctx.timerName);
-              cache.shared.put(ctx.timerName,
-                actions.ScriptExecution.createTimer(
-                  ctx.timerName,
-                  time.ZonedDateTime.now().plusSeconds(refresh),
-                  function () {
-                    items.getItem(ctx.target).postUpdate('refreshTimer');
-                  }
-                )
-              );
+            if (ctx.timerName) {
+              if (cache.shared.exists(ctx.timerName)) {
+                {{absorb_it_nspanel_cards_killRefreshTimer}}(); // just to be 100% shure
+              }
+              refresh = parseInt(refresh);
+              if (refresh != 0) {
+                console.debug("create refresh timer " + ctx.timerName);
+                cache.shared.put(ctx.timerName,
+                  actions.ScriptExecution.createTimer(
+                    ctx.timerName,
+                    time.ZonedDateTime.now().plusSeconds(refresh),
+                    function () {
+                      items.getItem(ctx.target).postUpdate('refreshTimer');
+                    }
+                  )
+                );
+              }
             }
           }
         name: absorb_it_nspanel_cards_startRefreshTimer
