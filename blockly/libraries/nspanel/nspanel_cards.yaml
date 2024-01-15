@@ -485,6 +485,8 @@ slots:
                 - °C
               - - °F
                 - °F
+              - - none
+                - ""
             type: field_dropdown
           - type: input_dummy
           - type: input_dummy
