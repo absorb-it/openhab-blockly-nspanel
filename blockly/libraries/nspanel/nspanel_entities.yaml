@@ -1144,7 +1144,7 @@ slots:
               }
               if (ctx.request == 'pageOpenDetail') {
                 if (ctx["newState"] !== undefined) {
-                  {{absorb_it_nspanel_entities_safeEval}}(setOption, ctx.newState + 1, getOptions.split('?')[ctx.newState]);
+                  {{absorb_it_nspanel_entities_safeEval}}(setOption, parseInt(ctx.newState) + 1, getOptions.split('?')[ctx.newState]);
                   return { "refreshPage": "1" };
                 }
                 else {
@@ -1178,7 +1178,7 @@ slots:
                       {{absorb_it_nspanel_entities_safeEval}}(setSpeed, ctx.newState);
                       break;
                     case "mode-preset_modes":
-                      {{absorb_it_nspanel_entities_safeEval}}(setSelectedMode, ctx.newState + 1, modes.split('?')[ctx.newState]);
+                      {{absorb_it_nspanel_entities_safeEval}}(setSelectedMode, parseInt(ctx.newState) + 1, modes.split('?')[ctx.newState]);
                       break;
                   }
                   return { "refreshPage": "1" };

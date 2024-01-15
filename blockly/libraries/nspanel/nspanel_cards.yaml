@@ -1981,13 +1981,13 @@ slots:
             if (ctx.newState) {
               switch (ctx.trigger) {
                 case "mode-0":
-                  {{absorb_it_nspanel_cards_safeEval}}(topAction, ctx.newState + 1, topOptions.split('?')[ctx.newState]);
+                  {{absorb_it_nspanel_cards_safeEval}}(topAction, parseInt(ctx.newState) + 1, topOptions.split('?')[ctx.newState]);
                   break;
                 case "mode-1":
-                  {{absorb_it_nspanel_cards_safeEval}}(midAction, ctx.newState + 1, midOptions.split('?')[ctx.newState]);
+                  {{absorb_it_nspanel_cards_safeEval}}(midAction, parseInt(ctx.newState) + 1, midOptions.split('?')[ctx.newState]);
                   break;
                 case "mode-2":
-                  {{absorb_it_nspanel_cards_safeEval}}(lowAction, ctx.newState + 1, lowOptions.split('?')[ctx.newState]);
+                  {{absorb_it_nspanel_cards_safeEval}}(lowAction, parseInt(ctx.newState) + 1, lowOptions.split('?')[ctx.newState]);
                   break;
               }
               return { "refreshPage": "1" };
