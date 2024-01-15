@@ -28,9 +28,9 @@ Set the *NSPanel Item* to 'loadScreensaver' and it directly activates the screen
 
 Provide the new screensaver timeout as a parameter to the related state change, like 'newTimeout?30' to set the timeout to 30 seconds.
 
-### newBrigthness
+### newBrightness
 
-You can also modify the brightness settings of the display on the fly, maybe to dim the panel down by night. Just provide the screensaver brightness as the first parameter, the normal brightness as the second parameter. For instance as 'newBrigthness?35?80'.<br clear="right"/>
+You can also modify the brightness settings of the display on the fly, maybe to dim the panel down by night. Just provide the screensaver brightness as the first parameter, the normal brightness as the second parameter. For instance as 'newBrightness?35?80'.<br clear="right"/>
 
 ### complexScreenSaver
 
