@@ -32,6 +32,20 @@ Provide the new screensaver timeout as a parameter to the related state change, 
 
 You can also modify the brightness settings of the display on the fly, maybe to dim the panel down by night. Just provide the screensaver brightness as the first parameter, the normal brightness as the second parameter. For instance as 'newBrigthness?35?80'.<br clear="right"/>
 
+### complexScreenSaver
+
+You can decide, if you like to change to the more complex screensaver or change back to the normal one. Supply 'complexScreenSaver?TRUE' or 'complexScreenSaver?FALSE', however you like this. Be aware that this will only take effect onc the screensaver is shown again. If you like this change to be immediate, than [reload the Screensaver](blockLibrary_nspanel_helpers_loadScreensaver.md) manually.
+
+### enterScriptName
+
+Set some new script for configuration of the screensaver (script will run after you entered the screensaver). Set the *NSPanel Item* to 'enterScriptName?ScriptID' and from this time on the scipt with the Id (not the label) ScriptID will get called.
+
+### leaveScriptName
+
+Usually you will end on the page screensaver got activated when you leave the screensaver again. You might have choosen some landing page feature by activating the "run also after leaving Screensaver" option for your startup script.
+
+Here you can change this behavior. Just set your *NSPanel Item* to 'leaveScriptName?ScriptID' and the option of using a landing page gets activated with the script ScriptID getting called everytime you leave the screensaver. Set *NSPanel Item* to 'leaveScriptName' without any script and the landing page feature gets disabled, you will return to the last called page when leaving the screensaver again.
+
 ## Configuration
 
 [<img src="img/blockLibrary_nspanel_callback_callback.png" align="right" width="300">](img/blockLibrary_nspanel_callback_callback.png)

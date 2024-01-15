@@ -7,14 +7,19 @@
 [<img src="img/blockLibrary_nspanel_helpers_hvacButton.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_hvacButton.png)
 
 - [get NSPanel Item from Context](blockLibrary_nspanel_helpers_getContextItem.md)
-- [set NSPanel Item if Context not found](blockLibrary_nspanel_helpers_setNSPanelIfNotContext.md)
 - [start Script with forced Context](blockLibrary_nspanel_helpers_startScriptWithContext.md)
+- [set NSPanel Item if Context not found](blockLibrary_nspanel_helpers_setNSPanelIfNotContext.md)
 - [get Icon for IconName](blockLibrary_nspanel_helpers_getIconForName.md)
 - [get IconName for Weathercode](blockLibrary_nspanel_helpers_getIconNameForWeathercode.md)
 - [get Navigation String](blockLibrary_nspanel_helpers_navString.md)
 - [get HVAC Button](blockLibrary_nspanel_helpers_hvacButton.md)
 - [get Alarm Button](blockLibrary_nspanel_helpers_alarmButton.md)
 - [get WIFI QR String](blockLibrary_nspanel_helpers_QRString.md)
+- [loadPage](blockLibrary_nspanel_helpers_loadPage.md)
+- [loadScreensaver](blockLibrary_nspanel_helpers_loadScreensaver.md)
+- [setTimeout](blockLibrary_nspanel_helpers_setTimeout.md)
+- [setBrightness](blockLibrary_nspanel_helpers_setBrightness.md)
+- [setScreensaverScripts](blockLibrary_nspanel_helpers_setScreenSaverScripts.md)
 - [Example returnValue](blockLibrary_nspanel_helpers_returnValue.md)
 - [Example returnMode](blockLibrary_nspanel_helpers_returnMode.md)
 - [Example Getter Statement](blockLibrary_nspanel_helpers_exampleGetter.md)
@@ -33,6 +38,7 @@
 - [QR Card](blockLibrary_nspanel_cards_cardQR.md)
 - [Thermo Card](blockLibrary_nspanel_cards_cardThermo.md)
 - [Thermo Popup](blockLibrary_nspanel_cards_popupThermo.md)<br clear="right"/>
+- [Full Page Notification](blockLibrary_nspanel_cards_fullNotification.md)
 
 ### Callback Library
 
@@ -45,7 +51,6 @@
 
 [<img src="img/blockLibrary_nspanel_screensaver_updateStandard.png" align="right" width="300">](img/blockLibrary_nspanel_screensaver_updateStandard.png)
 
-- [Full Page Notification](blockLibrary_nspanel_screensaver_fullNotification.md)
 - [set Screensaver Colors](blockLibrary_nspanel_screensaver_screensaverColors.md)
 - [show Screensaver Notification](blockLibrary_nspanel_screensaver_screensaverNotification.md)
 - [set Screensaver Status Icons](blockLibrary_nspanel_screensaver_screensaverStatusIcons.md)

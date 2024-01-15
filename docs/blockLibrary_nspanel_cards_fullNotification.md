@@ -6,7 +6,7 @@ This notification will be shown above your current page and can be closed manual
 
 ## Configuration
 
-[<img src="img/blockLibrary_nspanel_screensaver_fullNotification.png" align="right" width="300">](img/blockLibrary_nspanel_screensaver_fullNotification.png)
+[<img src="img/blockLibrary_nspanel_cards_fullNotification.png" align="right" width="300">](img/blockLibrary_nspanel_cards_fullNotification.png)
 
 - Add some notification text choose a color and a font size. Some fonts support Icons as well, just try it.
 - Configure the timeout, after which the notification will be closed automatically.

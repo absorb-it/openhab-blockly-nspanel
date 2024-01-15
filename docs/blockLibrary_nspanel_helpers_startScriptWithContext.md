@@ -11,9 +11,10 @@ This module gives you the option to force this context information for any scrip
 [<img src="img/blockLibrary_nspanel_helpers_startScriptWithContext.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_startScriptWithContext.png)
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
-- Add the ID of some script configuring your *Card*. 
+- add the ID of some script configuring your *Card* and / or
+- add the statement configuring your card juft below.
 
-You can also add additional *Cards* as *Statements*, they will all use the context *NSPanel Item* you just provided.<br clear="right"/>
+As you can see, you can add additional *Cards* as *Statements*, they will all use the context *NSPanel Item* you just provided.<br clear="right"/>
 
 ## additional Context
 
