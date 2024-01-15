@@ -272,6 +272,7 @@ slots:
               cache.private.put('complexScreenSaver', screensaver2);
               cache.private.put('enterScriptName', screensaverStartupScript);
               cache.private.put('leaveScriptName', startupScript);
+              cache.private.put('startupRedo', startupRedo);
               // done
               cache.private.put('initialized', 1);
             };
@@ -349,6 +350,10 @@ slots:
                   case "leaveScriptName":
                   {
                     cache.private.put('leaveScriptName', callbackParam[1]);
+                    if (callbackParam[1])
+                      cache.private.put('startupRedo', "TRUE");
+                    else
+                      cache.private.put('startupRedo', "FALSE");
                     return;
                   }
                   default:
@@ -358,6 +363,7 @@ slots:
             }
             switch(contextValues[1]) {
               case "startup":
+                cache.private.put('screensaverActive', "FALSE");
                 items.getItem(target).sendCommand(
                   "timeout" +
                   {{absorb_it_nspanel_callback_checkParam}}(timeout, 1)
@@ -375,8 +381,7 @@ slots:
                   break;
               case "sleepReached":
                 {{absorb_it_nspanel_callback_killRefreshTimer}};
-                if (startupRedo == "TRUE")
-                  cache.private.remove('currentCard');
+                cache.private.put('screensaverActive', "TRUE");
                 if (cache.private.get('complexScreenSaver') == "TRUE")
                   items.getItem(target).sendCommand("pageType~screensaver2");
                 else
@@ -387,6 +392,11 @@ slots:
                 cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
                 break;
               case "buttonPress2":
+                if (cache.private.get('screensaverActive') == "TRUE") {
+                  cache.private.put('screensaverActive', "FALSE");
+                  if (cache.private.get('startupRedo') == "TRUE")
+                    cache.private.remove('currentCard');
+                }
                 switch(contextValues[3]) {
                   case "bExit":
                     cache.private.remove('DetailPage');
