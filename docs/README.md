@@ -17,6 +17,7 @@
 - [get WIFI QR String](blockLibrary_nspanel_helpers_QRString.md)
 - [loadPage](blockLibrary_nspanel_helpers_loadPage.md)
 - [loadScreensaver](blockLibrary_nspanel_helpers_loadScreensaver.md)
+- [reloadPage](blockLibrary_nspanel_helpers_reloadPage.md)
 - [setTimeout](blockLibrary_nspanel_helpers_setTimeout.md)
 - [setBrightness](blockLibrary_nspanel_helpers_setBrightness.md)
 - [setScreensaverScripts](blockLibrary_nspanel_helpers_setScreenSaverScripts.md)

@@ -400,6 +400,24 @@ slots:
     - component: BlockType
       config:
         args0:
+          - type: input_dummy
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_reloadPage.md"
+        inputsInline: false
+        message0: reload Page %1
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          This reloads this via the callback. Be aware that some context information about the NSPanel Item is required.
+        type: absorb_it_nspanel_reloadPage
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_reloadPage}}();"
+    - component: BlockType
+      config:
+        args0:
           - name: TIMEOUT
             type: input_value
             check: Number
@@ -722,6 +740,14 @@ slots:
             items.getItem(ctx.target).postUpdate("loadScreensaver");
           }
         name: absorb_it_nspanel_loadScreensaver
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}() {
+            if (!{{absorb_it_nspanel_helpers_startupCheck}}(arguments.callee.name)) return;
+            items.getItem(ctx.target).postUpdate("loadPage?" + ctx.ruleUID);
+          }
+        name: absorb_it_nspanel_reloadPage
     - component: UtilityFunction
       config:
         code: >-
