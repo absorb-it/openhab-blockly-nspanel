@@ -13,56 +13,58 @@ slots:
       config:
         args0:
           - type: input_dummy
-          - name: TARGET
+            align: CENTER
+          - check: oh_item
+            name: TARGET
             required: true
             type: input_value
-            check: oh_item
-          - name: ACTIVE_BRIGHTNESS
+          - check: Number
+            name: ACTIVE_BRIGHTNESS
             type: input_value
-            check: Number
           - type: input_dummy
         args1:
           - type: input_dummy
-          - name: TIMEOUT
+            align: CENTER
+          - check: Number
+            name: TIMEOUT
             type: input_value
-            check: Number
-          - name: SCREENSAVER_BRIGHTNESS
+          - check: Number
+            name: SCREENSAVER_BRIGHTNESS
             type: input_value
-            check: Number
           - name: SCREENSAVER2
             type: field_checkbox
           - type: input_dummy
           - type: input_dummy
-          - name: SCREENSAVER_SCRIPT_ID
+          - check: String
+            name: SCREENSAVER_SCRIPT_ID
             type: input_value
-            check: String
           - type: input_dummy
         args2:
-          - type: input_dummy
-            align: CENTER
-          - name: STARTUP_SCRIPT_ID
+          - align: CENTER
+            type: input_dummy
+          - check: String
+            name: STARTUP_SCRIPT_ID
             type: input_value
-            check: String
           - type: input_dummy
           - name: STARTUP_ACTION
             type: input_statement
           - name: STARTUP_REDO
             type: field_checkbox
           - type: input_dummy
+          - type: input_dummy
         colour: 90
-        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md"
+        helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md
         message0: >
-          NSPANEL CALLBACK %1 Display on %2 Display Brightness (0 - 100) %3 %4
+          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 %4
         message1: >
-          SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
+          INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
           STARTUP %1
-          %5 run also after leaving Screensaver %6
-          Show Page / Call Script (enter Id) %2
-          Run Statement %3 %4
+          Show Page / Call Script (enter Id) %2 %5 run this Script always when leaving Screensaver %6 %7
+          Run Startup Statement %3 %4
         nextStatement: ""
         previousStatement: ""
-        tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts."
+        tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts. Some settings like screensaver brightness and timing are only used during startup and can only be modified trough other helpers."
         type: absorb_it_nspanel_callback
       slots:
         code:
