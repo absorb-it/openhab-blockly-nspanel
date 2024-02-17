@@ -361,7 +361,7 @@ slots:
           - type: input_dummy
           - type: input_dummy
         message1: >
-          Upper Slider (Position) - Label %1 - %2 'UP' Icon %3 - %4 'STOP' Icon %5 - %6 'Down' Icon %7
+          Upper Slider (Position) - Label %1 - %2 'UP' Icon %3 - %4 'STOP' Icon %5 - %6 'DOWN' Icon %7
            - Position ([0-100]) %8
            - Action Trigger (Entities Page and Popup) %9
            .   (returnValue = [0-100|UP|STOP|DOWN]) %11 %10 %12
@@ -1083,20 +1083,20 @@ slots:
             if (ctx.item == ownEntityPos) {
               if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined &&
                 (ctx.trigger == "up" || ctx.trigger == "stop" || ctx.trigger == "down")) {
-                {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger);
+                {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger.toUpperCase());
                 return { "refreshPage": "1" };
               }
               if (ctx.request == 'pageOpenDetail') {
                 if (ctx["newState"] !== undefined) {
                   switch (ctx.trigger) {
                     case "tiltOpen":
-                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "open");
+                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "OPEN");
                       break;
                     case "tiltStop":
-                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "stop");
+                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "STOP");
                       break;
                     case "tiltClose":
-                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "close");
+                      {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "CLOSE");
                       break;
                     case "tiltSlider":
                       {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.newState);
@@ -1104,7 +1104,7 @@ slots:
                     case "up":
                     case "stop":
                     case "down":
-                      {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger);
+                      {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger.toUpperCase());
                       break;
                     case "positionSlider":
                       {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.newState);
@@ -1138,7 +1138,6 @@ slots:
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
               if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "button") {
-                ctx["newState"] = ctx["newState"].toUpperCase();
                 {{absorb_it_nspanel_entities_safeEval}}(triggerChange);
                 return { "refreshPage": "1" };
               }
