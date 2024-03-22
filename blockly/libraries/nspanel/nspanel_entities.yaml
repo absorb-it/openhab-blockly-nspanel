@@ -223,7 +223,7 @@ slots:
             type: input_statement
           - type: input_dummy
         message1: >
-          **** POPUP **** %14 %1 Show Color Wheel with Label %2 Set Color Value (returnValue="R|G|B") %3 %4 %5 Show Color Temp Slider with Label %6 Preset Value [0-100] %7 Set Color Temp (returnValue=[0-100]) %8 %9 %10 Show Brightness Slider with Label %11 Preset Value [0-100] %12 Set Brightness (returnValue=[0-100]) %13
+          **** POPUP **** %14 %1 Show Color Wheel with Label %2 Set Color Value - use RGB or HSV(=HSB) %15 (returnValue=Dictionary { 'R':xx,'G':xx,'B':xx,'H':xx,'S':xx,'V',xx }") %3 %4 %5 Show Color Temp Slider with Label %6 Preset Value [0-100] %7 Set Color Temp (returnValue=[0-100]) %8 %9 %10 Show Brightness Slider with Label %11 Preset Value [0-100] %12 Set Brightness (returnValue=[0-100]) %13
         args1:
           - name: COLOR_WHEEL
             type: field_checkbox
@@ -254,6 +254,7 @@ slots:
             check: Number
           - name: SET_BRIGHTNESS
             type: input_statement
+          - type: input_dummy
           - type: input_dummy
         inputsInline: false
         colour: 90
@@ -994,6 +995,61 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}(h, s, v) {
+            // based on https://stackoverflow.com/questions/17242144/javascript-convert-hsb-hsv-color-to-rgb-accurately
+            // CC BY-SA 4.0 Deed license - https://creativecommons.org/licenses/by-sa/4.0/
+            var r, g, b, i, f, p, q, t;
+            i = Math.floor(h * 6);
+            f = h * 6 - i;
+            p = v * (1 - s);
+            q = v * (1 - f * s);
+            t = v * (1 - (1 - f) * s);
+            switch (i % 6) {
+                case 0: r = v, g = t, b = p; break;
+                case 1: r = q, g = v, b = p; break;
+                case 2: r = p, g = v, b = t; break;
+                case 3: r = p, g = q, b = v; break;
+                case 4: r = t, g = p, b = v; break;
+                case 5: r = v, g = p, b = q; break;
+            }
+            let returnDict = {
+              'R':Math.round(r * 255), 'G':Math.round(g * 255), 'B':Math.round(b * 255),
+              'H':Math.round(h * 360), 'S':Math.round(s * 100), 'V':Math.round(v * 100)
+            };
+            console.log(
+              "HSV|HSB[" + returnDict['H'] + " " + returnDict['S'] + " " + returnDict['V'] + "] -> #" +
+              Math.round(returnDict['R']).toString(16).padStart(2, '0') +
+              Math.round(returnDict['G']).toString(16).padStart(2, '0') +
+              Math.round(returnDict['B']).toString(16).padStart(2, '0')
+            );
+            return returnDict;
+          }
+        name: absorb_it_nspanel_HSVtoRGB_B
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(WheelPosString) { // something like "115|83|160"
+            // based on https://github.com/joBr99/nspanel-lovelace-ui/blob/19050079d4168d9c9d23e4e7ea0d1cc5d8de9ca3/apps/nspanel-lovelace-ui/luibackend/helper.py#L15
+            // GPL-3.0 license
+            let myArray = WheelPosString.split("|");
+            let r = myArray[2]/2; // 80
+            let x = myArray[0];
+            let y = myArray[1];
+
+            x = Math.round((x - r) / r * 100) / 100;
+            y = Math.round((r - y) / r * 100) / 100;
+            r = Math.sqrt(x*x + y*y);
+
+            let sat = 0;
+            if (r <= 1)
+              sat = r;
+
+            return {{absorb_it_nspanel_HSVtoRGB_B}}((Math.atan2(y, x) > 0 ? Math.atan2(y, x) : (2*Math.PI + Math.atan2(y, x))) * 360 / (2*Math.PI) / 360, sat, 1);
+          }
+        name: absorb_it_nspanel_WheelPosToRGB
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(icon, iconColor, displayName, getState, setState) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos && ctx.request == 'pageUpdate') {
@@ -1046,7 +1102,7 @@ slots:
                       {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
                       break;
                     case "colorWheel":
-                      {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, ctx.newState);
+                      {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, {{absorb_it_nspanel_WheelPosToRGB}}(ctx.newState));
                       break;
                     case "colorTempSlider":
                       console.log("\n\n\n***\ncolorTempSlider action: " + ctx.newState);
