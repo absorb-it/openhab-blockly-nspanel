@@ -14,7 +14,7 @@ This is some light switch, which is similar to some [standard switch](blockLibra
 
 ### Popup Configuration
 
-- Enable a Color Wheel if you like. Once you change the color, some action is triggered. The [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will contain the selected color, RGB-Values separated by '|'.
+- Enable a Color Wheel if you like. Once you change the color, some action is triggered. To calculate the resulting *RGB Color* value, you need to supply some brightness. Take it from to-be-controlled *Item* itself (by using the same input as for the Brightness Slider preset) or just leave it at full brightness value (100). The [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) will contain the selected color, as a usual RGB-String like '#ffa3c2'. It can be directly used or converted to HSB with the related Color library tool.
 - Enable a Color Temperature Slider. You can give the slider a preset value and will get the selected value in the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) for the change action.
 - Enable a Brightness Slider. You can give the slider a preset value and will get the selected value in the [*returnValue* variable](blockLibrary_nspanel_helpers_returnValue.md) for the change action.<br clear="right"/>
 

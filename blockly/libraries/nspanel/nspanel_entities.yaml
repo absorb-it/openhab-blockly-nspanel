@@ -223,15 +223,25 @@ slots:
             type: input_statement
           - type: input_dummy
         message1: >
-          **** POPUP **** %14 %1 Show Color Wheel with Label %2 Set Color Value - use RGB or HSV(=HSB) %15 (returnValue=Dictionary { 'R':xx,'G':xx,'B':xx,'H':xx,'S':xx,'V',xx }") %3 %4 %5 Show Color Temp Slider with Label %6 Preset Value [0-100] %7 Set Color Temp (returnValue=[0-100]) %8 %9 %10 Show Brightness Slider with Label %11 Preset Value [0-100] %12 Set Brightness (returnValue=[0-100]) %13
+          **** POPUP **** %1 %2 Show Color Wheel with Label %3
+          Brightness to use for RGB calculation %4 Set Color (returnValue=Color="#RGB") %5 %6 %7
+          Show Color Temp Slider with Label %8 Preset Value [0-100] %9
+          Set Color Temp (returnValue=[0-100]) %10 %11 %12
+          Show Brightness Slider with Label %13 Preset Value [0-100] %14
+          Set Brightness (returnValue=[0-100]) %15
         args1:
+          - type: input_dummy
           - name: COLOR_WHEEL
             type: field_checkbox
           - name: COLOR_WHEEL_LABEL
             type: input_value
             check: String
+          - name: BRIGHTNESS_FOR_WHEEL
+            type: input_value
+            check: Number
           - name: SET_COLOR_WHEEL
             type: input_statement
+            align: RIGHT
           - type: input_dummy
           - name: COLOR_TEMP
             type: field_checkbox
@@ -254,8 +264,6 @@ slots:
             check: Number
           - name: SET_BRIGHTNESS
             type: input_statement
-          - type: input_dummy
-          - type: input_dummy
         inputsInline: false
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_entities_light.md"
@@ -270,7 +278,7 @@ slots:
           - component: BlockCodeTemplate
             config:
               template: >-
-                {{utility:absorb_it_nspanel_entityLight}}({{input:ICON}}, {{input:ICON_COLOR}}, {{input:DISPLAY_NAME}}, {{input:GETTER}}, `{{statements:SETTER}}`, '{{field:COLOR_WHEEL}}', {{input:COLOR_WHEEL_LABEL}}, `{{statements:SET_COLOR_WHEEL}}`, '{{field:COLOR_TEMP}}', {{input:COLOR_TEMP_LABEL}}, {{input:GET_COLOR_TEMP}}, `{{statements:SET_COLOR_TEMP}}`, '{{field:BRIGHTNESS}}', {{input:BRIGHTNESS_LABEL}}, {{input:GET_BRIGHTNESS}}, `{{statements:SET_BRIGHTNESS}}`)
+                {{utility:absorb_it_nspanel_entityLight}}({{input:ICON}}, {{input:ICON_COLOR}}, {{input:DISPLAY_NAME}}, {{input:GETTER}}, `{{statements:SETTER}}`, '{{field:COLOR_WHEEL}}', {{input:COLOR_WHEEL_LABEL}}, {{input:BRIGHTNESS_FOR_WHEEL}}, `{{statements:SET_COLOR_WHEEL}}`, '{{field:COLOR_TEMP}}', {{input:COLOR_TEMP_LABEL}}, {{input:GET_COLOR_TEMP}}, `{{statements:SET_COLOR_TEMP}}`, '{{field:BRIGHTNESS}}', {{input:BRIGHTNESS_LABEL}}, {{input:GET_BRIGHTNESS}}, `{{statements:SET_BRIGHTNESS}}`)
         toolbox:
           - component: PresetInput
             config:
@@ -310,6 +318,13 @@ slots:
           - component: PresetInput
             config:
               fields:
+                NUM: 100
+              name: BRIGHTNESS_FOR_WHEEL
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
                 TEXT: Color Temperature
               name: COLOR_TEMP_LABEL
               shadow: true
@@ -317,7 +332,7 @@ slots:
           - component: PresetInput
             config:
               fields:
-                NUM: 1
+                NUM: 100
               name: GET_COLOR_TEMP
               shadow: true
               type: math_number
@@ -331,7 +346,7 @@ slots:
           - component: PresetInput
             config:
               fields:
-                NUM: 1
+                NUM: 100
               name: GET_BRIGHTNESS
               shadow: true
               type: math_number
@@ -995,7 +1010,11 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(h, s, v) {
+          function {{name}}(HSBarray) {
+            let h = HSBarray[0]/360;
+            let s = HSBarray[1]/100;
+            let v = HSBarray[2]/100;
+
             // based on https://stackoverflow.com/questions/17242144/javascript-convert-hsb-hsv-color-to-rgb-accurately
             // CC BY-SA 4.0 Deed license - https://creativecommons.org/licenses/by-sa/4.0/
             var r, g, b, i, f, p, q, t;
@@ -1012,23 +1031,19 @@ slots:
                 case 4: r = t, g = p, b = v; break;
                 case 5: r = v, g = p, b = q; break;
             }
-            let returnDict = {
-              'R':Math.round(r * 255), 'G':Math.round(g * 255), 'B':Math.round(b * 255),
-              'H':Math.round(h * 360), 'S':Math.round(s * 100), 'V':Math.round(v * 100)
-            };
-            console.log(
-              "HSV|HSB[" + returnDict['H'] + " " + returnDict['S'] + " " + returnDict['V'] + "] -> #" +
-              Math.round(returnDict['R']).toString(16).padStart(2, '0') +
-              Math.round(returnDict['G']).toString(16).padStart(2, '0') +
-              Math.round(returnDict['B']).toString(16).padStart(2, '0')
-            );
-            return returnDict;
+            let returnString =  "#" +
+              Math.round(r * 255).toString(16).padStart(2, '0') +
+              Math.round(g * 255).toString(16).padStart(2, '0') +
+              Math.round(b * 255).toString(16).padStart(2, '0');
+
+            console.debug("HSB[" + h + " " + s + " " + v + "] -> " + returnString);
+            return returnString;
           }
-        name: absorb_it_nspanel_HSVtoRGB_B
+        name: absorb_it_nspanel_HSBtoRGB
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(WheelPosString) { // something like "115|83|160"
+          function {{name}}(WheelPosString, colorWheelBrightness) {
             // based on https://github.com/joBr99/nspanel-lovelace-ui/blob/19050079d4168d9c9d23e4e7ea0d1cc5d8de9ca3/apps/nspanel-lovelace-ui/luibackend/helper.py#L15
             // GPL-3.0 license
             let myArray = WheelPosString.split("|");
@@ -1044,9 +1059,9 @@ slots:
             if (r <= 1)
               sat = r;
 
-            return {{absorb_it_nspanel_HSVtoRGB_B}}((Math.atan2(y, x) > 0 ? Math.atan2(y, x) : (2*Math.PI + Math.atan2(y, x))) * 360 / (2*Math.PI) / 360, sat, 1);
+            return [ (Math.atan2(y, x) > 0 ? Math.atan2(y, x) : (2*Math.PI + Math.atan2(y, x))) * 360 / (2*Math.PI), sat * 100, colorWheelBrightness ];
           }
-        name: absorb_it_nspanel_WheelPosToRGB
+        name: absorb_it_nspanel_WheelPosToHSB
     - component: UtilityFunction
       config:
         code: >-
@@ -1088,7 +1103,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(icon, iconColor, displayName, getState, setState, colorWheel, colorWheelLabel, setColorWheel, colorTemp, colorTempLabel, getColorTemp, setColorTemp, brightness, brightnessLabel, getBrightness, setBrightness) {
+          function {{name}}(icon, iconColor, displayName, getState, setState, colorWheel, colorWheelLabel, colorWheelBrightness, setColorWheel, colorTemp, colorTempLabel, getColorTemp, setColorTemp, brightness, brightnessLabel, getBrightness, setBrightness) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
               if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "OnOff") {
@@ -1102,7 +1117,9 @@ slots:
                       {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
                       break;
                     case "colorWheel":
-                      {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, {{absorb_it_nspanel_WheelPosToRGB}}(ctx.newState));
+                      let HSBarray = {{absorb_it_nspanel_WheelPosToHSB}}(ctx.newState, colorWheelBrightness);
+                      let RGBstring = {{absorb_it_nspanel_HSBtoRGB}}(HSBarray);
+                      {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, RGBstring);
                       break;
                     case "colorTempSlider":
                       console.log("\n\n\n***\ncolorTempSlider action: " + ctx.newState);
