@@ -1866,7 +1866,10 @@ slots:
             let dataset = '';
 
             for (i = NumberOfValues - 1; i >= 1; i--) {
-              targetValue = parseFloat(items.getItem(item).history.historicState(time.ZonedDateTime.now()['minus'+OffsetUnit](i*Offset))?.state) * scaling;
+              if (items.getItem(item).persistence) // since 4.2
+                targetValue = parseFloat(items.getItem(item).persistence.persistedState(time.ZonedDateTime.now()['minus'+OffsetUnit](i*Offset))?.state) * scaling;
+              else
+                targetValue = parseFloat(items.getItem(item).history.historicState(time.ZonedDateTime.now()['minus'+OffsetUnit](i*Offset))?.state) * scaling;
               if (type == 'cardLChart' && !targetValue)
                 continue;
               dataset += '~';
