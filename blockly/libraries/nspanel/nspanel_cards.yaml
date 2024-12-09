@@ -79,16 +79,38 @@ slots:
               - nspanel_entitySelectorString
               - nspanel_entityFanString
               - nspanel_entityTimerString
+          - name: ENTITY_5
+            type: input_value
+            check:
+              - nspanel_entitySwitchString
+              - nspanel_entityLabelString
+              - nspanel_entityButtonString
+              - nspanel_entityLightString
+              - nspanel_entityShutterString
+              - nspanel_entitySelectorString
+              - nspanel_entityFanString
+              - nspanel_entityTimerString
+          - name: ENTITY_6
+            type: input_value
+            check:
+              - nspanel_entitySwitchString
+              - nspanel_entityLabelString
+              - nspanel_entityButtonString
+              - nspanel_entityLightString
+              - nspanel_entityShutterString
+              - nspanel_entitySelectorString
+              - nspanel_entityFanString
+              - nspanel_entityTimerString
           - type: input_dummy
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_cards_cardEntities.md"
         inputsInline: false
         message0: CARD ENTITIES %1 Page Title %2 Refresh Time (Seconds, 0 - disable) %3 %4
         message1: Navigation (use NSPanel Helpers) %1 - previous %2 - next %3 %4
-        message2: "choose any Entity (use NSPanel Entities): %5 Entity 1 %1 Entity 2 %2 Entity 3 %3 Entity 4 %4"
+        message2: "choose any Entity (use NSPanel Entities): %7 Entity 1 %1 Entity 2 %2 Entity 3 %3 Entity 4 %4  Entity 5 %5 Entity 6 %6"
         nextStatement: ""
         previousStatement: ""
-        tooltip: "NSPanel Page with up to 4 entities displayed line by line."
+        tooltip: "NSPanel Page with up to 6 entities displayed line by line."
         type: absorb_it_nspanel_cardEntities
       slots:
         code:
@@ -105,7 +127,9 @@ slots:
                         {{input:ENTITY_1}},
                         {{input:ENTITY_2}},
                         {{input:ENTITY_3}},
-                        {{input:ENTITY_4}}
+                        {{input:ENTITY_4}},
+                        {{input:ENTITY_5}},
+                        {{input:ENTITY_6}}
                     ],
                     {{input:REFRESH}}
                   );
@@ -1810,7 +1834,7 @@ slots:
             if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             let mqtt = {{absorb_it_nspanel_cards_getPreamble}}(title, navigation);
-            for (let i = 0; i < 4; i++) {
+            for (let i = 0; i < 6; i++) {
               let result = entities[i];
               if (result === undefined) {
                   mqtt += {{absorb_it_nspanel_cards_checkParam}}("", 6);
