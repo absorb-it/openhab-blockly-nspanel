@@ -21,6 +21,12 @@ slots:
           - check: Number
             name: ACTIVE_BRIGHTNESS
             type: input_value
+          - check: Colour
+            name: BACKGROUND_COLOR
+            type: input_value
+          - name: EXPERIMENTAL_SLIDERS
+            type: field_checkbox
+          - type: input_dummy
           - type: input_dummy
         args1:
           - type: input_dummy
@@ -55,7 +61,7 @@ slots:
         colour: 90
         helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md
         message0: >
-          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 %4
+          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
         message1: >
           INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
@@ -71,8 +77,16 @@ slots:
           - component: BlockCodeTemplate
             config:
               template: >-
-                {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}}, '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
+                {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
+                {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
         toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                COLOUR: "#000000"
+              name: BACKGROUND_COLOR
+              shadow: true
+              type: colour_picker
           - component: PresetInput
             config:
               name: TARGET
@@ -257,7 +271,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, screensaver2, screensaverStartupScript, startupScript, startupAction, startupRedo) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, startupScript, startupAction, startupRedo) {
             // on first run only...
             if (!cache.private.exists('initialized')) {
               // allow refreshing of dimming and timeout when saving configured callback
@@ -336,7 +350,9 @@ slots:
                       items.getItem(target).sendCommand(
                         "dimmode" +
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1) +
-                        {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1)
+                        {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1) +
+                        {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
+                        (experimentalSliders == "TRUE")?'~~1':'~~0';
                       );
                     return;
                   case "complexScreenSaver":
@@ -373,7 +389,9 @@ slots:
                 items.getItem(target).sendCommand(
                   "dimmode" +
                   {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
-                  {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
+                  {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1) +
+                  {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
+                  (experimentalSliders == "TRUE")?'~~1':'~~0';
                 );
                 let success = {{absorb_it_nspanel_callback_startScript}}(
                   cache.private.get('leaveScriptName'), { "target": target }, 1
