@@ -30,6 +30,7 @@ You can also use the cardGrid for navigation, for instance as some landing page 
   
   - [Entity Label](blockLibrary_nspanel_entities_label.md) - some Icon with a Label
   - [Entity Button](blockLibrary_nspanel_entities_button.md) - has some additional Action trigger
+  - [Entity Light](blockLibrary_nspanel_entities_light.md) - has some additional Popup page for light settings (use long press to access popup page)
   - [Entity Shutter](blockLibrary_nspanel_entities_shutter.md) - looks like the Entity Button, but can open Shutter Popup
   - [Entity Selector](blockLibrary_nspanel_entities_selector.md) - looks like the Entity Button, but can open Selector Popup
   - [Entity Timer](blockLibrary_nspanel_entities_timer.md) - looks like the Entity Button, but can open Timer Popup

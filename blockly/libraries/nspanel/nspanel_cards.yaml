@@ -181,6 +181,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_2
             type: input_value
             check:
@@ -189,6 +190,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_3
             type: input_value
             check:
@@ -197,6 +199,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_4
             type: input_value
             check:
@@ -205,6 +208,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_5
             type: input_value
             check:
@@ -213,6 +217,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_6
             type: input_value
             check:
@@ -221,6 +226,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_7
             type: input_value
             check:
@@ -229,6 +235,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - name: ENTITY_8
             type: input_value
             check:
@@ -237,6 +244,7 @@ slots:
               - nspanel_entityShutterString
               - nspanel_entitySelectorString
               - nspanel_entityTimerString
+              - nspanel_entityLightString
           - type: input_dummy
           - type: input_dummy
         colour: 90
