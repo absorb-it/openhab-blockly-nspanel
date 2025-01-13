@@ -352,7 +352,7 @@ slots:
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1) +
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1) +
                         {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
-                        (experimentalSliders == "TRUE")?'~~1':'~~0';
+                        (experimentalSliders == "TRUE")?'~~1':'~~0'
                       );
                     return;
                   case "complexScreenSaver":
@@ -391,7 +391,7 @@ slots:
                   {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
                   {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1) +
                   {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
-                  (experimentalSliders == "TRUE")?'~~1':'~~0';
+                  (experimentalSliders == "TRUE")?'~~1':'~~0'
                 );
                 let success = {{absorb_it_nspanel_callback_startScript}}(
                   cache.private.get('leaveScriptName'), { "target": target }, 1
