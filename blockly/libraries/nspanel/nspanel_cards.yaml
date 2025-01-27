@@ -1783,8 +1783,8 @@ slots:
                 try { result = eval(command); }
                 catch (e) {
                   console.error("Error", e.stack);
-                  console.log("Error", e.toString());
-                  console.log("eval failed: '" + command + "'");
+                  console.debug("Error", e.toString());
+                  console.debug("eval failed: '" + command + "'");
                 }
             }
             return result;
@@ -1807,7 +1807,7 @@ slots:
       config:
         code: >-
           function {{name}}(functionName) {
-            console.log("starting script '" + functionName + "' " + ctx);
+            console.debug("starting script '" + functionName + "' " + ctx);
             if (!ctx.target) {
               if (!ctx.triggerLoadPage) {
                 console.error("missing context for loading Card '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item' or 'NSPanel Item via CallBack' from Helpers library!");

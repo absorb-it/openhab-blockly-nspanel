@@ -660,8 +660,8 @@ slots:
                 try { result = eval(command); }
                 catch (e) {
                   console.error("Error", e.stack);
-                  console.log("Error", e.toString());
-                  console.log("eval failed: '" + command + "'");
+                  console.debug("Error", e.toString());
+                  console.debug("eval failed: '" + command + "'");
                 }
             }
             return result;
@@ -701,8 +701,8 @@ slots:
               }
               catch (e) {
                 console.error("Error", e.stack);
-                console.log("Error", e.toString());
-                console.log("can't start/find rule with id '" + scriptName + "'");
+                console.debug("Error", e.toString());
+                console.debug("can't start/find rule with id '" + scriptName + "'");
               }
             }
             ctx.target = target;
@@ -712,7 +712,7 @@ slots:
       config:
         code: >-
           function {{name}}(functionName) {
-            console.log("starting script '" + functionName + "' " + ctx);
+            console.debug("starting script '" + functionName + "' " + ctx);
             if (!ctx.target && !ctx.triggerLoadPageDone) {
               if (!ctx.triggerLoadPage)
                 console.error("missing context for loading '" + functionName + "' in '" + ctx.ruleUID + "', try 'NSPanel Item' from Helpers library!");

@@ -217,10 +217,10 @@ slots:
                 let timer = 10;
                 while (RuleManager.getStatus(scriptName) && RuleManager.getStatus(scriptName).toString() === "RUNNING") {
                   if (!timer--) {
-                    console.log("finished waiting for rule " + scriptName);
+                    console.debug("finished waiting for rule " + scriptName);
                     break;
                   }
-                  console.log("waiting 1 sec. for running rule " + scriptName);
+                  console.debug("waiting 1 sec. for running rule " + scriptName);
                   thread.sleep(1000);
                 }
                 rules.runRule(scriptName, context);
@@ -231,8 +231,8 @@ slots:
             }
             catch (e) {
                 console.error("Error", e.stack);
-                console.log("Error", e.toString());
-                console.log("can't start/find rule with id '" + scriptName + "'");
+                console.debug("Error", e.toString());
+                console.debug("can't start/find rule with id '" + scriptName + "'");
             }
             return 0;
           }
@@ -247,8 +247,8 @@ slots:
                 try { result = eval(command); }
                 catch (e) {
                   console.error("Error", e.stack);
-                  console.log("Error", e.toString());
-                  console.log("eval failed: '" + command + "'");
+                  console.debug("Error", e.toString());
+                  console.debug("eval failed: '" + command + "'");
                 }
             }
             return result;

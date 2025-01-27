@@ -990,8 +990,8 @@ slots:
                 try { result = eval(command); }
                 catch (e) {
                   console.error("Error", e.stack);
-                  console.log("Error", e.toString());
-                  console.log("eval failed: '" + command + "'");
+                  console.debug("Error", e.toString());
+                  console.debug("eval failed: '" + command + "'");
                 }
             }
             return result;
@@ -1122,7 +1122,7 @@ slots:
                       {{absorb_it_nspanel_entities_safeEval}}(setColorWheel, RGBstring);
                       break;
                     case "colorTempSlider":
-                      console.log("\n\n\n***\ncolorTempSlider action: " + ctx.newState);
+                      console.debug("\n\n\n***\ncolorTempSlider action: " + ctx.newState);
                       {{absorb_it_nspanel_entities_safeEval}}(setColorTemp, ctx.newState);
                       break;
                     case "brightnessSlider":
