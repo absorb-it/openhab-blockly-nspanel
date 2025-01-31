@@ -594,7 +594,7 @@ slots:
         message3: >
           Text Box 1st Line %1 Text Box 2nd Line %2 Text Box 3rd Line %3 Text Box 4th Line %4 %5
         message4: >
-          HVAC Action Buttons (use NSPanel Helpers) %16 HVAC Action 1 %1 HVAC Action 2 %2 HVAC Action 3 %3 HVAC Action 4 %4 HVAC Action 5 %5 HVAC Action 6 %6 HVAC Action 7 %7 HVAC Action 8 %8 %9 Temperature Change Action %10 - One Target: (returnVal=Temp) %11 - Two Targets: (returnVal=RightTemp|LeftTemp) %12 %13 %14 Enable Popup Page %17 add config here (use NSPanel Helpers) %15
+          HVAC Action Buttons (use NSPanel Helpers) %16 HVAC Action 1 %1 HVAC Action 2 %2 HVAC Action 3 %3 HVAC Action 4 %4 HVAC Action 5 %5 HVAC Action 6 %6 HVAC Action 7 %7 HVAC Action 8 %8 %9 Temperature Change Action %10 - One Target: (returnValue=Temp) %11 - Two Targets: (returnValue=RightTemp|LeftTemp) %12 %13 %14 Enable Popup Page %17 add config here (use NSPanel Helpers) %15
         nextStatement: ""
         previousStatement: ""
         tooltip: "NSPanel Page to control 1 or 2 temperature settings. You can also add a Popup Page to control additional settings."

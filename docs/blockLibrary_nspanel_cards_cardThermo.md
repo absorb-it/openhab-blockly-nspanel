@@ -25,7 +25,7 @@ The cardThermo is made to control one or two temperature settings for your home 
 - Configure minimum and maximum temperature, the temperature steps and the temperature unit for both main and second temperature.
 - Configure the texts displayed on the left side.
 - Add up to 8 [HVAC buttons](blockLibrary_nspanel_helpers_hvacButton.md) below the other controls. Only the Icon is shown, you can press theses buttons to start some action.
-- Configure some action, which is triggered if the temperature is changed. If you control two temperatures, the returValue variable contains always both temperatures separated by '|'.
+- Configure some action, which is triggered if the temperature is changed. If you control two temperatures, the returnValue variable contains always both temperatures separated by '|'.
 - You can add some popup page and configure it here using the [popupThermo](blockLibrary_nspanel_cards_popupThermo.md) module from the cards toolbox.<br clear="right"/>
 
 ---
