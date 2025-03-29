@@ -78,7 +78,7 @@ slots:
             config:
               template: >-
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
-                {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
+                {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
         toolbox:
           - component: PresetInput
             config:
@@ -293,7 +293,9 @@ slots:
               items.getItem(target).sendCommand(
                 "dimmode" +
                 {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
-                {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1)
+                {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1) +
+                {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
+                        ((experimentalSliders == "TRUE")?'~~1':'~~0')
               );
               // store settings from blockly interface to be able to change them on-the-fly
               cache.private.put('complexScreenSaver', screensaver2);
@@ -363,7 +365,7 @@ slots:
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1) +
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[2], 1) +
                         {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
-                        (experimentalSliders == "TRUE")?'~~1':'~~0'
+                        ((experimentalSliders == "TRUE")?'~~1':'~~0')
                       );
                     return;
                   case "complexScreenSaver":
@@ -402,7 +404,7 @@ slots:
                   {{absorb_it_nspanel_callback_checkParam}}(screenSaverBrightness, 1) +
                   {{absorb_it_nspanel_callback_checkParam}}(activeBrightness, 1) +
                   {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
-                  (experimentalSliders == "TRUE")?'~~1':'~~0'
+                  ((experimentalSliders == "TRUE")?'~~1':'~~0')
                 );
                 let success = {{absorb_it_nspanel_callback_startScript}}(
                   cache.private.get('leaveScriptName'), { "target": target }, 1
