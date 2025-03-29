@@ -146,12 +146,15 @@ slots:
           - name: DATE_FORMAT
             type: input_value
             check: String
+          - name: TIME_ADD_STRING
+            type: input_value
+            check: String
         colour: 90
         helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_timeUpdate.md"
         message0: >
           NSPANEL TIME UPDATE for %1
         message1: >
-          Time Format %1 Date Format %2
+          Time Format %1 Date Format %2 Additional Time Text %3
         nextStatement: ""
         previousStatement: ""
         tooltip: "This updates the time on some NSPanel - there is no local clock in these devices."
@@ -162,7 +165,7 @@ slots:
           - component: BlockCodeTemplate
             config:
               template: >-
-                {{utility:absorb_it_nspanel_timeUpdate}}({{input:TARGET}}, {{input:TIME_FORMAT}}, {{input:DATE_FORMAT}});
+                {{utility:absorb_it_nspanel_timeUpdate}}({{input:TARGET}}, {{input:TIME_FORMAT}}, {{input:DATE_FORMAT}} , {{input:TIME_ADD_STRING}});
         toolbox:
           - component: PresetInput
             config:
@@ -182,6 +185,14 @@ slots:
               fields:
                 TEXT: dd-MM-yyyy
               name: DATE_FORMAT
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: ""
+              name: TIME_ADD_STRING
               required: false
               shadow: true
               type: text
@@ -485,10 +496,11 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, patternTime = 'HH:mm', patternDate = 'dd-MM-yyyy') {
+          function {{name}}(target, patternTime = 'HH:mm', patternDate =
+          'dd-MM-yyyy', tTimeAdd = '') {
             let timeString =  String((time.ZonedDateTime.now()).format(time.DateTimeFormatter.ofPattern(patternTime)));
             let dateString =  String((time.ZonedDateTime.now()).format(time.DateTimeFormatter.ofPattern(patternDate)));
-            items.getItem(target).sendCommand('time~' + timeString);
+            items.getItem(target).sendCommand('time~' + timeString + '~' + tTimeAdd);
             items.getItem(target).sendCommand('date~' + dateString);
           }
         name: absorb_it_nspanel_timeUpdate
