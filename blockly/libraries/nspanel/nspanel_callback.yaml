@@ -430,6 +430,10 @@ slots:
                 }
                 switch(contextValues[3]) {
                   case "bExit":
+                  case "swipeLeft":
+                  case "swipeRight":
+                  case "swipeUp":
+                  case "swipeDown":
                     cache.private.remove('DetailPage');
                     if (cache.private.get('currentCard'))
                       {{absorb_it_nspanel_callback_startScript}}(
