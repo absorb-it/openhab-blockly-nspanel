@@ -8,7 +8,8 @@ The time (and date), which is displayed on the screensaver of your display, has 
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
 - The Time Format.
-- The Date Format.<br clear="right"/>
+- The Date Format.
+- Some additional Text to be displayed.<br clear="right"/>
 
 ---
 

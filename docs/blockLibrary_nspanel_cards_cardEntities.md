@@ -20,7 +20,7 @@ The cardEntities page gives you the overview of the status of up to 4 different 
 
 ### Special Configuration for cardEntities
 
-- Add up to 6 different Entities to indicate different settings or enable some actions. The EU-version only supports up to 4 Entities. The Icon will be displayed together with the Name and the Value. Some Entities allow direct actions on the main page, others allow access to a sub-page with some options.
+- Add up to 6 different Entities to indicate different settings or enable some actions. The EU-version of the NSPanel Display only supports up to 4 Entities - the additional Entitites will not have any effect here. See also [EU vs. US hardware](https://github.com/Blackymas/NSPanel_HA_Blueprint/discussions/713). The Icon will be displayed together with the Name and the Value. Some Entities allow direct actions on the main page, others allow access to a sub-page with some options.
 - Choose any entity you like from the "NSPanel Entities" library:
   - [Entity Label](blockLibrary_nspanel_entities_label.md) - some Icon with a Label.
   - [Entity Button](blockLibrary_nspanel_entities_button.md) - has some additional Action trigger.

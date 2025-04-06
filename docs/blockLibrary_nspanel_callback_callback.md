@@ -52,6 +52,8 @@ Here you can change this behavior. Just set your *NSPanel Item* to 'leaveScriptN
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
 - The Brightness for the activated display (for instance after some touch event) as numerical value between 0 and 100.
+- The Background Color of the panel.
+- You can enable the usage of [experimental sliders](https://github.com/joBr99/nspanel-lovelace-ui/issues/945), if you are using some recent Lovelace UI firmware. Best leave un-checked.
 
 The *Callback* will configure the screensaver after receiving the display startup message. The following settings are relevant for the screensaver:
 
