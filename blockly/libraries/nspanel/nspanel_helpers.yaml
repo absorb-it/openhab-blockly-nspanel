@@ -534,6 +534,80 @@ slots:
               required: false
               shadow: true
               type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: NEW_SWIPE_LEFT_SCREENSAVER_SCRIPT
+            type: field_checkbox
+          - name: SWIPE_LEFT_SCREENSAVER_SCRIPT
+            type: input_value
+            check: String
+          - name: NEW_SWIPE_RIGTH_SCREENSAVER_SCRIPT
+            type: field_checkbox
+          - name: SWIPE_RIGHT_SCREENSAVER_SCRIPT
+            type: input_value
+            check: String
+          - name: NEW_SWIPE_UP_SCREENSAVER_SCRIPT
+            type: field_checkbox
+          - name: SWIPE_UP_SCREENSAVER_SCRIPT
+            type: input_value
+            check: String
+          - name: NEW_SWIPE_DOWN_SCREENSAVER_SCRIPT
+            type: field_checkbox
+          - name: SWIPE_DOWN_SCREENSAVER_SCRIPT
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setScreenSaverScriptsComplex.md"
+        inputsInline: false
+        message0: >
+          %1 new Script for Swipe Left on Screensaver %2
+          %3 new Script for Swipe Right on Screensaver %4
+          %5 new Script for Swipe Up on Screensaver %6
+          %7 new Script for Swipe Down on Screensaver %8
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          Set new ScreenSaver settings via the callback. Be aware that some context information about the NSPanel Item is required.
+        type: absorb_it_nspanel_setScreenSaverScriptsComplex
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_setScreenSaverScriptsComplex}}('{{field:NEW_SWIPE_LEFT_SCREENSAVER_SCRIPT}}', {{input:SWIPE_LEFT_SCREENSAVER_SCRIPT}}, '{{field:NEW_SWIPE_RIGTH_SCREENSAVER_SCRIPT}}', {{input:SWIPE_RIGHT_SCREENSAVER_SCRIPT}}, '{{field:NEW_SWIPE_UP_SCREENSAVER_SCRIPT}}', {{input:SWIPE_UP_SCREENSAVER_SCRIPT}}, '{{field:NEW_SWIPE_DOWN_SCREENSAVER_SCRIPT}}', {{input:SWIPE_DOWN_SCREENSAVER_SCRIPT}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_LEFT_SCREENSAVER_SCRIPT
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_RIGHT_SCREENSAVER_SCRIPT
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_UP_SCREENSAVER_SCRIPT
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_DOWN_SCREENSAVER_SCRIPT
+              required: false
+              shadow: true
+              type: text
     - component: Separator
       config:
         gap: 48
@@ -776,6 +850,20 @@ slots:
               items.getItem(ctx.target).postUpdate("leaveScriptName?" + leaveScriptName);
           }
         name: absorb_it_nspanel_setScreenSaverScripts
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(newSwipeLeftScript, newSwipeLeftScriptName, newSwipeRightScript, newSwipeRightScriptName, newSwipeUpScript, newSwipeUpScriptName, newSwipeDownScript, newSwipeDownScriptName ) {
+            if (newSwipeLeftScript == "TRUE")
+              items.getItem(ctx.target).postUpdate("swipeLeftScriptName?" + newSwipeLeftScriptName);
+            if (newSwipeRightScript == "TRUE")
+              items.getItem(ctx.target).postUpdate("swipeRightScriptName?" + newSwipeRightScriptName);
+            if (newSwipeUpScript == "TRUE")
+              items.getItem(ctx.target).postUpdate("swipeUpScriptName?" + newSwipeUpScriptName);
+            if (newSwipeDownScript == "TRUE")
+              items.getItem(ctx.target).postUpdate("swipeDownScriptName?" + newSwipeDownScriptName);
+          }
+        name: absorb_it_nspanel_setScreenSaverScriptsComplex
     - component: UtilityFunction
       config:
         code: >-

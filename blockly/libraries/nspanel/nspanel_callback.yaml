@@ -24,9 +24,6 @@ slots:
           - check: Colour
             name: BACKGROUND_COLOR
             type: input_value
-          - name: EXPERIMENTAL_SLIDERS
-            type: field_checkbox
-          - type: input_dummy
           - type: input_dummy
         args1:
           - type: input_dummy
@@ -61,7 +58,7 @@ slots:
         colour: 90
         helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md
         message0: >
-          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
+          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 %5
         message1: >
           INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
@@ -78,7 +75,7 @@ slots:
             config:
               template: >-
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
-                {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
+                {{input:BACKGROUND_COLOR}}, "FALSE", '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, [ {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}} ], `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
         toolbox:
           - component: PresetInput
             config:
@@ -129,6 +126,178 @@ slots:
               fields:
                 TEXT: Script Id
               name: STARTUP_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - type: input_dummy
+            align: CENTER
+          - check: oh_item
+            name: TARGET
+            required: true
+            type: input_value
+          - check: Number
+            name: ACTIVE_BRIGHTNESS
+            type: input_value
+          - check: Colour
+            name: BACKGROUND_COLOR
+            type: input_value
+          - name: EXPERIMENTAL_SLIDERS
+            type: field_checkbox
+          - type: input_dummy
+          - type: input_dummy
+        args1:
+          - type: input_dummy
+            align: CENTER
+          - check: Number
+            name: TIMEOUT
+            type: input_value
+          - check: Number
+            name: SCREENSAVER_BRIGHTNESS
+            type: input_value
+          - name: SCREENSAVER2
+            type: field_checkbox
+          - type: input_dummy
+          - type: input_dummy
+          - check: String
+            name: SCREENSAVER_SCRIPT_ID
+            type: input_value
+          - type: input_dummy
+        args2:
+          - align: CENTER
+            type: input_dummy
+          - check: String
+            name: STARTUP_SCRIPT_ID
+            type: input_value
+          - type: input_dummy
+          - name: STARTUP_ACTION
+            type: input_statement
+          - name: STARTUP_REDO
+            type: field_checkbox
+          - type: input_dummy
+          - type: input_dummy
+          - check: String
+            name: SWIPE_LEFT_SCRIPT_ID
+            type: input_value
+          - check: String
+            name: SWIPE_RIGHT_SCRIPT_ID
+            type: input_value
+          - check: String
+            name: SWIPE_UP_SCRIPT_ID
+            type: input_value
+          - check: String
+            name: SWIPE_DOWN_SCRIPT_ID
+            type: input_value
+        colour: 90
+        helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md
+        message0: >
+          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
+        message1: >
+          INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
+        message2: >
+          STARTUP %1
+          Swipe Left Call Script (enter Id) %8
+          Swipe Right Call Script (enter Id) %9
+          Swipe Up Call Script (enter Id) %10
+          Swipe Down Call Script (enter Id) %11
+          Touch Call Script (enter Id) %2 %5 run Touch Script always when leaving Screensaver %6 %7
+          Run Startup Statement %3 %4
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts. Some settings like screensaver brightness and timing are only used during startup and can only be modified trough other helpers."
+        type: absorb_it_nspanel_complex_callback
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: >-
+                {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
+                {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}},
+                [ {{input:STARTUP_SCRIPT_ID}}, {{input:SWIPE_LEFT_SCRIPT_ID}}, {{input:SWIPE_RIGHT_SCRIPT_ID}}, {{input:SWIPE_UP_SCRIPT_ID}}, {{input:SWIPE_DOWN_SCRIPT_ID}} ], `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                COLOUR: "#000000"
+              name: BACKGROUND_COLOR
+              shadow: true
+              type: colour_picker
+          - component: PresetInput
+            config:
+              name: TARGET
+              shadow: true
+              type: oh_item
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 20
+              name: TIMEOUT
+              required: false
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 50
+              name: SCREENSAVER_BRIGHTNESS
+              required: false
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 100
+              name: ACTIVE_BRIGHTNESS
+              required: false
+              shadow: true
+              type: math_number
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Weather/IconUpdate Script Id
+              name: SCREENSAVER_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: STARTUP_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_LEFT_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_RIGHT_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_UP_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: SWIPE_DOWN_SCRIPT_ID
               required: false
               shadow: true
               type: text
@@ -282,7 +451,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, startupScript, startupAction, startupRedo) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, startupScripts, startupAction, startupRedo) {
             // on first run only...
             if (!cache.private.exists('initialized')) {
               // allow refreshing of dimming and timeout when saving configured callback
@@ -300,7 +469,11 @@ slots:
               // store settings from blockly interface to be able to change them on-the-fly
               cache.private.put('complexScreenSaver', screensaver2);
               cache.private.put('enterScriptName', screensaverStartupScript);
-              cache.private.put('leaveScriptName', startupScript);
+              cache.private.put('leaveScriptName', startupScripts[0]);
+              cache.private.put('swipeLeftScriptName', startupScripts[1]);
+              cache.private.put('swipeRightScriptName', startupScripts[2]);
+              cache.private.put('swipeUpScriptName', startupScripts[3]);
+              cache.private.put('swipeDownScriptName', startupScripts[4]);
               cache.private.put('startupRedo', startupRedo);
               // done
               cache.private.put('initialized', 1);
@@ -378,6 +551,26 @@ slots:
                     cache.private.put('enterScriptName', callbackParam[1]);
                     return;
                   }
+                  case "swipeLeftScriptName":
+                  {
+                    cache.private.put('swipeLeftScriptName', callbackParam[1]);
+                    return;
+                  }
+                  case "swipeRightScriptName":
+                  {
+                    cache.private.put('swipeRightScriptName', callbackParam[1]);
+                    return;
+                  }
+                  case "swipeUpScriptName":
+                  {
+                    cache.private.put('swipeUpScriptName', callbackParam[1]);
+                    return;
+                  }
+                  case "swipeDownScriptName":
+                  {
+                    cache.private.put('swipeDownScriptName', callbackParam[1]);
+                    return;
+                  }
                   case "leaveScriptName":
                   {
                     cache.private.put('leaveScriptName', callbackParam[1]);
@@ -430,6 +623,20 @@ slots:
                   if (cache.private.get('startupRedo') == "TRUE")
                     cache.private.remove('currentCard');
                 }
+                let targetScript = 0; let updateCacheLink = 0;
+                switch(contextValues[3]) {
+                  case "bExit":
+                    targetScript = cache.private.get('leaveScriptName'); updateCacheLink = 1; break;
+                  case "swipeLeft":
+                    targetScript = cache.private.get('swipeLeftScriptName'); break;
+                  case "swipeRight":
+                    targetScript = cache.private.get('swipeRightScriptName'); break;
+                  case "swipeUp":
+                    targetScript = cache.private.get('swipeUpScriptName'); break;
+                  case "swipeDown":
+                    targetScript = cache.private.get('swipeDownScriptName'); break;
+                  default:
+                }
                 switch(contextValues[3]) {
                   case "bExit":
                   case "swipeLeft":
@@ -443,7 +650,7 @@ slots:
                       );
                     else
                       {{absorb_it_nspanel_callback_startScript}}(
-                        cache.private.get('leaveScriptName'), { "target": target }, 1
+                        targetScript, { "target": target }, updateCacheLink
                       );
                   break;
                   default:
