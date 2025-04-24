@@ -191,9 +191,9 @@ slots:
             name: SWIPE_DOWN_SCRIPT_ID
             type: input_value
         colour: 90
-        helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback.md
+        helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback_complex.md
         message0: >
-          NSPANEL CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
+          NSPANEL COMPLEX CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
         message1: >
           INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
