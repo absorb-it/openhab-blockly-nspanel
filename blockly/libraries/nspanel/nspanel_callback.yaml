@@ -479,12 +479,13 @@ slots:
               cache.private.put('initialized', 1);
             };
 
+            var itemState = event.receivedState ?? event.itemState;
             try {
-              contextValues = (JSON.parse(event.itemState))["CustomRecv"].split(',');
+              contextValues = (JSON.parse(itemState))["CustomRecv"].split(',');
             } catch {
-              if (event.itemState) {
+              if (itemState) {
                 // if callback received non-JSON string check for local requests
-                let callbackParam = event.itemState.toString().split('?');
+                let callbackParam = itemState.toString().split('?');
                 switch (callbackParam[0]) {
                   case "refresh":
                   case "ON":    // triggered by Hardware Button press (if rule configured to fire)
