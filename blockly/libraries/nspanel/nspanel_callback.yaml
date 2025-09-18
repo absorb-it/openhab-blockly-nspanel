@@ -478,7 +478,7 @@ slots:
               // done
               cache.private.put('initialized', 1);
             };
-
+            var contextValues;
             var itemState = event.receivedState ?? event.itemState;
             try {
               contextValues = (JSON.parse(itemState))["CustomRecv"].split(',');
