@@ -2039,7 +2039,7 @@ slots:
           function {{name}}(title, navigation, text_1st, color_1st, text_2nd, color_2nd,
                             volume, playPauseIcon, onOffBtn_enabled, onOffBtnColor, shuffleIcon_enabled,
                             shuffleIcon, entities, actionBack, actionPause, actionNext, actionVolume, actionOnOff, actionShuffle, refresh) {
-            // starting script '{request=pageUpdate, item=null, ruleUID=nspanel1_cardMedia, trigger=button, previousPage=nspanel1_cardGrid, newState=null}'
+            // starting script '{request=pageUpdate, item=null, ruleUID=nspanel1_cardMedia, trigger=button, previousPage=nspanel1_cardGrid, newState=""}'
             if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             {{absorb_it_nspanel_cards_killRefreshTimer}}();
             if (ctx.request == "pageUpdate" && ctx.item === null) {

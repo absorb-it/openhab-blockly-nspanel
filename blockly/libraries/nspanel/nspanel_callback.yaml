@@ -685,7 +685,7 @@ slots:
                         "request": cache.private.exists('DetailPage')?"pageOpenDetail":"pageUpdate",
                         "item": item,
                         "trigger": contextValues[3],
-                        "newState": contextValues[4],
+                        "newState": contextValues[4] || "", // newState must be a String
                         "previousPage": cache.private.get('lastPage'),
                         "target": target
                       },

@@ -1106,12 +1106,12 @@ slots:
           function {{name}}(icon, iconColor, displayName, getState, setState, colorWheel, colorWheelLabel, colorWheelBrightness, setColorWheel, colorTemp, colorTempLabel, getColorTemp, setColorTemp, brightness, brightnessLabel, getBrightness, setBrightness) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
-              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "OnOff") {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] && ctx.trigger == "OnOff") {
                 {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
                 return { "refreshPage": "1" };
               }
               if (ctx.request == 'pageOpenDetail') {
-                if (ctx["newState"] !== undefined) {
+                if (ctx["newState"]) {
                 switch (ctx.trigger) {
                     case "OnOff":
                       {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
@@ -1154,13 +1154,13 @@ slots:
                             lowerRightEnable, lowerRightIcon, lowerGetter, lowerSetter) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
-              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined &&
+              if (ctx.request == 'pageUpdate' && ctx["newState"] &&
                 (ctx.trigger == "up" || ctx.trigger == "stop" || ctx.trigger == "down")) {
                 {{absorb_it_nspanel_entities_safeEval}}(upperSetter, ctx.trigger.toUpperCase());
                 return { "refreshPage": "1" };
               }
               if (ctx.request == 'pageOpenDetail') {
-                if (ctx["newState"] !== undefined) {
+                if (ctx["newState"]) {
                   switch (ctx.trigger) {
                     case "tiltOpen":
                       {{absorb_it_nspanel_entities_safeEval}}(lowerSetter, "OPEN");
@@ -1210,12 +1210,12 @@ slots:
           function {{name}}(icon, iconColor, displayName, popupIconColor, getOptions, getSelection, setOption, triggerChange) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
-              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "button") {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] && ctx.trigger == "button") {
                 {{absorb_it_nspanel_entities_safeEval}}(triggerChange);
                 return { "refreshPage": "1" };
               }
               if (ctx.request == 'pageOpenDetail') {
-                if (ctx["newState"] !== undefined) {
+                if (ctx["newState"]) {
                   {{absorb_it_nspanel_entities_safeEval}}(setOption, parseInt(ctx.newState) + 1, getOptions.split('?')[ctx.newState]);
                   return { "refreshPage": "1" };
                 }
@@ -1236,12 +1236,12 @@ slots:
           function {{name}}(icon, iconColor, displayName, getter, setter, popupIconColor, label, speed, speedMax, setSpeed, modes, selectedMode, setSelectedMode) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
-              if (ctx.request == 'pageUpdate' && ctx["newState"] !== undefined && ctx.trigger == "OnOff") {
+              if (ctx.request == 'pageUpdate' && ctx["newState"] && ctx.trigger == "OnOff") {
                 {{absorb_it_nspanel_entities_safeEval}}(setter, ctx.newState);
                 return { "refreshPage": "1" };
               }
               if (ctx.request == 'pageOpenDetail') {
-                if (ctx["newState"] !== undefined) {
+                if (ctx["newState"]) {
                   switch (ctx.trigger) {
                     case "OnOff":
                       {{absorb_it_nspanel_entities_safeEval}}(setter, ctx.newState);
@@ -1272,7 +1272,7 @@ slots:
           function {{name}}(icon, iconColor, displayName, displayValue, popupIconColor, minRemaining, secRemaining, editable, leftBtn, leftBtnAction, midBtn, midBtnAction, rightBtn, rightBtnAction) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx["newState"] !== undefined) {
+              if (ctx["newState"]) {
                 switch (ctx.trigger) {
                   case "timer-left":
                     {{absorb_it_nspanel_entities_safeEval}}(leftBtnAction, ctx.newState);
