@@ -456,6 +456,7 @@ slots:
       config:
         code: >-
           function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, startupScripts, startupAction, startupRedo) {
+            console.debug("running absorb_it_nspanel_callback with openhab-js " + utils.OPENHAB_JS_VERSION);
             // on first run only...
             if (!cache.private.exists('initialized')) {
               // allow refreshing of dimming and timeout when saving configured callback
