@@ -450,6 +450,7 @@ slots:
 
             context["timerName"] = {{getTimerName}}();
             try {
+                (scriptName && scriptName != "Script Id") && console.debug("start rule with id '" + scriptName + "'");
                 rules.runRule(scriptName, context);
                 cache.private.put('lastPage', scriptName); // any last page
                 if (updateCacheLink)
@@ -735,15 +736,19 @@ slots:
                     if (targetScript && targetScript != "Script Id") {
                       cache.private.remove('DetailPage');
                       if (cache.private.get('currentCard')) {
+                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard'));
                         {{absorb_it_nspanel_callback_startScript}}(
                           cache.private.get('currentCard'), { "target": target }, 0
                         );
+                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard') + " done.");
                       } else {
+                        console.debug("screensaver: " + eventName + " -> " + targetScript);
                         {{absorb_it_nspanel_callback_startScript}}(
                           targetScript, { "target": target }, 1
                         );
                       }
                     } else {
+                      console.debug("screensaver: " + eventName + " ignored, no script configured.");
                     }
                 }
                 break;
