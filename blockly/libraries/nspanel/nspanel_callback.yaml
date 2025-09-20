@@ -51,7 +51,7 @@ slots:
           - type: input_dummy
           - name: STARTUP_ACTION
             type: input_statement
-          - name: STARTUP_REDO
+          - name: SCRIPT_REDO
             type: field_checkbox
           - type: input_dummy
           - type: input_dummy
@@ -75,7 +75,8 @@ slots:
             config:
               template: >-
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
-                {{input:BACKGROUND_COLOR}}, "FALSE", '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, [ {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}} ], `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
+                {{input:BACKGROUND_COLOR}}, "FALSE", '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, [ {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}} ], [ '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}' ],
+                `{{statements:STARTUP_ACTION}}`);
         toolbox:
           - component: PresetInput
             config:
@@ -171,39 +172,71 @@ slots:
           - check: String
             name: STARTUP_SCRIPT_ID
             type: input_value
-          - type: input_dummy
           - name: STARTUP_ACTION
             type: input_statement
-          - name: STARTUP_REDO
+          - type: input_dummy
+        args3:
+          - align: CENTER
+            type: input_dummy
+          - align: CENTER
+            type: input_dummy
+          - align: CENTER
+            type: input_dummy
+          - name: TOUCH_REDO
             type: field_checkbox
-          - type: input_dummy
-          - type: input_dummy
-          - check: String
+          - align: RIGHT
+            check: String
+            name: TOUCH_SCRIPT_ID
+            type: input_value
+          - name: SWIPE_LEFT_REDO
+            type: field_checkbox
+          - align: RIGHT
+            check: String
             name: SWIPE_LEFT_SCRIPT_ID
             type: input_value
-          - check: String
+          - name: SWIPE_RIGHT_REDO
+            type: field_checkbox
+          - align: RIGHT
+            check: String
             name: SWIPE_RIGHT_SCRIPT_ID
             type: input_value
-          - check: String
+          - name: SWIPE_UP_REDO
+            type: field_checkbox
+          - align: RIGHT
+            check: String
             name: SWIPE_UP_SCRIPT_ID
             type: input_value
-          - check: String
+          - name: SWIPE_DOWN_REDO
+            type: field_checkbox
+          - align: RIGHT
+            check: String
             name: SWIPE_DOWN_SCRIPT_ID
             type: input_value
+          - type: input_dummy
         colour: 90
         helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback_complex.md
         message0: >
-          NSPANEL COMPLEX CALLBACK %1 Display on %2 Initial Display Brightness (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
+          NSPANEL COMPLEX CALLBACK %1 Display on %2 Initial Display Brightness
+          (0 - 100) %3 Background Color %4 Use Experimental Sliders %5 %6 %7
         message1: >
-          INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
+          INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness
+          (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after
+          Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7
+          %8
         message2: >
           STARTUP %1
-          Swipe Left Call Script (enter Id) %8
-          Swipe Right Call Script (enter Id) %9
-          Swipe Up Call Script (enter Id) %10
-          Swipe Down Call Script (enter Id) %11
-          Touch Call Script (enter Id) %2 %5 run Touch Script always when leaving Screensaver %6 %7
+          Startup Script (enter Id) %2
           Run Startup Statement %3 %4
+        message3: >
+          ACTION %1
+          box off: prefer last card if known%2
+          box on: forget last card & start script%3
+          Touch %4 Script (enter Id) %5
+          Swipe Left %6 Script (enter Id) %7
+          Swipe Right %8 Script (enter Id) %9
+          Swipe Up %10 Script (enter Id) %11
+          Swipe Down %12 Script (enter Id) %13
+          %14
         nextStatement: ""
         previousStatement: ""
         tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts. Some settings like screensaver brightness and timing are only used during startup and can only be modified trough other helpers."
@@ -215,7 +248,9 @@ slots:
               template: >-
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
                 {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}},
-                [ {{input:STARTUP_SCRIPT_ID}}, {{input:SWIPE_LEFT_SCRIPT_ID}}, {{input:SWIPE_RIGHT_SCRIPT_ID}}, {{input:SWIPE_UP_SCRIPT_ID}}, {{input:SWIPE_DOWN_SCRIPT_ID}} ], `{{statements:STARTUP_ACTION}}`, '{{field:STARTUP_REDO}}');
+                [ {{input:STARTUP_SCRIPT_ID}}, {{input:TOUCH_SCRIPT_ID}}, {{input:SWIPE_LEFT_SCRIPT_ID}}, {{input:SWIPE_RIGHT_SCRIPT_ID}}, {{input:SWIPE_UP_SCRIPT_ID}}, {{input:SWIPE_DOWN_SCRIPT_ID}} ],
+                [ '{{field:TOUCH_REDO}}', '{{field:SWIPE_LEFT_REDO}}', '{{field:SWIPE_RIGHT_REDO}}', '{{field:SWIPE_UP_REDO}}', '{{field:SWIPE_DOWN_REDO}}' ],
+                `{{statements:STARTUP_ACTION}}`);
         toolbox:
           - component: PresetInput
             config:
@@ -266,6 +301,14 @@ slots:
               fields:
                 TEXT: Script Id
               name: STARTUP_SCRIPT_ID
+              required: false
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: Script Id
+              name: TOUCH_SCRIPT_ID
               required: false
               shadow: true
               type: text
@@ -455,7 +498,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, startupScripts, startupAction, startupRedo) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptRedos, startupAction) {
             console.debug("running absorb_it_nspanel_callback with openhab-js " + utils.OPENHAB_JS_VERSION);
             // on first run only...
             if (!cache.private.exists('initialized')) {
@@ -474,12 +517,17 @@ slots:
               // store settings from blockly interface to be able to change them on-the-fly
               cache.private.put('complexScreenSaver', screensaver2);
               cache.private.put('enterScriptName', screensaverStartupScript);
-              cache.private.put('leaveScriptName', startupScripts[0]);
-              cache.private.put('swipeLeftScriptName', startupScripts[1]);
-              cache.private.put('swipeRightScriptName', startupScripts[2]);
-              cache.private.put('swipeUpScriptName', startupScripts[3]);
-              cache.private.put('swipeDownScriptName', startupScripts[4]);
-              cache.private.put('startupRedo', startupRedo);
+              cache.private.put('startupScriptName', actionScripts[0]);
+              cache.private.put('touchScriptName', actionScripts[1]);
+              cache.private.put('swipeLeftScriptName', actionScripts[2]);
+              cache.private.put('swipeRightScriptName', actionScripts[3]);
+              cache.private.put('swipeUpScriptName', actionScripts[4]);
+              cache.private.put('swipeDownScriptName', actionScripts[5]);
+              cache.private.put('touchRedo', scriptRedos[0]);
+              cache.private.put('swipeLeftRedo', scriptRedos[1]);
+              cache.private.put('swipeRightRedo', scriptRedos[2]);
+              cache.private.put('swipeUpRedo', scriptRedos[3]);
+              cache.private.put('swipeDownRedo', scriptRedos[4]);
               // done
               cache.private.put('initialized', 1);
             };
@@ -557,33 +605,39 @@ slots:
                     cache.private.put('enterScriptName', callbackParam[1]);
                     return;
                   }
+                  case "touchScriptName":
+                  {
+                    cache.private.put('touchScriptName', callbackParam[1]);
+                    cache.private.put('touchRedo', (callbackParam[2])?"TRUE":"FALSE");
+                    return;
+                  }
                   case "swipeLeftScriptName":
                   {
                     cache.private.put('swipeLeftScriptName', callbackParam[1]);
+                    cache.private.put('swipeLeftRedo', (callbackParam[2])?"TRUE":"FALSE");
                     return;
                   }
                   case "swipeRightScriptName":
                   {
                     cache.private.put('swipeRightScriptName', callbackParam[1]);
+                    cache.private.put('swipeRightRedo', (callbackParam[2])?"TRUE":"FALSE");
                     return;
                   }
                   case "swipeUpScriptName":
                   {
                     cache.private.put('swipeUpScriptName', callbackParam[1]);
+                    cache.private.put('swipeUpRedo', (callbackParam[2])?"TRUE":"FALSE");
                     return;
                   }
                   case "swipeDownScriptName":
                   {
                     cache.private.put('swipeDownScriptName', callbackParam[1]);
+                    cache.private.put('swipeDownRedo', (callbackParam[2])?"TRUE":"FALSE");
                     return;
                   }
-                  case "leaveScriptName":
+                  case "startupScriptName":
                   {
-                    cache.private.put('leaveScriptName', callbackParam[1]);
-                    if (callbackParam[1])
-                      cache.private.put('startupRedo', "TRUE");
-                    else
-                      cache.private.put('startupRedo', "FALSE");
+                    cache.private.put('startupScriptName', callbackParam[1]);
                     return;
                   }
                   default:
@@ -606,7 +660,7 @@ slots:
                   ((experimentalSliders == "TRUE")?'~~1':'~~0')
                 );
                 let success = {{absorb_it_nspanel_callback_startScript}}(
-                  cache.private.get('leaveScriptName'), { "target": target }, 1
+                  cache.private.get('startupScriptName'), { "target": target }, 1
                 );
                 {{absorb_it_nspanel_callback_safeEval}}(startupAction);
                 if (success || startupAction != '')
@@ -626,39 +680,19 @@ slots:
               case "buttonPress2":
                 if (cache.private.get('screensaverActive') == "TRUE") {
                   cache.private.put('screensaverActive', "FALSE");
-                  if (cache.private.get('startupRedo') == "TRUE")
-                    cache.private.remove('currentCard');
                 }
-                let targetScript = 0; let updateCacheLink = 0;
+                let eventName = null;
                 switch(contextValues[3]) {
                   case "bExit":
-                    targetScript = cache.private.get('leaveScriptName'); updateCacheLink = 1; break;
+                    eventName = "touch"; break;
                   case "swipeLeft":
-                    targetScript = cache.private.get('swipeLeftScriptName'); break;
+                    eventName = "swipeLeft"; break;
                   case "swipeRight":
-                    targetScript = cache.private.get('swipeRightScriptName'); break;
+                    eventName = "swipeRight"; break;
                   case "swipeUp":
-                    targetScript = cache.private.get('swipeUpScriptName'); break;
+                    eventName = "swipeUp"; break;
                   case "swipeDown":
-                    targetScript = cache.private.get('swipeDownScriptName'); break;
-                  default:
-                }
-                switch(contextValues[3]) {
-                  case "bExit":
-                  case "swipeLeft":
-                  case "swipeRight":
-                  case "swipeUp":
-                  case "swipeDown":
-                    cache.private.remove('DetailPage');
-                    if (cache.private.get('currentCard'))
-                      {{absorb_it_nspanel_callback_startScript}}(
-                        cache.private.get('currentCard'), { "target": target }, 0
-                      );
-                    else
-                      {{absorb_it_nspanel_callback_startScript}}(
-                        targetScript, { "target": target }, updateCacheLink
-                      );
-                  break;
+                    eventName = "swipeDown"; break;
                   default:
                     if (contextValues[2].split('?')[0] !== cache.private.get('lastPage')) {
                       // new page called, probably clicked on navigation buttons
@@ -692,8 +726,26 @@ slots:
                       },
                       (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
                     );
-                  }
-                  break;
+                }
+                if (eventName) {
+                    let targetScript = cache.private.get(eventName + "ScriptName");
+                    if (cache.private.get(eventName + "Redo") == "TRUE")
+                      cache.private.remove('currentCard');
+                    if (targetScript && targetScript != "Script Id") {
+                      cache.private.remove('DetailPage');
+                      if (cache.private.get('currentCard')) {
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          cache.private.get('currentCard'), { "target": target }, 0
+                        );
+                      } else {
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          targetScript, { "target": target }, 1
+                        );
+                      }
+                    } else {
+                    }
+                }
+                break;
               case "pageOpenDetail":
                 let item = contextValues[3].split('?')[1];
                 cache.private.put('DetailPage', item?item:0);
