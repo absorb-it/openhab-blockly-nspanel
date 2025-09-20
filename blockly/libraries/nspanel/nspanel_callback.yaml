@@ -662,6 +662,7 @@ slots:
                 let success = {{absorb_it_nspanel_callback_startScript}}(
                   cache.private.get('startupScriptName'), { "target": target }, 1
                 );
+                cache.private.remove('currentCard');
                 {{absorb_it_nspanel_callback_safeEval}}(startupAction);
                 if (success || startupAction != '')
                   break;
