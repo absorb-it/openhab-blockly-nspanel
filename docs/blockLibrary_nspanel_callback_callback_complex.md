@@ -1,12 +1,12 @@
-# Callback
+# Complex Callback
 
-The Callback is the central part which will react on every message from the display and forward the information to the right sub-routine. It should normally be triggered by some rule, have a look at the [Installation information](../README.md) or the [related rule details](openhab_rules_callback.md).
+The Callback is the central part which will react on every message from the display and forward the information to the right sub-routine. It should normally be triggered by some rule, have a look at the [Installation information](../README.md) or the [related rule details](openhab_rules_callback.md). The Complex Callback gives you access to all the options which are hidden in the [much simpler standard version](blockLibrary_nspanel_callback_callback.md) - behind the scenes the same script is used for both versions.
 
 Also have a look the [API for direct updates](blockLibrary_nspanel_callback_API.md) of the callback settings.
 
 ## Configuration
 
-[<img src="img/blockLibrary_nspanel_callback_callback.png" align="right" width="300">](img/blockLibrary_nspanel_callback_callback.png)
+[<img title="" src="img/blockLibrary_nspanel_callback_callback_complex.png" alt="" align="right" width="300">](img/blockLibrary_nspanel_callback_callback_complex.png)
 
 - The *NSPanel Item* which is used to control the panel with MQTT.
 - The Brightness for the activated display (for instance after some touch event) as numerical value between 0 and 100.
@@ -22,8 +22,12 @@ The *Callback* will configure the screensaver after receiving the display startu
 
 You might also like to display some initial card (page) after starting.
 
-- Add the ID of some script configuring your *Card*. You might decide if this *Card* is shown every time you are leaving your screensaver (like a landing page for naviation) or if you like to reach the last *Card* shown instead.
+- Add the ID of some script running once displaying some Welcome- *Card*. 
 - Run any statement you like. This statement will only be run once during initial startup.
+
+Once the Screensaver is shown, you surely like also to leave it. Now you can add some fine-grained configuration which actions should happen. Be aware that the swipe actions are sometimes hard to trigger - you might always end up with some touch event instead if the desired swipe event.
+
+- Add the ID of some script running when touched or swiped. You can activate the checkbox to use the script as some Landing Page.
 
 ## Context information
 

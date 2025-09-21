@@ -21,6 +21,8 @@
 - [setTimeout](blockLibrary_nspanel_helpers_setTimeout.md)
 - [setBrightness](blockLibrary_nspanel_helpers_setBrightness.md)
 - [setScreensaverScripts](blockLibrary_nspanel_helpers_setScreenSaverScripts.md)
+- [setScreensaverScripts(Complex)](blockLibrary_nspanel_helpers_setScreenSaverScriptsComplex.md)
+- [setScreensaverScripts(Complex LandingPage Mode)](blockLibrary_nspanel_helpers_setScreenSaverScriptsComplex_LandingPage.md)
 - [Example returnValue](blockLibrary_nspanel_helpers_returnValue.md)
 - [Example returnMode](blockLibrary_nspanel_helpers_returnMode.md)
 - [Example Getter Statement](blockLibrary_nspanel_helpers_exampleGetter.md)
@@ -46,6 +48,7 @@
 [<img src="img/blockLibrary_nspanel_callback_timeUpdate.png" align="right" width="300">](img/blockLibrary_nspanel_callback_timeUpdate.png)
 
 - [Callback](blockLibrary_nspanel_callback_callback.md)
+- [Complex Callback](blockLibrary_nspanel_callback_callback_complex.md)
 - [Time Update](blockLibrary_nspanel_callback_timeUpdate.md)<br clear="right"/>
 
 ### Screensaver/Notification Library
@@ -96,7 +99,7 @@
 
 ## Remote Control Options
 
-See [Callback](blockLibrary_nspanel_callback_callback.md) for further information.
+- [API for direct Callback updates](blockLibrary_nspanel_callback_API.md)
 
 ---
 

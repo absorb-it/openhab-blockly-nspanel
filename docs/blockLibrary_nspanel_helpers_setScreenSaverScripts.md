@@ -10,7 +10,7 @@ Using this helper you always have to device if you like to use the normal or the
 
 Additionally you can re-configure the scripts, which are called for entering or leaving the ScreenSaver. If you set any script for leaving the ScreenSaver, this script becomes some 'landing page'. If you supply some empty string for this script, the option of the landing script gets removed and you will always end on the last called page when leaving the Screensaver.
 
-All this is done via indirect calls trough your CallBack ([complexScreenSaver](blockLibrary_nspanel_callback_callback.md#complexscreensaver), [enterScriptName](blockLibrary_nspanel_callback_callback.md#enterscriptname), [leaveScriptName](blockLibrary_nspanel_callback_callback.md#leavescriptname)). Your CallBack has to be configured and working.<br clear="right"/>
+All this is done via indirect calls trough your [CallBack API](blockLibrary_nspanel_callback_API.md) - your CallBack has to be configured and working.<br clear="right"/>
 
 ---
 

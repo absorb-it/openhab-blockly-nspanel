@@ -66,7 +66,7 @@ Now add some *Channel* and enter the receiving and sending MQTT topics for you N
 
 [<img src="docs/img/overview.png" align="right" width="300">](docs/img/overview.png)
 
-Before starting the configuration of these libraries you need to get a little bit familiar to the overall concept of this add-on. In the image you can see the display itself (hardware), the *MQTT-Broker* and the *Lovelace UI Item* as you configured them already. Now some *Rule* has to be added, which triggers the [*Callback*](docs/blockLibrary_nspanel_callback_callback.md) on any change of the Item state (any received relevant MQTT message or any direct change).
+Before starting the configuration of these libraries you need to get a little bit familiar to the overall concept of this add-on. In the image you can see the display itself (hardware), the *MQTT-Broker* and the *Lovelace UI Item* as you configured them already. Now some *Rule* has to be added, which triggers the [*Callback*](docs/blockLibrary_nspanel_callback_callback.md) on any update of the Item state (any received relevant MQTT message or any direct change).
 
 This *Callback* will forward your message to the last or any new *Card* you requested by parsing this message. These *Cards* are just *Scripts* you created, which can have some forward and backwards navigation items on top. These items will contain references to other *Scripts* for navigation between your *Cards*. This way you can configure any navigation you like between all of your *Cards*.
 
