@@ -841,11 +841,11 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(complexScreenSaver, newEnterScript, enterScriptName, newLeaveScript, leaveScriptName) {
+          function {{name}}(complexScreenSaver, newScreensaverScript, screensaverScriptName, newLeaveScript, leaveScriptName) {
             if (!{{absorb_it_nspanel_helpers_startupCheck}}(arguments.callee.name)) return;
             items.getItem(ctx.target).postUpdate("complexScreenSaver?" + complexScreenSaver);
-            if (newEnterScript == "TRUE")
-              items.getItem(ctx.target).postUpdate("enterScriptName?" + enterScriptName);
+            if (newScreensaverScript == "TRUE")
+              items.getItem(ctx.target).postUpdate("screensaverScriptName?" + screensaverScriptName);
             if (newLeaveScript == "TRUE")
               items.getItem(ctx.target).postUpdate("leaveScriptName?" + leaveScriptName);
           }
