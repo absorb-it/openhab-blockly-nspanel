@@ -521,7 +521,7 @@ slots:
               );
               // store settings from blockly interface to be able to change them on-the-fly
               cache.private.put('complexScreenSaver', screensaver2);
-              cache.private.put('enterScriptName', screensaverStartupScript);
+              cache.private.put('screensaverScriptName', screensaverStartupScript);
               cache.private.put('startupScriptName', actionScripts[0]);
               cache.private.put('touchScriptName', actionScripts[1]);
               cache.private.put('swipeLeftScriptName', actionScripts[2]);
@@ -601,50 +601,21 @@ slots:
                       );
                     return;
                   case "complexScreenSaver":
-                  {
                     cache.private.put('complexScreenSaver', callbackParam[1]);
                     return;
-                    }
-                  case "enterScriptName":
-                  {
-                    cache.private.put('enterScriptName', callbackParam[1]);
-                    return;
-                  }
                   case "touchScriptName":
-                  {
-                    cache.private.put('touchScriptName', callbackParam[1]);
-                    cache.private.put('touchRedo', (callbackParam[2])?"TRUE":"FALSE");
-                    return;
-                  }
                   case "swipeLeftScriptName":
-                  {
-                    cache.private.put('swipeLeftScriptName', callbackParam[1]);
-                    cache.private.put('swipeLeftRedo', (callbackParam[2])?"TRUE":"FALSE");
-                    return;
-                  }
                   case "swipeRightScriptName":
-                  {
-                    cache.private.put('swipeRightScriptName', callbackParam[1]);
-                    cache.private.put('swipeRightRedo', (callbackParam[2])?"TRUE":"FALSE");
-                    return;
-                  }
                   case "swipeUpScriptName":
-                  {
-                    cache.private.put('swipeUpScriptName', callbackParam[1]);
-                    cache.private.put('swipeUpRedo', (callbackParam[2])?"TRUE":"FALSE");
-                    return;
-                  }
                   case "swipeDownScriptName":
-                  {
-                    cache.private.put('swipeDownScriptName', callbackParam[1]);
-                    cache.private.put('swipeDownRedo', (callbackParam[2])?"TRUE":"FALSE");
-                    return;
-                  }
+                    if (callbackParam[2]) {
+                      let eventName = callbackParam[0].substring(0, callbackParam[0].search("ScriptName"));
+                      cache.private.put(eventName + 'LandingPage', callbackParam[2]);
+                    }
+                  case "screensaverScriptName":
                   case "startupScriptName":
-                  {
-                    cache.private.put('startupScriptName', callbackParam[1]);
+                    cache.private.put(callbackParam[0], callbackParam[1]);
                     return;
-                  }
                   default:
                     return;
                 }
@@ -679,7 +650,7 @@ slots:
                 else
                   items.getItem(target).sendCommand("pageType~screensaver");
                 {{absorb_it_nspanel_callback_startScript}}(
-                  cache.private.get('enterScriptName'), { "target": target }, 0
+                  cache.private.get('screensaverScriptName'), { "target": target }, 0
                 );
                 cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
                 break;
@@ -687,18 +658,35 @@ slots:
                 if (cache.private.get('screensaverActive') == "TRUE") {
                   cache.private.put('screensaverActive', "FALSE");
                 }
-                let eventName = null;
+                if (contextValues[3] == "bExit")
+                  contextValues[3] = "touch";
                 switch(contextValues[3]) {
-                  case "bExit":
-                    eventName = "touch"; break;
+                  case "touch":
                   case "swipeLeft":
-                    eventName = "swipeLeft"; break;
                   case "swipeRight":
-                    eventName = "swipeRight"; break;
                   case "swipeUp":
-                    eventName = "swipeUp"; break;
                   case "swipeDown":
-                    eventName = "swipeDown"; break;
+                    let eventName = contextValues[3];
+                    let targetScript = cache.private.get(eventName + "ScriptName");
+                    if (cache.private.get(eventName + "LandingPage") == "TRUE")
+                      cache.private.remove('currentCard');
+                    if (targetScript && targetScript != "Script Id") {
+                      cache.private.remove('DetailPage');
+                      if (cache.private.get('currentCard')) {
+                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard'));
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          cache.private.get('currentCard'), { "target": target }, 0
+                        );
+                      } else {
+                        console.debug("screensaver: " + eventName + " -> " + targetScript);
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          targetScript, { "target": target }, 1
+                        );
+                      }
+                    } else {
+                      console.debug("screensaver: " + eventName + " ignored, no script configured.");
+                    }
+                    break;
                   default:
                     if (contextValues[2].split('?')[0] !== cache.private.get('lastPage')) {
                       // new page called, probably clicked on navigation buttons
@@ -732,28 +720,6 @@ slots:
                       },
                       (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
                     );
-                }
-                if (eventName) {
-                    let targetScript = cache.private.get(eventName + "ScriptName");
-                    if (cache.private.get(eventName + "Redo") == "TRUE")
-                      cache.private.remove('currentCard');
-                    if (targetScript && targetScript != "Script Id") {
-                      cache.private.remove('DetailPage');
-                      if (cache.private.get('currentCard')) {
-                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard'));
-                        {{absorb_it_nspanel_callback_startScript}}(
-                          cache.private.get('currentCard'), { "target": target }, 0
-                        );
-                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard') + " done.");
-                      } else {
-                        console.debug("screensaver: " + eventName + " -> " + targetScript);
-                        {{absorb_it_nspanel_callback_startScript}}(
-                          targetScript, { "target": target }, 1
-                        );
-                      }
-                    } else {
-                      console.debug("screensaver: " + eventName + " ignored, no script configured.");
-                    }
                 }
                 break;
               case "pageOpenDetail":
