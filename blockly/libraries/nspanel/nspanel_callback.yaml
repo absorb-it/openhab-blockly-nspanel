@@ -499,8 +499,8 @@ slots:
           function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptLandingPage, startupAction) {
             switch (utils.OPENHAB_JS_VERSION) {
                   case "5.13.0":
-                    console.error("NSPanel Lovelace UI Callback is not compatible with your JavaScript Scripting version (openhab-js v" + utils.OPENHAB_JS_VERSION) + ")";
-                    console.error("please upgrade openHAB or your JavaScript Scripting (openhab-js) addon";
+                    console.error("NSPanel Lovelace UI Callback is not compatible with your JavaScript Scripting version (openhab-js v" + utils.OPENHAB_JS_VERSION + ")");
+                    console.error("please upgrade openHAB or your JavaScript Scripting (openhab-js) addon");
                     return;
                   default:
                     console.debug("running absorb_it_nspanel_callback with openhab-js " + utils.OPENHAB_JS_VERSION);
