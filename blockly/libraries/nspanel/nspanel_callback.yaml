@@ -51,7 +51,7 @@ slots:
           - type: input_dummy
           - name: STARTUP_ACTION
             type: input_statement
-          - name: SCRIPT_REDO
+          - name: SCRIPT_LANDINGPAGE
             type: field_checkbox
           - type: input_dummy
           - type: input_dummy
@@ -63,7 +63,7 @@ slots:
           INITIAL SCREENSAVER SETTINGS %1 Timeout (0 = disabled) %2 Brightness (0 - 100) %3 Use Complex Screensaver %4 %5 Call Script after Screensaver shown %6 (i.e. for WeatherUpdate, enter Id) %7 %8
         message2: >
           STARTUP %1
-          Show Page / Call Script (enter Id) %2 %5 run this Script always when leaving Screensaver %6 %7
+          Show Page / Call Script (enter Id) %2 %5 use LandingPage Mode %6 %7
           Run Startup Statement %3 %4
         nextStatement: ""
         previousStatement: ""
@@ -75,7 +75,7 @@ slots:
             config:
               template: >-
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
-                {{input:BACKGROUND_COLOR}}, "FALSE", '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, [ {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}} ], [ '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}', '{{field:SCRIPT_REDO}}' ],
+                {{input:BACKGROUND_COLOR}}, "FALSE", '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, [ {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}} ], [ '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}' ],
                 `{{statements:STARTUP_ACTION}}`);
         toolbox:
           - component: PresetInput
@@ -180,33 +180,31 @@ slots:
             type: input_dummy
           - align: CENTER
             type: input_dummy
-          - align: CENTER
-            type: input_dummy
-          - name: TOUCH_REDO
+          - name: TOUCH_LANDINGPAGE
             type: field_checkbox
           - align: RIGHT
             check: String
             name: TOUCH_SCRIPT_ID
             type: input_value
-          - name: SWIPE_LEFT_REDO
+          - name: SWIPE_LEFT_LANDINGPAGE
             type: field_checkbox
           - align: RIGHT
             check: String
             name: SWIPE_LEFT_SCRIPT_ID
             type: input_value
-          - name: SWIPE_RIGHT_REDO
+          - name: SWIPE_RIGHT_LANDINGPAGE
             type: field_checkbox
           - align: RIGHT
             check: String
             name: SWIPE_RIGHT_SCRIPT_ID
             type: input_value
-          - name: SWIPE_UP_REDO
+          - name: SWIPE_UP_LANDINGPAGE
             type: field_checkbox
           - align: RIGHT
             check: String
             name: SWIPE_UP_SCRIPT_ID
             type: input_value
-          - name: SWIPE_DOWN_REDO
+          - name: SWIPE_DOWN_LANDINGPAGE
             type: field_checkbox
           - align: RIGHT
             check: String
@@ -229,14 +227,13 @@ slots:
           Run Startup Statement %3 %4
         message3: >
           ACTION %1
-          box off: prefer last card if known%2
-          box on: forget last card & start script%3
-          Touch %4 Script (enter Id) %5
-          Swipe Left %6 Script (enter Id) %7
-          Swipe Right %8 Script (enter Id) %9
-          Swipe Up %10 Script (enter Id) %11
-          Swipe Down %12 Script (enter Id) %13
-          %14
+          acitvate box for LandingPage Mode%2
+          Touch %3 Script (enter Id) %4
+          Swipe Left %5 Script (enter Id) %6
+          Swipe Right %7 Script (enter Id) %8
+          Swipe Up %9 Script (enter Id) %10
+          Swipe Down %11 Script (enter Id) %12
+          %13
         nextStatement: ""
         previousStatement: ""
         tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts. Some settings like screensaver brightness and timing are only used during startup and can only be modified trough other helpers."
@@ -249,7 +246,7 @@ slots:
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
                 {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}},
                 [ {{input:STARTUP_SCRIPT_ID}}, {{input:TOUCH_SCRIPT_ID}}, {{input:SWIPE_LEFT_SCRIPT_ID}}, {{input:SWIPE_RIGHT_SCRIPT_ID}}, {{input:SWIPE_UP_SCRIPT_ID}}, {{input:SWIPE_DOWN_SCRIPT_ID}} ],
-                [ '{{field:TOUCH_REDO}}', '{{field:SWIPE_LEFT_REDO}}', '{{field:SWIPE_RIGHT_REDO}}', '{{field:SWIPE_UP_REDO}}', '{{field:SWIPE_DOWN_REDO}}' ],
+                [ '{{field:TOUCH_LANDINGPAGE}}', '{{field:SWIPE_LEFT_LANDINGPAGE}}', '{{field:SWIPE_RIGHT_LANDINGPAGE}}', '{{field:SWIPE_UP_LANDINGPAGE}}', '{{field:SWIPE_DOWN_LANDINGPAGE}}' ],
                 `{{statements:STARTUP_ACTION}}`);
         toolbox:
           - component: PresetInput
@@ -499,7 +496,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptRedos, startupAction) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptLandingPage, startupAction) {
             switch (utils.OPENHAB_JS_VERSION) {
                   case "5.13.0":
                     console.error("NSPanel Lovelace UI Callback is not compatible with your JavaScript Scripting version (openhab-js v" + utils.OPENHAB_JS_VERSION) + ")";
@@ -531,11 +528,11 @@ slots:
               cache.private.put('swipeRightScriptName', actionScripts[3]);
               cache.private.put('swipeUpScriptName', actionScripts[4]);
               cache.private.put('swipeDownScriptName', actionScripts[5]);
-              cache.private.put('touchRedo', scriptRedos[0]);
-              cache.private.put('swipeLeftRedo', scriptRedos[1]);
-              cache.private.put('swipeRightRedo', scriptRedos[2]);
-              cache.private.put('swipeUpRedo', scriptRedos[3]);
-              cache.private.put('swipeDownRedo', scriptRedos[4]);
+              cache.private.put('touchLandingPage', scriptLandingPage[0]);
+              cache.private.put('swipeLeftLandingPage', scriptLandingPage[1]);
+              cache.private.put('swipeRightLandingPage', scriptLandingPage[2]);
+              cache.private.put('swipeUpLandingPage', scriptLandingPage[3]);
+              cache.private.put('swipeDownLandingPage', scriptLandingPage[4]);
               // done
               cache.private.put('initialized', 1);
             };
