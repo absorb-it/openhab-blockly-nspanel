@@ -597,7 +597,7 @@ slots:
             type: input_value
             check: String
         colour: 90
-        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setScreenSaverScriptsComplex.md"
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setScreenSaverScriptsComplex_LandingPage.md"
         inputsInline: false
         message0: >-
           %1 on ScreenSaver LandingPage Script (enter Id) %2
