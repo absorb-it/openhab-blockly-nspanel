@@ -1106,7 +1106,7 @@ slots:
           function {{name}}(icon, iconColor, displayName, getState, setState, colorWheel, colorWheelLabel, colorWheelBrightness, setColorWheel, colorTemp, colorTempLabel, getColorTemp, setColorTemp, brightness, brightnessLabel, getBrightness, setBrightness) {
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos) {
-              if (ctx.request == 'pageUpdate' && ctx["newState"] && ctx.trigger == "OnOff") {
+              if (ctx.request == 'pageUpdate' && (ctx.trigger == "OnOff" || ctx.trigger == "button")) {
                 {{absorb_it_nspanel_entities_safeEval}}(setState, ctx.newState);
                 return { "refreshPage": "1" };
               }
