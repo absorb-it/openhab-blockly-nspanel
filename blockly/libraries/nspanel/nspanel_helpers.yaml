@@ -447,6 +447,35 @@ slots:
     - component: BlockType
       config:
         args0:
+          - name: TIME
+            type: input_value
+            check: Number
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setLandingPageTime.md"
+        inputsInline: false
+        message0: set LandingPage Mode after Timeout %1
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          This updates the ScreenSaver 'enter LandingPage time' via the callback. Be aware that some context information about the NSPanel Item is required.
+        type: absorb_it_nspanel_setLandingPageTime
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_setLandingPageTime}}({{input:TIME}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 60
+              name: TIME
+              required: false
+              shadow: true
+              type: math_number
+    - component: BlockType
+      config:
+        args0:
           - name: ACTIVE_BRIGHTNESS
             type: input_value
             check: Number
@@ -842,6 +871,14 @@ slots:
             items.getItem(ctx.target).postUpdate("newTimeout?" + timeout);
           }
         name: absorb_it_nspanel_setTimeout
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeout) {
+            if (!{{absorb_it_nspanel_helpers_startupCheck}}(arguments.callee.name)) return;
+            items.getItem(ctx.target).postUpdate("newLandingPageTime?" + timeout);
+          }
+        name: absorb_it_nspanel_setLandingPageTime
     - component: UtilityFunction
       config:
         code: >-

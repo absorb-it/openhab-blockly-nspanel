@@ -76,7 +76,7 @@ slots:
               template: >-
                 {{utility:absorb_it_nspanel_callback}}({{input:TARGET}}, {{input:TIMEOUT}}, {{input:SCREENSAVER_BRIGHTNESS}}, {{input:ACTIVE_BRIGHTNESS}},
                 {{input:BACKGROUND_COLOR}}, "FALSE", '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}}, [ {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}}, {{input:STARTUP_SCRIPT_ID}} ], [ '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}', '{{field:SCRIPT_LANDINGPAGE}}' ],
-                `{{statements:STARTUP_ACTION}}`);
+                `{{statements:STARTUP_ACTION}}`, 0);
         toolbox:
           - component: PresetInput
             config:
@@ -210,6 +210,9 @@ slots:
             check: String
             name: SWIPE_DOWN_SCRIPT_ID
             type: input_value
+          - check: Number
+            name: LANDINGPAGETIME
+            type: input_value
           - type: input_dummy
         colour: 90
         helpUrl: https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_callback_callback_complex.md
@@ -227,13 +230,14 @@ slots:
           Run Startup Statement %3 %4
         message3: >
           ACTION %1
-          acitvate box for LandingPage Mode%2
+          activate box for LandingPage Mode%2
           Touch %3 Script (enter Id) %4
           Swipe Left %5 Script (enter Id) %6
           Swipe Right %7 Script (enter Id) %8
           Swipe Up %9 Script (enter Id) %10
           Swipe Down %11 Script (enter Id) %12
-          %13
+          LandingPage Mode after Timeout (0 = disabled) %13
+          %14
         nextStatement: ""
         previousStatement: ""
         tooltip: "Registers and maintains all external and internal requests to some NSPanel Item. Stores basic setings and forwards information like the NSPanel Item as context to called scripts. Some settings like screensaver brightness and timing are only used during startup and can only be modified trough other helpers."
@@ -247,7 +251,7 @@ slots:
                 {{input:BACKGROUND_COLOR}}, '{{field:EXPERIMENTAL_SLIDERS}}', '{{field:SCREENSAVER2}}', {{input:SCREENSAVER_SCRIPT_ID}},
                 [ {{input:STARTUP_SCRIPT_ID}}, {{input:TOUCH_SCRIPT_ID}}, {{input:SWIPE_LEFT_SCRIPT_ID}}, {{input:SWIPE_RIGHT_SCRIPT_ID}}, {{input:SWIPE_UP_SCRIPT_ID}}, {{input:SWIPE_DOWN_SCRIPT_ID}} ],
                 [ '{{field:TOUCH_LANDINGPAGE}}', '{{field:SWIPE_LEFT_LANDINGPAGE}}', '{{field:SWIPE_RIGHT_LANDINGPAGE}}', '{{field:SWIPE_UP_LANDINGPAGE}}', '{{field:SWIPE_DOWN_LANDINGPAGE}}' ],
-                `{{statements:STARTUP_ACTION}}`);
+                `{{statements:STARTUP_ACTION}}`, {{input:LANDINGPAGETIME}});
         toolbox:
           - component: PresetInput
             config:
@@ -341,6 +345,14 @@ slots:
               required: false
               shadow: true
               type: text
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 60
+              name: LANDINGPAGETIME
+              required: false
+              shadow: true
+              type: math_number
     - component: BlockType
       config:
         args0:
@@ -496,7 +508,7 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptLandingPage, startupAction) {
+          function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptLandingPage, startupAction, landingPageTime) {
             switch (utils.OPENHAB_JS_VERSION) {
                   case "5.13.0":
                     console.error("NSPanel Lovelace UI Callback is not compatible with your JavaScript Scripting version (openhab-js v" + utils.OPENHAB_JS_VERSION + ")");
@@ -533,6 +545,7 @@ slots:
               cache.private.put('swipeRightLandingPage', scriptLandingPage[2]);
               cache.private.put('swipeUpLandingPage', scriptLandingPage[3]);
               cache.private.put('swipeDownLandingPage', scriptLandingPage[4]);
+              cache.private.put('landingPageTime', landingPageTime);
               // done
               cache.private.put('initialized', 1);
             };
@@ -588,6 +601,9 @@ slots:
                         "timeout" +
                         {{absorb_it_nspanel_callback_checkParam}}(callbackParam[1], 1)
                       );
+                    return;
+                  case "newLandingPageTime":
+                    cache.private.put('landingPageTime', callbackParam[1]);
                     return;
                   case "newBrightness":
                   case "newBrigthness":   // keep old value, type of parameter was fixed in 0.6
@@ -653,6 +669,7 @@ slots:
                   cache.private.get('screensaverScriptName'), { "target": target }, 0
                 );
                 cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
+                cache.private.put('screensaverTime', Date.now()); // remember time screensaver was activated
                 break;
               case "buttonPress2":
                 if (cache.private.get('screensaverActive') == "TRUE") {
@@ -668,8 +685,13 @@ slots:
                   case "swipeDown":
                     let eventName = contextValues[3];
                     let targetScript = cache.private.get(eventName + "ScriptName");
-                    if (cache.private.get(eventName + "LandingPage") == "TRUE")
-                      cache.private.remove('currentCard');
+                    if (  (!cache.private.exists('DetailPage')) && (
+                      (cache.private.get(eventName + "LandingPage") == "TRUE") ||
+                      (cache.private.get('lastPage') == 'screensaver' && cache.private.get('landingPageTime') &&
+                        Date.now() - cache.private.get('screensaverTime') > cache.private.get('landingPageTime')*1000))) {
+                        console.debug("removing currentCard '" + cache.private.get('currentCard') + "' DetailPage=" + cache.private.get('DetailPage'));
+                        cache.private.remove('currentCard');
+                      }
                     if (targetScript && targetScript != "Script Id") {
                       cache.private.remove('DetailPage');
                       if (cache.private.get('currentCard')) {
