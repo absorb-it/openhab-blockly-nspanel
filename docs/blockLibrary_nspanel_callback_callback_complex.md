@@ -28,6 +28,7 @@ You might also like to display some initial card (page) after starting.
 Once the Screensaver is shown, you surely like also to leave it. Now you can add some fine-grained configuration which actions should happen. Be aware that the swipe actions are sometimes hard to trigger - you might always end up with some touch event instead if the desired swipe event.
 
 - Add the ID of some script running when touched or swiped. You can activate the checkbox to use the script as some Landing Page.
+- Additionally you can add some timeout in seconds after which the last active page before the Screensaver was shown is forgotten and the mentioned scripts will be called as in LandingPage mode.
 
 ## Context information
 

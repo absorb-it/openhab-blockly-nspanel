@@ -19,6 +19,7 @@
 - [loadScreensaver](blockLibrary_nspanel_helpers_loadScreensaver.md)
 - [reloadPage](blockLibrary_nspanel_helpers_reloadPage.md)
 - [setTimeout](blockLibrary_nspanel_helpers_setTimeout.md)
+- [setLandingPageTime](blockLibrary_nspanel_helpers_setLandingPageTime.md)
 - [setBrightness](blockLibrary_nspanel_helpers_setBrightness.md)
 - [setScreensaverScripts](blockLibrary_nspanel_helpers_setScreenSaverScripts.md)
 - [setScreensaverScripts(Complex)](blockLibrary_nspanel_helpers_setScreenSaverScriptsComplex.md)
