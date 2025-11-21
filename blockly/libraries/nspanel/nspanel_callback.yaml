@@ -659,7 +659,7 @@ slots:
                 if (success || startupAction != '')
                   break;
               case "sleepReached":
-                {{absorb_it_nspanel_callback_killRefreshTimer}};
+                {{absorb_it_nspanel_callback_killRefreshTimer}}();
                 cache.private.put('screensaverActive', "TRUE");
                 if (cache.private.get('complexScreenSaver') == "TRUE")
                   items.getItem(target).sendCommand("pageType~screensaver2");
