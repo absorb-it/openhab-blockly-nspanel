@@ -1401,9 +1401,9 @@ slots:
             }
             let resultString;
             if (cache.shared.get(timeVarPrefix + "_running")) {
-              resultString = '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName, 1) + {{absorb_it_nspanel_entities_checkParam}}(1, 1);
+              resultString = '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName, 1);
             } else {
-              resultString = '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon_stopped, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor_stopped), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName_stopped, 1) + {{absorb_it_nspanel_entities_checkParam}}(0, 1);
+              resultString = '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon_stopped, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor_stopped), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName_stopped, 1);
             }
             return {"resultString": resultString};
           }
