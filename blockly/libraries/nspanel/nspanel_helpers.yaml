@@ -1200,37 +1200,33 @@ slots:
         code: >-
           function {{name}}(timeVarPrefix, alarmAction) {
             let running = parseInt(cache.shared.get(timeVarPrefix + "_running"));
-            let justTriggered = parseInt(cache.private.get("timer_triggered"));
+            let justTriggered = cache.private.get("dailyWakeupTriggered");
             if (running || justTriggered) {
               let type = cache.shared.get(timeVarPrefix + "_type");
               let alarmTime = cache.shared.get(timeVarPrefix + "_alarmTime");
               let daily = cache.shared.get(timeVarPrefix + "_daily");
               let now = new Date().getTime();
-              if (!justTriggered) {
-                switch (type) {
-                  case "wakeup":
-                  case "countDownHrs":
-                    now -= now % 60000;
-                    break;
-                  case "countDownMin":
-                    now -= now % 1000;
-                    break;
+              switch (type) {
+                case "wakeup":
+                case "countDownHrs":
+                  now -= now % 60000;
+                  break;
+                case "countDownMin":
+                  now -= now % 1000;
+                  break;
+
+              }
+              if (!justTriggered && now === alarmTime) {
+                if (type === "wakeup" && daily) {
+                  cache.private.put("dailyWakeupTriggered", alarmTime);
                 }
-                if (now === alarmTime) {
-                  if (type === "wakeup" && daily) {
-                    cache.private.put("timer_triggered", 1);
-                  }
-                  {{absorb_it_nspanel_helpers_safeEval}}(alarmAction, ctx.newState);
-                  if (type !== "wakeup" || !daily) {
-                    cache.shared.put(timeVarPrefix + "_running", 0);
-                    cache.shared.put(timeVarPrefix + "_setTime", "");
-                  }
+                {{absorb_it_nspanel_helpers_safeEval}}(alarmAction, ctx.newState);
+                if (type !== "wakeup" || !daily) {
+                  cache.shared.put(timeVarPrefix + "_running", 0);
+                  cache.shared.put(timeVarPrefix + "_setTime", "");
                 }
-              } else if (type === "wakeup" && daily) {
-                now -= now % 60000 + 60000;
-                if (now === alarmTime) {
-                    cache.private.put("timer_triggered", 0);
-                }
+              } else if (justTriggered && now !== justTriggered) {
+                cache.private.put("dailyWakeupTriggered", 0);
               }
             }
           }
