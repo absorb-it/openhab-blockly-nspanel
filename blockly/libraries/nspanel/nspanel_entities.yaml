@@ -813,8 +813,27 @@ slots:
     - component: BlockType
       config:
         message0: >
-          ENTITY TIMER %1 Icon %2 Icon Color %3 Displayed Name %4 Displayed Value %5 %6
+          ENTITY TIMER %1 Type %2 %3 Unique Timer Name %4
+          Running State: %5
+          Icon %6 Icon Color %7 Displayed Name %8
+          Stopped State: %9
+          Icon %10 Icon Color %11 Displayed Name %12
         args0:
+          - type: input_dummy
+            align: CENTER
+          - name: TYPE
+            options:
+              - - Wakeup [Hrs:Min]
+                - wakeup
+              - - Countdown [Hrs:Min]
+                - countDownHrs
+              - - Countdown [Min:Sec]
+                - countDownMin
+            type: field_dropdown
+          - type: input_dummy
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
           - type: input_dummy
             align: CENTER
           - name: ICON
@@ -826,47 +845,36 @@ slots:
           - name: DISPLAY_NAME
             type: input_value
             check: String
-          - name: DISPLAY_VALUE
+          - type: input_dummy
+            align: CENTER
+          - name: ICON_STOPPED
             type: input_value
             check: String
-          - type: input_dummy
-        message1: >
-          **** POPUP **** %1 Popup Icon Color %2 %3
-        args1:
-          - type: input_dummy
-          - name: POPUP_ICON_COLOR
+          - name: ICON_COLOR_STOPPED
             type: input_value
             check: Colour
+          - name: DISPLAY_NAME_STOPPED
+            type: input_value
+            check: String
+        message1: >
+          Preset Timer Hrs/Min %1 Preset Timer Min/Sec %2 %3
+        args1:
+          - name: PRESET_1
+            type: input_value
+            check: Number
+          - name: PRESET_2
+            type: input_value
+            check: Number
           - type: input_dummy
         message2: >
-          Preset Timer Minutes %1 Preset Timer Seconds %2 Editable %3 %4 %5
+          Action after Edit %1 Left Button Extra Action %2 Middle Button Extra Action %3 Right Button Extra Action %4
         args2:
-          - name: MIN_REMAINING
-            type: input_value
-            check: Number
-          - name: SEC_REMAINING
-            type: input_value
-            check: Number
-          - name: EDITABLE
-            type: field_checkbox
-          - type: input_dummy
-          - type: input_dummy
-        message3: >
-          Left Button %1 Left Button Id %2 Middle Button %3 Middle Button Id %4 Right Button %5 Right Button Id %6
-        args3:
-          - name: LEFT_BTN
-            type: input_value
-            check: String
+          - name: EDITED_ACTION
+            type: input_statement
           - name: LEFT_BTN_ACTION
             type: input_statement
-          - name: MID_BTN
-            type: input_value
-            check: String
           - name: MID_BTN_ACTION
             type: input_statement
-          - name: RIGHT_BTN
-            type: input_value
-            check: String
           - name: RIGHT_BTN_ACTION
             type: input_statement
         colour: 90
@@ -880,7 +888,7 @@ slots:
           - component: BlockCodeTemplate
             config:
               template: >-
-                {{utility:absorb_it_nspanel_entityTimer}}({{input:ICON}}, {{input:ICON_COLOR}}, {{input:DISPLAY_NAME}}, {{input:DISPLAY_VALUE}}, {{input:POPUP_ICON_COLOR}}, {{input:MIN_REMAINING}}, {{input:SEC_REMAINING}}, '{{field:EDITABLE}}', {{input:LEFT_BTN}}, `{{statements:LEFT_BTN_ACTION}}`, {{input:MID_BTN}}, `{{statements:MID_BTN_ACTION}}`, {{input:RIGHT_BTN}}, `{{statements:RIGHT_BTN_ACTION}}`)
+                {{utility:absorb_it_nspanel_entityTimer}}('{{field:TYPE}}', {{input:TIME_VAR_PREFIX}}, {{input:ICON}}, {{input:ICON_COLOR}}, {{input:DISPLAY_NAME}}, {{input:ICON_STOPPED}}, {{input:ICON_COLOR_STOPPED}}, {{input:DISPLAY_NAME_STOPPED}}, {{input:PRESET_1}}, {{input:PRESET_2}}, `{{statements:EDITED_ACTION}}`, `{{statements:LEFT_BTN_ACTION}}`, `{{statements:MID_BTN_ACTION}}`, `{{statements:RIGHT_BTN_ACTION}}`)
         toolbox:
           - component: PresetInput
             config:
@@ -892,66 +900,59 @@ slots:
           - component: PresetInput
             config:
               fields:
-                COLOUR: "#0000ee"
+                COLOUR: "#00ee00"
               name: ICON_COLOR
               shadow: true
               type: colour_picker
           - component: PresetInput
             config:
               fields:
-                TEXT: Timer
+                TEXT: Running
               name: DISPLAY_NAME
               shadow: true
               type: text
           - component: PresetInput
             config:
               fields:
-                TEXT: value
-              name: DISPLAY_VALUE
+                TEXT: "-"
+              name: ICON_STOPPED
               shadow: true
               type: text
           - component: PresetInput
             config:
               fields:
-                COLOUR: "#0000ee"
-              name: POPUP_ICON_COLOR
+                COLOUR: "#ee0000"
+              name: ICON_COLOR_STOPPED
               shadow: true
               type: colour_picker
           - component: PresetInput
             config:
               fields:
-                NUM: 42
-              name: MIN_REMAINING
+                TEXT: Stopped
+              name: DISPLAY_NAME_STOPPED
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                NUM: 10
+              name: PRESET_1
               shadow: true
               type: math_number
           - component: PresetInput
             config:
               fields:
-                NUM: 13
-              name: SEC_REMAINING
+                NUM: 00
+              name: PRESET_2
               shadow: true
               type: math_number
-          - component: PresetInput
-            config:
-              fields:
-                TEXT: left
-              name: LEFT_BTN
-              shadow: true
-              type: text
-          - component: PresetInput
-            config:
-              fields:
-                TEXT: middle
-              name: MID_BTN
-              shadow: true
-              type: text
-          - component: PresetInput
-            config:
-              fields:
-                TEXT: right
-              name: RIGHT_BTN
-              shadow: true
-              type: text
   utilities:
     - component: UtilityFunction
       config:
@@ -1269,32 +1270,141 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
-          function {{name}}(icon, iconColor, displayName, displayValue, popupIconColor, minRemaining, secRemaining, editable, leftBtn, leftBtnAction, midBtn, midBtnAction, rightBtn, rightBtnAction) {
+          function {{name}}(type, timeVarPrefix, preset1, preset2, reset = 0) {
+            if (reset || !cache.shared.get(timeVarPrefix + "_setTime")) {
+              cache.shared.put(timeVarPrefix + "_type", type);
+              cache.shared.put(timeVarPrefix + "_setTime", String(preset1).padStart(2, "0") + ":" + String(preset2).padStart(2, "0"));
+            };
+            let setTime = cache.shared.get(timeVarPrefix + "_setTime").split(":")
+            // original display is made for minutes/seconds, fix is hours/minutes is used
+            if (type !== "countDownMin" && setTime[0] > 23) {
+              setTime[0] = "23";
+              cache.shared.put(timeVarPrefix + "_setTime", setTime[0].padStart(2, "0") + ":" + setTime[1].padStart(2, "0"));
+            };
+          }
+        name: absorb_it_nspanel_entities_fixDisplayedTime
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(type, timeVarPrefix) {
+            let date = new Date();  //now
+            let setTime = cache.shared.get(timeVarPrefix + "_setTime").split(":")
+            switch (type) {
+              case "wakeup":
+                date.setHours(setTime[0]);
+                date.setMinutes(setTime[1], 0, 0);
+                let now = new Date();
+                if (date < (new Date())) {
+                  date.setDate(date.getDate() + 1);
+                }
+                break;
+              case "countDownHrs":
+                date.setHours(date.getHours() + parseInt(setTime[0]));
+                date.setMinutes(date.getMinutes() + parseInt(setTime[1]), 0, 0);
+                break;
+              case "countDownMin":
+                date.setMinutes(date.getMinutes() + parseInt(setTime[0]));
+                date.setSeconds(date.getSeconds() + parseInt(setTime[1]), 0);
+                break;
+            }
+            cache.shared.put(timeVarPrefix + "_alarmTime", date.getTime());
+          }
+        name: absorb_it_nspanel_entities_updateWakeup
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(type, timeVarPrefix, preset1, preset2) {
+            {{absorb_it_nspanel_entities_fixDisplayedTime}}(type, timeVarPrefix, preset1, preset2);
+            if (parseInt(cache.shared.get(timeVarPrefix + "_running"))) {
+              let alarmTime = cache.shared.get(timeVarPrefix + "_alarmTime");
+              let now = new Date().getTime();
+              let preciscion = 60000;
+              if (type === "countDownMin") {
+                preciscion = 1000;
+              }
+              let differenceTime = alarmTime - now + now % preciscion;
+              if (differenceTime < -preciscion) {
+                // external watcher missed resetting the countdown
+                console.warn("countdown/wakeup finished but not resetted, is the watcher active?");
+                console.warn("resetting countdown/wakeup for '" + timeVarPrefix + "' now");
+                {{absorb_it_nspanel_entities_fixDisplayedTime}}(type, timeVarPrefix, preset1, preset2, 1);
+                cache.shared.put(timeVarPrefix + "_running", 0);
+              } else if (type != "wakeup") {
+                // update countdown display
+                let val1 = Math.floor(differenceTime / (60*preciscion));
+                let val2 = differenceTime % (60*preciscion) / preciscion;
+                {{absorb_it_nspanel_entities_fixDisplayedTime}}(type, timeVarPrefix, val1, val2, 1);
+              }
+            }
+          }
+        name: absorb_it_nspanel_entities_updateDisplayedTime
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(type, timeVarPrefix, icon, iconColor, displayName, icon_stopped, iconColor_stopped, displayName_stopped, preset1, preset2, editedAction, leftBtnAction, midBtnAction, rightBtnAction) {
+            {{absorb_it_nspanel_entities_updateDisplayedTime}}(type, timeVarPrefix, preset1, preset2);
+            {{absorb_it_nspanel_entities_updateWakeup}}(type, timeVarPrefix);
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
-              if (ctx["newState"]) {
-                switch (ctx.trigger) {
-                  case "timer-left":
-                    {{absorb_it_nspanel_entities_safeEval}}(leftBtnAction, ctx.newState);
-                    break;
-                  case "timer-middle":
-                    {{absorb_it_nspanel_entities_safeEval}}(midBtnAction, ctx.newState);
-                    break;
-                  case "timer-right":
-                    {{absorb_it_nspanel_entities_safeEval}}(rightBtnAction, ctx.newState);
-                    break;
-                }
-                return { "refreshPage": "1" };
+              switch (ctx.trigger) {
+                case "timer-left":
+                  // start-stop button
+                  cache.shared.put(timeVarPrefix + "_running", parseInt(cache.shared.get(timeVarPrefix + "_running"))?0:1);
+                  {{absorb_it_nspanel_entities_safeEval}}(leftBtnAction, ctx.newState);
+                  break;
+                case "timer-middle":
+                  // no real button, but action can be added
+                  {{absorb_it_nspanel_entities_safeEval}}(midBtnAction, ctx.newState);
+                  return { "refreshPage": "1" };
+                  break;
+                case "timer-right":
+                  // wakeup daily/one-time, countdown reset button
+                  switch (type) {
+                    case "wakeup":
+                      cache.shared.put(timeVarPrefix + "_daily", parseInt(cache.shared.get(timeVarPrefix + "_daily"))?0:1);
+                      break;
+                    case "countDownHrs":
+                    case "countDownMin":
+                      {{absorb_it_nspanel_entities_fixDisplayedTime}}(type, timeVarPrefix, preset1, preset2, 1);
+                      {{absorb_it_nspanel_entities_updateWakeup}}(type, timeVarPrefix);
+                      break;
+                  }
+                  {{absorb_it_nspanel_entities_safeEval}}(rightBtnAction, ctx.newState);
+                  break;
+                case "timer-start":
+                  // displayed time was edited, update
+                  let timeVar = ctx.newState.split(":");
+                  {{absorb_it_nspanel_entities_fixDisplayedTime}}(type, timeVarPrefix, timeVar[1], timeVar[2], 1);
+                  {{absorb_it_nspanel_entities_updateWakeup}}(type, timeVarPrefix);
+                  {{absorb_it_nspanel_entities_safeEval}}(editedAction, newState);
+                  break;
               }
-              else {
-                let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + {{absorb_it_nspanel_entities_checkParam}}(minRemaining, 1) + {{absorb_it_nspanel_entities_checkParam}}(secRemaining, 1);
-                mqtt += (editable == "TRUE")?'~1':'~0';
-                mqtt += "~left~mid~right" + {{absorb_it_nspanel_entities_checkParam}}(leftBtn, 1) + {{absorb_it_nspanel_entities_checkParam}}(midBtn, 1) + {{absorb_it_nspanel_entities_checkParam}}(rightBtn, 1);
-                return { "sendNow": "1", "resultString": mqtt };
+              let mqtt = 'entityUpdateDetail' + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1) + '~' + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(ctx.ruleUID + '?' + ownEntityPos, 1);
+              let timeVar = cache.shared.get(timeVarPrefix + "_setTime").split(":");
+              mqtt += {{absorb_it_nspanel_entities_checkParam}}(timeVar[0], 1) + {{absorb_it_nspanel_entities_checkParam}}(timeVar[1], 1) + "~1";
+              let leftBtn, midBtn, rightBtn;
+              switch (type) {
+                case "wakeup":
+                  leftBtn = cache.shared.get(timeVarPrefix + "_running")?"stop":"start";
+                  midBtn = cache.shared.get(timeVarPrefix + "_running")?"active":"";
+                  rightBtn = cache.shared.get(timeVarPrefix + "_daily")?"daily":"one-time";
+                  break;
+                case "countDownHrs":
+                case "countDownMin":
+                  leftBtn = cache.shared.get(timeVarPrefix + "_running")?"stop":"start";
+                  midBtn = cache.shared.get(timeVarPrefix + "_running")?"running":"";
+                  rightBtn = "reset";
+                  break;
               }
+              mqtt += "~left~mid~right" + {{absorb_it_nspanel_entities_checkParam}}(leftBtn, 1) + {{absorb_it_nspanel_entities_checkParam}}(midBtn, 1) + {{absorb_it_nspanel_entities_checkParam}}(rightBtn, 1);
+              return { "sendNow": "1", "resultString": mqtt };
             }
-            return {
-              "resultString": '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName, 1) + {{absorb_it_nspanel_entities_checkParam}}(displayValue, 1)
+            let resultString;
+            if (cache.shared.get(timeVarPrefix + "_running")) {
+              resultString = '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName, 1) + {{absorb_it_nspanel_entities_checkParam}}(1, 1);
+            } else {
+              resultString = '~timer~' +  ctx.ruleUID + '?' + ownEntityPos + {{absorb_it_nspanel_entities_checkParam}}(icon_stopped, 1) + {{absorb_it_nspanel_entities_checkParam}}({{absorb_it_nspanel_entities_getRGB565}}(iconColor_stopped), 1) + {{absorb_it_nspanel_entities_checkParam}}(displayName_stopped, 1) + {{absorb_it_nspanel_entities_checkParam}}(0, 1);
             }
+            return {"resultString": resultString};
           }
         name: absorb_it_nspanel_entityTimer

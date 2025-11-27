@@ -649,6 +649,182 @@ slots:
               required: false
               shadow: true
               type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
+          - name: ALARM_ACTION
+            type: input_statement
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setTimerAction.md"
+        inputsInline: false
+        message0:  Timer Name %1 Timer Action %2
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          Run some action if timer reaches current time.
+        type: absorb_it_nspanel_setTimerAction
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_setTimerAction}}({{input:TIME_VAR_PREFIX}},  `{{statements:ALARM_ACTION}}`);"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_getTimerString.md"
+        message0: get Time of Timer %1
+        output: String
+        tooltip: >
+          "Updates the running time on countdown and returns the Time String in Hrs:Min or Min:Sec."
+        type: absorb_it_nspanel_getTimerString
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: >-
+                {{utility:absorb_it_nspanel_getTimerString}}({{input:TIME_VAR_PREFIX}})
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_startTimer.md"
+        message0: Start Timer %1
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >
+          "Starts the Timer."
+        type: absorb_it_nspanel_startTimer
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_startTimer}}({{input:TIME_VAR_PREFIX}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_stopTimer.md"
+        message0: Stop Timer %1
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >
+          "Stops the Timer."
+        type: absorb_it_nspanel_stopTimer
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_stopTimer}}({{input:TIME_VAR_PREFIX}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
+          - name: TIME_STRING
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_setTimerNewTime.md"
+        inputsInline: false
+        message0:  Timer Name %1 Set Time (Hrs:Min or Min:Sec) %2
+        nextStatement: ""
+        previousStatement: ""
+        tooltip: >-
+          Reconfigure the timer and set a new time.
+        type: absorb_it_nspanel_setTimerNewTime
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: "{{utility:absorb_it_nspanel_setTimerNewTime}}({{input:TIME_VAR_PREFIX}},  {{input:TIME_STRING}});"
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: 13:12
+              name: TIME_STRING
+              shadow: true
+              type: text
+    - component: BlockType
+      config:
+        args0:
+          - name: TIME_VAR_PREFIX
+            type: input_value
+            check: String
+        colour: 90
+        helpUrl: "https://github.com/absorb-it/openhab-blockly-nspanel/blob/main/docs/blockLibrary_nspanel_helpers_getTimerStatus.md"
+        message0: Get Status of Timer %1
+        output: String
+        tooltip: >
+          "Returns the Status of the Timer [ON|OFF]."
+        type: absorb_it_nspanel_getTimerStatus
+      slots:
+        code:
+          - component: BlockCodeTemplate
+            config:
+              template: >-
+                {{utility:absorb_it_nspanel_getTimerStatus}}({{input:TIME_VAR_PREFIX}})
+        toolbox:
+          - component: PresetInput
+            config:
+              fields:
+                TEXT: wakeupTime
+              name: TIME_VAR_PREFIX
+              shadow: true
+              type: text
     - component: Separator
       config:
         gap: 48
@@ -948,6 +1124,157 @@ slots:
             }
           }
         name: absorb_it_nspanel_getAlarmButtonString
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(type, timeVarPrefix, preset1, preset2, reset = 0) {
+            if (reset || !cache.shared.get(timeVarPrefix + "_setTime")) {
+              cache.shared.put(timeVarPrefix + "_type", type);
+              cache.shared.put(timeVarPrefix + "_setTime", String(preset1).padStart(2, "0") + ":" + String(preset2).padStart(2, "0"));
+            };
+            let setTime = cache.shared.get(timeVarPrefix + "_setTime").split(":")
+            // original display is made for minutes/seconds, fix is hours/minutes is used
+            if (type !== "countDownMin" && setTime[0] > 23) {
+              setTime[0] = "23";
+              cache.shared.put(timeVarPrefix + "_setTime", setTime[0].padStart(2, "0") + ":" + setTime[1].padStart(2, "0"));
+            };
+          }
+        name: absorb_it_nspanel_helpers_fixDisplayedTime
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(type, timeVarPrefix) {
+            let date = new Date();  //now
+            let setTime = cache.shared.get(timeVarPrefix + "_setTime").split(":")
+            switch (type) {
+              case "wakeup":
+                date.setHours(setTime[0]);
+                date.setMinutes(setTime[1], 0, 0);
+                let now = new Date();
+                if (date < (new Date())) {
+                  date.setDate(date.getDate() + 1);
+                }
+                break;
+              case "countDownHrs":
+                date.setHours(date.getHours() + parseInt(setTime[0]));
+                date.setMinutes(date.getMinutes() + parseInt(setTime[1]), 0, 0);
+                break;
+              case "countDownMin":
+                date.setMinutes(date.getMinutes() + parseInt(setTime[0]));
+                date.setSeconds(date.getSeconds() + parseInt(setTime[1]), 0);
+                break;
+            }
+            cache.shared.put(timeVarPrefix + "_alarmTime", date.getTime());
+          }
+        name: absorb_it_nspanel_helpers_updateWakeup
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(type, timeVarPrefix, preset1, preset2) {
+            {{absorb_it_nspanel_helpers_fixDisplayedTime}}(type, timeVarPrefix, preset1, preset2);
+            if (parseInt(cache.shared.get(timeVarPrefix + "_running"))) {
+              let alarmTime = cache.shared.get(timeVarPrefix + "_alarmTime");
+              let now = new Date().getTime();
+              let preciscion = 60000;
+              if (type === "countDownMin") {
+                preciscion = 1000;
+              }
+              let differenceTime = alarmTime - now + now % preciscion;
+              if (differenceTime < -preciscion) {
+                // external watcher missed resetting the countdown
+                console.warn("countdown/wakeup finished but not resetted, is the watcher active?");
+                console.warn("resetting countdown/wakeup for '" + timeVarPrefix + "' now");
+                {{absorb_it_nspanel_helpers_fixDisplayedTime}}(type, timeVarPrefix, preset1, preset2, 1);
+                cache.shared.put(timeVarPrefix + "_running", 0);
+              } else if (type != "wakeup") {
+                // update countdown display
+                let val1 = Math.floor(differenceTime / (60*preciscion));
+                let val2 = differenceTime % (60*preciscion) / preciscion;
+                {{absorb_it_nspanel_helpers_fixDisplayedTime}}(type, timeVarPrefix, val1, val2, 1);
+              }
+            }
+          }
+        name: absorb_it_nspanel_helpers_updateDisplayedTime
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeVarPrefix, alarmAction) {
+            let running = parseInt(cache.shared.get(timeVarPrefix + "_running"));
+            let justTriggered = parseInt(cache.private.get("timer_triggered"));
+            if (running || justTriggered) {
+              let type = cache.shared.get(timeVarPrefix + "_type");
+              let alarmTime = cache.shared.get(timeVarPrefix + "_alarmTime");
+              let daily = cache.shared.get(timeVarPrefix + "_daily");
+              let now = new Date().getTime();
+              if (!justTriggered) {
+                switch (type) {
+                  case "wakeup":
+                  case "countDownHrs":
+                    now -= now % 60000;
+                    break;
+                  case "countDownMin":
+                    now -= now % 1000;
+                    break;
+                }
+                if (now === alarmTime) {
+                  if (type === "wakeup" && daily) {
+                    cache.private.put("timer_triggered", 1);
+                  }
+                  {{absorb_it_nspanel_helpers_safeEval}}(alarmAction, ctx.newState);
+                  if (type !== "wakeup" || !daily) {
+                    cache.shared.put(timeVarPrefix + "_running", 0);
+                    cache.shared.put(timeVarPrefix + "_setTime", "");
+                  }
+                }
+              } else if (type === "wakeup" && daily) {
+                now -= now % 60000 + 60000;
+                if (now === alarmTime) {
+                    cache.private.put("timer_triggered", 0);
+                }
+              }
+            }
+          }
+        name: absorb_it_nspanel_setTimerAction
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeVarPrefix) {
+            let type = cache.shared.get(timeVarPrefix + "_type");
+            {{absorb_it_nspanel_helpers_updateDisplayedTime}}(type, timeVarPrefix, 0, 0);
+            return cache.shared.get(timeVarPrefix + "_setTime");
+          }
+        name: absorb_it_nspanel_getTimerString
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeVarPrefix) {
+            cache.shared.put(timeVarPrefix + "_running", 1);
+          }
+        name: absorb_it_nspanel_startTimer
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeVarPrefix) {
+            cache.shared.put(timeVarPrefix + "_running", 0);
+          }
+        name: absorb_it_nspanel_stopTimer
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeVarPrefix, newTime) {
+            let timeVar = newTime.split(":");
+            let type = cache.shared.get(timeVarPrefix + "_type");
+            {{absorb_it_nspanel_helpers_fixDisplayedTime}}(type, timeVarPrefix, timeVar[0], timeVar[1], 1);
+            {{absorb_it_nspanel_helpers_updateWakeup}}(type, timeVarPrefix);
+          }
+        name: absorb_it_nspanel_setTimerNewTime
+    - component: UtilityFunction
+      config:
+        code: >-
+          function {{name}}(timeVarPrefix) {
+            return cache.shared.get(timeVarPrefix + "_running")?"ON":"OFF";
+          }
+        name: absorb_it_nspanel_getTimerStatus
     - component: UtilityFunction
       config:
         code: >-
