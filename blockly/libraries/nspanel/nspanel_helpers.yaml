@@ -1198,6 +1198,22 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}(timeVarPrefix) {
+            let setTime = cache.shared.get(timeVarPrefix + "_setTime");
+            let alarmTime = new Date(cache.shared.get(timeVarPrefix + "_alarmTime"));
+            let type = cache.shared.get(timeVarPrefix + "_type");
+            if (type == "wakeup") {
+              type += parseInt(cache.shared.get(timeVarPrefix + "_daily"))?"(daily)":"(one-time)";
+            }
+            let status = parseInt(cache.shared.get(timeVarPrefix + "_running"))?"running":"stopped";
+            console.debug("Helper: Set Time: " + setTime);
+            console.debug("Alarm Time: " + alarmTime);
+            console.debug("type: " + type + ", status: " + status);
+          }
+        name: absorb_it_nspanel_helpers_printTimerStatus
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(timeVarPrefix, alarmAction) {
             let running = parseInt(cache.shared.get(timeVarPrefix + "_running"));
             let justTriggered = cache.private.get("dailyWakeupTriggered");

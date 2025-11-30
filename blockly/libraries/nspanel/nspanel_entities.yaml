@@ -1341,9 +1341,27 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}(timeVarPrefix) {
+            let setTime = cache.shared.get(timeVarPrefix + "_setTime");
+            let alarmTime = new Date(cache.shared.get(timeVarPrefix + "_alarmTime"));
+            let type = cache.shared.get(timeVarPrefix + "_type");
+            if (type == "wakeup") {
+              type += parseInt(cache.shared.get(timeVarPrefix + "_daily"))?"(daily)":"(one-time)";
+            }
+            let status = parseInt(cache.shared.get(timeVarPrefix + "_running"))?"running":"stopped";
+            console.debug("Set Time: " + setTime);
+            console.debug("Alarm Time: " + alarmTime);
+            console.debug("type: " + type + ", status: " + status);
+          }
+        name: absorb_it_nspanel_entities_printTimerStatus
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(type, timeVarPrefix, icon, iconColor, displayName, icon_stopped, iconColor_stopped, displayName_stopped, preset1, preset2, editedAction, leftBtnAction, midBtnAction, rightBtnAction) {
             {{absorb_it_nspanel_entities_updateDisplayedTime}}(type, timeVarPrefix, preset1, preset2);
             {{absorb_it_nspanel_entities_updateWakeup}}(type, timeVarPrefix);
+            {{absorb_it_nspanel_entities_printTimerStatus}}(timeVarPrefix);
+
             var ownEntityPos = {{absorb_it_nspanel_entities_getEntityPos}}();
             if (ctx.item == ownEntityPos && ctx.request == 'pageOpenDetail') {
               switch (ctx.trigger) {
