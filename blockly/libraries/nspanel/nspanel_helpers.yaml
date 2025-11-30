@@ -1151,7 +1151,7 @@ slots:
                 date.setHours(setTime[0]);
                 date.setMinutes(setTime[1], 0, 0);
                 let now = new Date();
-                if (date < (new Date())) {
+                if (date <= (new Date())) {
                   date.setDate(date.getDate() + 1);
                 }
                 break;
@@ -1216,8 +1216,7 @@ slots:
         code: >-
           function {{name}}(timeVarPrefix, alarmAction) {
             let running = parseInt(cache.shared.get(timeVarPrefix + "_running"));
-            let justTriggered = cache.private.get("dailyWakeupTriggered");
-            if (running || justTriggered) {
+            if (running) {
               let type = cache.shared.get(timeVarPrefix + "_type");
               let alarmTime = cache.shared.get(timeVarPrefix + "_alarmTime");
               let daily = cache.shared.get(timeVarPrefix + "_daily");
@@ -1232,17 +1231,17 @@ slots:
                   break;
 
               }
-              if (!justTriggered && now === alarmTime) {
-                if (type === "wakeup" && daily) {
-                  cache.private.put("dailyWakeupTriggered", alarmTime);
-                }
+              if (now === alarmTime) {
+                console.debug("Running Timer '" + timeVarPrefix + "' Action");
                 {{absorb_it_nspanel_helpers_safeEval}}(alarmAction, ctx.newState);
+                if (type == "wakeup") {
+                  {{absorb_it_nspanel_helpers_updateWakeup}}(type, timeVarPrefix);
+                } else {
+                  cache.shared.put(timeVarPrefix + "_setTime", "");
+                };
                 if (type !== "wakeup" || !daily) {
                   cache.shared.put(timeVarPrefix + "_running", 0);
-                  cache.shared.put(timeVarPrefix + "_setTime", "");
                 }
-              } else if (justTriggered && now !== justTriggered) {
-                cache.private.put("dailyWakeupTriggered", 0);
               }
             }
           }
@@ -1252,7 +1251,6 @@ slots:
         code: >-
           function {{name}}(timeVarPrefix) {
             let type = cache.shared.get(timeVarPrefix + "_type");
-            {{absorb_it_nspanel_helpers_updateDisplayedTime}}(type, timeVarPrefix, 0, 0);
             return cache.shared.get(timeVarPrefix + "_setTime");
           }
         name: absorb_it_nspanel_getTimerString
