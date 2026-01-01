@@ -2176,7 +2176,7 @@ slots:
           function {{name}}(notification, notificationColor, timeout, fontId, heading, headingColor, showIcon, icon, iconColor, btnLeft, btnLeftColor, btnRight, btnRightColor, actionLeft, actionRight) {
             if (!{{absorb_it_nspanel_cards_startupCheck}}(arguments.callee.name)) return;
             if (ctx.request == 'pageUpdate') {
-              switch (ctx.trigger) {
+              switch (ctx.newState) {
                 case "no":
                   {{absorb_it_nspanel_cards_safeEval}}(actionLeft);
                   break;
