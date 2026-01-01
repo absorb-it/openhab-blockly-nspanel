@@ -459,11 +459,14 @@ slots:
 
             context["timerName"] = {{getTimerName}}();
             try {
-                (scriptName && scriptName != "Script Id") && console.debug("start rule with id '" + scriptName + "'");
+                console.debug("start rule with id '" + scriptName + "' and context:" + JSON.stringify(context));
                 rules.runRule(scriptName, context);
-                cache.private.put('lastPage', scriptName); // any last page
-                if (updateCacheLink)
+                cache.private.put('anyCurrentPage', scriptName); // any last page
+                if (updateCacheLink) {
+                  cache.private.put('previousCard', cache.private.get('currentCard'));
+                  console.debug("updated previousCard to " + cache.private.get('previousCard'));
                   cache.private.put('currentCard', scriptName); // only some last pages (excluding popupNotify, Screensaver)
+                }
                 return 1;
             }
             catch (e) {
@@ -508,7 +511,23 @@ slots:
     - component: UtilityFunction
       config:
         code: >-
+          function {{name}}(eventName) {
+            // check if LandingPage should be re-enabled
+            if (  (!cache.private.exists('DetailPage')) && (                      // we are not on any DetailPage
+              (cache.private.get(eventName + "LandingPage") == "TRUE") ||         // LandingPage mode is set to true or
+              (cache.private.get('anyCurrentPage') == 'screensaver' && cache.private.get('landingPageTime') &&
+                Date.now() - cache.private.get('screensaverTime') > cache.private.get('landingPageTime')*1000))) {  // we are on Screensaver and last Page Data is too old
+                console.debug("removing currentCard '" + cache.private.get('currentCard') + "' DetailPage=" + cache.private.get('DetailPage'));
+                cache.private.remove('currentCard');  // remove last know card (start again with LandingPage)
+                cache.private.remove('previousCard'); // remove previous card as well
+              }
+          }
+        name: absorb_it_nspanel_callback_reenableLandingPage
+    - component: UtilityFunction
+      config:
+        code: >-
           function {{name}}(target, timeout, screenSaverBrightness, activeBrightness, backgroundColor, experimentalSliders, screensaver2, screensaverStartupScript, actionScripts, scriptLandingPage, startupAction, landingPageTime) {
+            console.debug("entering callback '" + (event.receivedState ?? event.itemState) + "' currentCard:" + cache.private.get('currentCard')+ " anyCurrentPage:" + cache.private.get('anyCurrentPage') + " previousCard:" + cache.private.get('previousCard'));
             switch (utils.OPENHAB_JS_VERSION) {
                   case "5.13.0":
                     console.error("NSPanel Lovelace UI Callback is not compatible with your JavaScript Scripting version (openhab-js v" + utils.OPENHAB_JS_VERSION + ")");
@@ -563,13 +582,14 @@ slots:
                   case "OFF":   // triggered by Hardware Button press (if rule configured to fire)
                     if (cache.private.get('currentCard') && (cache.private.get('anyCurrentPage') !== "screensaver")) {
                       let context = {
-                        "previousPage": cache.private.get('lastPage'),
+                        "previousPage": cache.private.get('anyCurrentPage'),
                         "target": target
                       };
                       if (cache.private.exists('DetailPage')) {
                         context["request"] = "pageOpenDetail";
                         context["item"] = cache.private.get('DetailPage');
                       };
+                      console.debug("absorb_it_nspanel_callback_startScript refresh/ON/OFF");
                       {{absorb_it_nspanel_callback_startScript}}(
                         cache.private.get('currentCard'),
                         context,
@@ -578,15 +598,17 @@ slots:
                     }
                     return;
                   case "refreshTimer":
-                    if (cache.private.get('currentCard') && (cache.private.get('lastPage') !== "screensaver"))
+                    if (cache.private.get('currentCard') && (cache.private.get('anyCurrentPage') !== "screensaver")) {
+                      console.debug("absorb_it_nspanel_callback_startScript refreshTimer");
                       {{absorb_it_nspanel_callback_startScript}}(
                         cache.private.get('currentCard'),
                         {
-                          "previousPage": cache.private.get('lastPage'),
+                          "previousPage": cache.private.get('anyCurrentPage'),
                           "target": target
                         },
                         0
                       );
+                    }
                     return;
                   case "loadPage":
                     if (callbackParam[1])
@@ -651,13 +673,97 @@ slots:
                   {{absorb_it_nspanel_callback_checkParam}}(backgroundColor, 1) +
                   ((experimentalSliders == "TRUE")?'~~1':'~~0')
                 );
+                console.debug("absorb_it_nspanel_callback_startScript startup");
                 let success = {{absorb_it_nspanel_callback_startScript}}(
                   cache.private.get('startupScriptName'), { "target": target }, 1
                 );
                 cache.private.remove('currentCard');
+                cache.private.remove('previousCard');
                 {{absorb_it_nspanel_callback_safeEval}}(startupAction);
                 if (success || startupAction != '')
                   break;
+              case "buttonPress2":
+                // disable screensaver
+                if (cache.private.get('screensaverActive') == "TRUE") {
+                  cache.private.put('screensaverActive', "FALSE");
+                }
+                let eventName = (contextValues[3] === "bExit")?"touch":contextValues[3];
+                if (!(contextValues[3] == "bExit" && contextValues[2] == "popupNotify")) {
+                  switch(contextValues[3]) {
+                    case "bExit":
+                    case "touch":
+                    case "swipeLeft":
+                    case "swipeRight":
+                    case "swipeUp":
+                    case "swipeDown":
+                      let eventName = (contextValues[3] === "bExit")?"touch":contextValues[3];
+                      {{absorb_it_nspanel_callback_reenableLandingPage}}(eventName);
+                      cache.private.remove('DetailPage'); // if Detail was shown, close it and go back to main page
+                      if (cache.private.get('currentCard')) {
+                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard'));
+                        console.debug("absorb_it_nspanel_callback_startScript bExit/touch/swipe previous card available");
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          cache.private.get('currentCard'), { "target": target }, 0
+                        );
+                      } else {
+                        let targetScript = cache.private.get(eventName + "ScriptName");
+                        console.debug("screensaver: " + eventName + " -> " + targetScript);
+                        console.debug("absorb_it_nspanel_callback_startScript bExit/touch/swipe no previous card available");
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          targetScript, { "target": target }, 1
+                        );
+                      }
+                      break;
+                    default:
+                      if (contextValues[2].split('?')[0] !== cache.private.get('anyCurrentPage')) {
+                        // new page called, probably clicked on navigation buttons
+                        console.debug("absorb_it_nspanel_callback_startScript buttonPress2 for new Page");
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          contextValues[2].split('?')[0], { "target": target },
+                          (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
+                        );
+                      } else {
+                        // find the clicked item, if there hade been multiple on the page
+                        let item = "";
+                        // alarmButtons: third context field contains 'cb' and item id, reparated by '?'
+                        // {"CustomRecv":"event,buttonPress2,*cardAlarmScriptName*,item?1,1"}
+                        if (contextValues[3] && contextValues[3].split('?')[0] === "item")
+                          item = contextValues[3].split('?')[1];
+                        // HVACButtons: third context field contains script name and item id, reparated by '?'
+                        // {"CustomRecv":"event,buttonPress2,*cardThermoScriptName*,hvac_action,item?1"}
+                        if (contextValues[4] && contextValues[4].split('?')[0] === "item")
+                          item = contextValues[4].split('?')[1];
+                        // entities: third context field contains both script name and item id, reparated by '?'
+                        // {"CustomRecv":"event,buttonPress2,*cardEntitiesScriptName*?2,OnOff,0"}
+                        else item = contextValues[2].split('?')[1];
+                        console.debug("absorb_it_nspanel_callback_startScript buttonPress2 handover new parameter (trigger, newState)");
+                        {{absorb_it_nspanel_callback_startScript}}(
+                          contextValues[2].split('?')[0],
+                          {
+                            "request": cache.private.exists('DetailPage')?"pageOpenDetail":"pageUpdate",
+                            "item": item,
+                            "trigger": contextValues[3],
+                            "newState": contextValues[4] || "", // newState must be a String
+                            "previousPage": cache.private.get('anyCurrentPage'),
+                            "target": target
+                          },
+                          (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
+                        );
+                      }
+                  }
+                  break;
+                } else { // {"CustomRecv":"event,buttonPress2,popupNotify,bExit"}
+                  {{absorb_it_nspanel_callback_reenableLandingPage}}(eventName);
+                  // exit Notify, restore previous Card if available
+                  if (cache.private.get('previousCard')) {
+                    console.debug("absorb_it_nspanel_callback_startScript popupNotify exit");
+                    {{absorb_it_nspanel_callback_startScript}}(
+                      cache.private.get('previousCard'), { "target": target }, 1
+                    );
+                    break;
+                  }
+                  // else show screensaver, no break - continue with switch/case
+                }
               case "sleepReached":
                 {{absorb_it_nspanel_callback_killRefreshTimer}}();
                 cache.private.put('screensaverActive', "TRUE");
@@ -665,88 +771,17 @@ slots:
                   items.getItem(target).sendCommand("pageType~screensaver2");
                 else
                   items.getItem(target).sendCommand("pageType~screensaver");
+                console.debug("absorb_it_nspanel_callback_startScript sleepReached");
                 {{absorb_it_nspanel_callback_startScript}}(
                   cache.private.get('screensaverScriptName'), { "target": target }, 0
                 );
-                cache.private.put('lastPage', 'screensaver'); // therefore ignore timer updates during screensaver
+                cache.private.put('anyCurrentPage', 'screensaver'); // therefore ignore timer updates during screensaver
                 cache.private.put('screensaverTime', Date.now()); // remember time screensaver was activated
-                break;
-              case "buttonPress2":
-                if (cache.private.get('screensaverActive') == "TRUE") {
-                  cache.private.put('screensaverActive', "FALSE");
-                }
-                if (contextValues[3] == "bExit")
-                  contextValues[3] = "touch";
-                switch(contextValues[3]) {
-                  case "touch":
-                  case "swipeLeft":
-                  case "swipeRight":
-                  case "swipeUp":
-                  case "swipeDown":
-                    let eventName = contextValues[3];
-                    let targetScript = cache.private.get(eventName + "ScriptName");
-                    if (  (!cache.private.exists('DetailPage')) && (
-                      (cache.private.get(eventName + "LandingPage") == "TRUE") ||
-                      (cache.private.get('lastPage') == 'screensaver' && cache.private.get('landingPageTime') &&
-                        Date.now() - cache.private.get('screensaverTime') > cache.private.get('landingPageTime')*1000))) {
-                        console.debug("removing currentCard '" + cache.private.get('currentCard') + "' DetailPage=" + cache.private.get('DetailPage'));
-                        cache.private.remove('currentCard');
-                      }
-                    if (targetScript && targetScript != "Script Id") {
-                      cache.private.remove('DetailPage');
-                      if (cache.private.get('currentCard')) {
-                        console.debug("screensaver: " + eventName + " -> " + cache.private.get('currentCard'));
-                        {{absorb_it_nspanel_callback_startScript}}(
-                          cache.private.get('currentCard'), { "target": target }, 0
-                        );
-                      } else {
-                        console.debug("screensaver: " + eventName + " -> " + targetScript);
-                        {{absorb_it_nspanel_callback_startScript}}(
-                          targetScript, { "target": target }, 1
-                        );
-                      }
-                    } else {
-                      console.debug("screensaver: " + eventName + " ignored, no script configured.");
-                    }
-                    break;
-                  default:
-                    if (contextValues[2].split('?')[0] !== cache.private.get('lastPage')) {
-                      // new page called, probably clicked on navigation buttons
-                      {{absorb_it_nspanel_callback_startScript}}(
-                        contextValues[2].split('?')[0], { "target": target },
-                        (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
-                      );
-                    }
-                    // find the clicked item, if there hade been multiple on the page
-                    let item = "";
-                    // alarmButtons: third context field contains 'cb' and item id, reparated by '?'
-                    // {"CustomRecv":"event,buttonPress2,*cardAlarmScriptName*,item?1,1"}
-                    if (contextValues[3] && contextValues[3].split('?')[0] === "item")
-                      item = contextValues[3].split('?')[1];
-                    // HVACButtons: third context field contains script name and item id, reparated by '?'
-                    // {"CustomRecv":"event,buttonPress2,*cardThermoScriptName*,hvac_action,item?1"}
-                    if (contextValues[4] && contextValues[4].split('?')[0] === "item")
-                      item = contextValues[4].split('?')[1];
-                    // entities: third context field contains both script name and item id, reparated by '?'
-                    // {"CustomRecv":"event,buttonPress2,*cardEntitiesScriptName*?2,OnOff,0"}
-                    else item = contextValues[2].split('?')[1];
-                    {{absorb_it_nspanel_callback_startScript}}(
-                      contextValues[2].split('?')[0],
-                      {
-                        "request": cache.private.exists('DetailPage')?"pageOpenDetail":"pageUpdate",
-                        "item": item,
-                        "trigger": contextValues[3],
-                        "newState": contextValues[4] || "", // newState must be a String
-                        "previousPage": cache.private.get('lastPage'),
-                        "target": target
-                      },
-                      (contextValues[2] !== "popupNotify" && contextValues[3] !== "notifyAction")
-                    );
-                }
                 break;
               case "pageOpenDetail":
                 let item = contextValues[3].split('?')[1];
                 cache.private.put('DetailPage', item?item:0);
+                console.debug("absorb_it_nspanel_callback_startScript pageOpenDetail");
                 {{absorb_it_nspanel_callback_startScript}}(
                   contextValues[3].split('?')[0],
                   {
