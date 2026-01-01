@@ -561,7 +561,7 @@ slots:
                   case "refresh":
                   case "ON":    // triggered by Hardware Button press (if rule configured to fire)
                   case "OFF":   // triggered by Hardware Button press (if rule configured to fire)
-                    if (cache.private.get('currentCard')) {
+                    if (cache.private.get('currentCard') && (cache.private.get('anyCurrentPage') !== "screensaver")) {
                       let context = {
                         "previousPage": cache.private.get('lastPage'),
                         "target": target
