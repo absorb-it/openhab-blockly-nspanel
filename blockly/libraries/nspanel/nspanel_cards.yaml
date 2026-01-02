@@ -1622,7 +1622,7 @@ slots:
           - component: BlockCodeTemplate
             config:
               template: >
-                {{utility:absorb_it_nspanel_setupPopupNotification}}({{input:NOTIFICATION}}, {{input:NOTIFICATION_COLOR}}, {{input:TIMEOUT}}, '{{field:FONT_ID}}', {{input:HEADING}}, {{input:HEADING_COLOR}}, '{{field:SHOW_ICON}}', {{input:ICON}}, {{input:ICON_COLOR}}, {{input:BTN_LEFT}}, {{input:BTN_LEFT_COLOR}}, {{input:BTN_RIGHT}}, {{input:BTN_RIGHT_COLOR}}, "{{statements:ACTION_LEFT}}", "{{statements:ACTION_RIGHT}}");
+                {{utility:absorb_it_nspanel_setupPopupNotification}}({{input:NOTIFICATION}}, {{input:NOTIFICATION_COLOR}}, {{input:TIMEOUT}}, '{{field:FONT_ID}}', {{input:HEADING}}, {{input:HEADING_COLOR}}, '{{field:SHOW_ICON}}', {{input:ICON}}, {{input:ICON_COLOR}}, {{input:BTN_LEFT}}, {{input:BTN_LEFT_COLOR}}, {{input:BTN_RIGHT}}, {{input:BTN_RIGHT_COLOR}}, `{{statements:ACTION_LEFT}}`, `{{statements:ACTION_RIGHT}}`);
         toolbox:
           - component: PresetInput
             config:
