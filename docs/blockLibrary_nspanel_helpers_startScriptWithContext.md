@@ -20,7 +20,7 @@ As you can see, you can add additional *Cards* as *Statements*, they will all us
 
 [<img src="img/blockLibrary_nspanel_helpers_startScriptWithContext_addContext.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_startScriptWithContext_addContext.png)
 
-If you like to use some centralized script with special features per display, you can also add some keys to the context dictionary *ctx*. Just add *ctx* as a variable and set the required items.<br clear="right"/>
+If you like to use some centralized script with special features per display, you can also add some keys to the context dictionary *ctx*. Set the required items and call the rule or script with the standard blockly module. It's important to add some context dictionary element named "target" with the NSPanel-Item as well - this is the way the addon knows which panel to use.<br clear="right"/>
 
 [<img src="img/blockLibrary_nspanel_helpers_startScriptWithContext_useContext.png" align="right" width="300">](img/blockLibrary_nspanel_helpers_startScriptWithContext_useContext.png)
 
