@@ -688,7 +688,7 @@ slots:
                   cache.private.put('screensaverActive', "FALSE");
                 }
                 let eventName = (contextValues[3] === "bExit")?"touch":contextValues[3];
-                if (!(contextValues[3] == "bExit" && contextValues[2] == "popupNotify")) {
+                if (contextValues[1] !== "startup" && !(contextValues[3] == "bExit" && contextValues[2] == "popupNotify")) {
                   switch(contextValues[3]) {
                     case "bExit":
                     case "touch":
