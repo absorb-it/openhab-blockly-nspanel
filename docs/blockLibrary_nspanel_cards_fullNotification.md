@@ -8,7 +8,7 @@ This notification will be shown above your current page and can be closed manual
 
 [<img src="img/blockLibrary_nspanel_cards_fullNotification.png" align="right" width="300">](img/blockLibrary_nspanel_cards_fullNotification.png)
 
-- Add some notification text choose a color and a font size. Some fonts support Icons as well, just try it.
+- Add some notification text choose a color and a font size. Some fonts support Icons as well, just try it. To add a newline just add "\r\n" into the message string.
 - Configure the timeout, after which the notification will be closed automatically.
 - Configure some notification header and some icon, if you like.
 - Add some button on the lower left and right area. Choose the actions triggered on left or right button press.<br clear="right"/>
